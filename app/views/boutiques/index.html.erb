@@ -1,0 +1,29 @@
+<h1>Listing boutiques</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @boutiques.each do |boutique| %>
+      <tr>
+        <td><%= boutique.name %></td>
+        <td><%= boutique.phone %></td>
+        <td><%= boutique.address %></td>
+        <td><%= link_to 'Show', boutique %></td>
+        <td><%= link_to 'Edit', edit_boutique_path(boutique) %></td>
+        <td><%= link_to 'Destroy', boutique, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Boutique', new_boutique_path %>

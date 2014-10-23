@@ -1,0 +1,2 @@
+module TbanquesHelper
+end

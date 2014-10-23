@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Banque:</strong>
+  <%= @tbanque.banque %>
+</p>
+
+<p>
+  <strong>Type rv:</strong>
+  <%= @tbanque.type_rv %>
+</p>
+
+<p>
+  <strong>Montant:</strong>
+  <%= @tbanque.montant %>
+</p>
+
+<p>
+  <strong>Porteur:</strong>
+  <%= @tbanque.porteur %>
+</p>
+
+<%= link_to 'Edit', edit_tbanque_path(@tbanque) %> |
+<%= link_to 'Back', tbanques_path %>

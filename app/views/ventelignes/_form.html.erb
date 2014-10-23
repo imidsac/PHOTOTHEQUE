@@ -1,0 +1,15 @@
+<%= simple_form_for(@venteligne) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :vente %>
+    <%= f.input :qte %>
+    <%= f.input :qtelivre %>
+    <%= f.input :montant %>
+    <%= f.input :etat %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

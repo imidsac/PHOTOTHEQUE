@@ -1,0 +1,14 @@
+<%= simple_form_for(@tbanque) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :banque %>
+    <%= f.input :type_rv %>
+    <%= f.input :montant %>
+    <%= f.input :porteur %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

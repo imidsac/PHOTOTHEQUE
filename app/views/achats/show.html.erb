@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fournisseur:</strong>
+  <%= @achat.fournisseur %>
+</p>
+
+<p>
+  <strong>Date achat:</strong>
+  <%= @achat.date_achat %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @achat.type %>
+</p>
+
+<p>
+  <strong>Somme:</strong>
+  <%= @achat.somme %>
+</p>
+
+<p>
+  <strong>Payee:</strong>
+  <%= @achat.payee %>
+</p>
+
+<p>
+  <strong>Etat achat:</strong>
+  <%= @achat.etat_achat %>
+</p>
+
+<%= link_to 'Edit', edit_achat_path(@achat) %> |
+<%= link_to 'Back', achats_path %>

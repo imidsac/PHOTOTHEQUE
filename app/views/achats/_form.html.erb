@@ -1,0 +1,16 @@
+<%= simple_form_for(@achat) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :fournisseur %>
+    <%= f.input :date_achat %>
+    <%= f.input :type %>
+    <%= f.input :somme %>
+    <%= f.input :payee %>
+    <%= f.input :etat_achat %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

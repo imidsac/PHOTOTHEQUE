@@ -1,0 +1,27 @@
+<h1>Listing caisses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Paiement</th>
+      <th>Font</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @caisses.each do |caiss| %>
+      <tr>
+        <td><%= caiss.paiement %></td>
+        <td><%= caiss.font %></td>
+        <td><%= link_to 'Show', caiss %></td>
+        <td><%= link_to 'Edit', edit_caiss_path(caiss) %></td>
+        <td><%= link_to 'Destroy', caiss, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Caisse', new_caiss_path %>

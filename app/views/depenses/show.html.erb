@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @depense.description %>
+</p>
+
+<p>
+  <strong>Categoriedep:</strong>
+  <%= @depense.categoriedep %>
+</p>
+
+<p>
+  <strong>Montant:</strong>
+  <%= @depense.montant %>
+</p>
+
+<p>
+  <strong>Etat dep:</strong>
+  <%= @depense.etat_dep %>
+</p>
+
+<%= link_to 'Edit', edit_depense_path(@depense) %> |
+<%= link_to 'Back', depenses_path %>

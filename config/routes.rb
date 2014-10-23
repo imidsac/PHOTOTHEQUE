@@ -1,4 +1,46 @@
 Rails.application.routes.draw do
+  resources :tbanques
+
+  resources :banques
+
+  resources :employes
+
+  resources :tcaisses
+
+  resources :caisses
+
+  resources :depenses
+
+  resources :categoriedeps
+
+  resources :paiements
+
+  resources :ventelignes
+
+  resources :ventes
+
+  resources :prestationlignes
+
+  resources :prestations
+
+  resources :clients
+
+  resources :boutiques
+
+  resources :alignes
+
+  resources :achats
+
+  resources :fournisseurs
+
+  resources :stocks
+
+  resources :articles
+
+  resources :cadres
+
+  resources :formatphotos
+
   get 'welcome/home'
   root 'welcome#home'
 

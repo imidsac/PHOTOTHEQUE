@@ -1,0 +1,12 @@
+<%= simple_form_for(@cadre) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :numerobaguete %>
+    <%= f.input :info %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

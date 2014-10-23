@@ -1,0 +1,2 @@
+module VentelignesHelper
+end

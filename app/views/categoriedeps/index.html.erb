@@ -1,0 +1,27 @@
+<h1>Listing categoriedeps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categoriedeps.each do |categoriedep| %>
+      <tr>
+        <td><%= categoriedep.name %></td>
+        <td><%= categoriedep.description %></td>
+        <td><%= link_to 'Show', categoriedep %></td>
+        <td><%= link_to 'Edit', edit_categoriedep_path(categoriedep) %></td>
+        <td><%= link_to 'Destroy', categoriedep, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Categoriedep', new_categoriedep_path %>

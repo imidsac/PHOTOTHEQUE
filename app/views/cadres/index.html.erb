@@ -1,0 +1,27 @@
+<h1>Listing cadres</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Numerobaguete</th>
+      <th>Info</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cadres.each do |cadre| %>
+      <tr>
+        <td><%= cadre.numerobaguete %></td>
+        <td><%= cadre.info %></td>
+        <td><%= link_to 'Show', cadre %></td>
+        <td><%= link_to 'Edit', edit_cadre_path(cadre) %></td>
+        <td><%= link_to 'Destroy', cadre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cadre', new_cadre_path %>

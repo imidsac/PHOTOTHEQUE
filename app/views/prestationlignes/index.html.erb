@@ -1,0 +1,37 @@
+<h1>Listing prestationlignes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prestation</th>
+      <th>Qte</th>
+      <th>Qtelivre</th>
+      <th>Montant</th>
+      <th>Numero prise</th>
+      <th>Type</th>
+      <th>Etat</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @prestationlignes.each do |prestationligne| %>
+      <tr>
+        <td><%= prestationligne.prestation %></td>
+        <td><%= prestationligne.qte %></td>
+        <td><%= prestationligne.qtelivre %></td>
+        <td><%= prestationligne.montant %></td>
+        <td><%= prestationligne.numero_prise %></td>
+        <td><%= prestationligne.type %></td>
+        <td><%= prestationligne.etat %></td>
+        <td><%= link_to 'Show', prestationligne %></td>
+        <td><%= link_to 'Edit', edit_prestationligne_path(prestationligne) %></td>
+        <td><%= link_to 'Destroy', prestationligne, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Prestationligne', new_prestationligne_path %>

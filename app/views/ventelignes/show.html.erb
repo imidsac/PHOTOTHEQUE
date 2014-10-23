@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Vente:</strong>
+  <%= @venteligne.vente %>
+</p>
+
+<p>
+  <strong>Qte:</strong>
+  <%= @venteligne.qte %>
+</p>
+
+<p>
+  <strong>Qtelivre:</strong>
+  <%= @venteligne.qtelivre %>
+</p>
+
+<p>
+  <strong>Montant:</strong>
+  <%= @venteligne.montant %>
+</p>
+
+<p>
+  <strong>Etat:</strong>
+  <%= @venteligne.etat %>
+</p>
+
+<%= link_to 'Edit', edit_venteligne_path(@venteligne) %> |
+<%= link_to 'Back', ventelignes_path %>

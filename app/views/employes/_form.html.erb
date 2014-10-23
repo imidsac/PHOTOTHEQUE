@@ -1,0 +1,20 @@
+<%= simple_form_for(@employe) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :nom %>
+    <%= f.input :prenom %>
+    <%= f.input :sexe %>
+    <%= f.input :phone %>
+    <%= f.input :address %>
+    <%= f.input :email %>
+    <%= f.input :compte_banc %>
+    <%= f.input :salaireb %>
+    <%= f.input :type %>
+    <%= f.input :date_recru %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

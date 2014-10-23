@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Prestation:</strong>
+  <%= @prestationligne.prestation %>
+</p>
+
+<p>
+  <strong>Qte:</strong>
+  <%= @prestationligne.qte %>
+</p>
+
+<p>
+  <strong>Qtelivre:</strong>
+  <%= @prestationligne.qtelivre %>
+</p>
+
+<p>
+  <strong>Montant:</strong>
+  <%= @prestationligne.montant %>
+</p>
+
+<p>
+  <strong>Numero prise:</strong>
+  <%= @prestationligne.numero_prise %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @prestationligne.type %>
+</p>
+
+<p>
+  <strong>Etat:</strong>
+  <%= @prestationligne.etat %>
+</p>
+
+<%= link_to 'Edit', edit_prestationligne_path(@prestationligne) %> |
+<%= link_to 'Back', prestationlignes_path %>

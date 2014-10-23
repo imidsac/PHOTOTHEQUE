@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @prestation.client %>
+</p>
+
+<p>
+  <strong>Employe:</strong>
+  <%= @prestation.employe %>
+</p>
+
+<p>
+  <strong>Date perstation:</strong>
+  <%= @prestation.date_perstation %>
+</p>
+
+<p>
+  <strong>Etat prestation:</strong>
+  <%= @prestation.etat_prestation %>
+</p>
+
+<p>
+  <strong>Somme:</strong>
+  <%= @prestation.somme %>
+</p>
+
+<p>
+  <strong>Payee:</strong>
+  <%= @prestation.payee %>
+</p>
+
+<%= link_to 'Edit', edit_prestation_path(@prestation) %> |
+<%= link_to 'Back', prestations_path %>

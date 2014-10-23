@@ -1,0 +1,16 @@
+<%= simple_form_for(@fournisseur) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name_company %>
+    <%= f.input :nom %>
+    <%= f.input :prenom %>
+    <%= f.input :phone %>
+    <%= f.input :address %>
+    <%= f.input :email %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

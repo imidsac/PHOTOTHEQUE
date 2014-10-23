@@ -1,0 +1,16 @@
+<%= simple_form_for(@prestation) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :client %>
+    <%= f.association :employe %>
+    <%= f.input :date_perstation %>
+    <%= f.input :etat_prestation %>
+    <%= f.input :somme %>
+    <%= f.input :payee %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

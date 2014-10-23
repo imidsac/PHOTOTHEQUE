@@ -1,0 +1,27 @@
+<h1>Listing formatphotos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dimention</th>
+      <th>Info</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @formatphotos.each do |formatphoto| %>
+      <tr>
+        <td><%= formatphoto.dimention %></td>
+        <td><%= formatphoto.info %></td>
+        <td><%= link_to 'Show', formatphoto %></td>
+        <td><%= link_to 'Edit', edit_formatphoto_path(formatphoto) %></td>
+        <td><%= link_to 'Destroy', formatphoto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Formatphoto', new_formatphoto_path %>

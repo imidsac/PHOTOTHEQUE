@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Achat:</strong>
+  <%= @aligne.achat %>
+</p>
+
+<p>
+  <strong>Qte:</strong>
+  <%= @aligne.qte %>
+</p>
+
+<p>
+  <strong>Qtelivre:</strong>
+  <%= @aligne.qtelivre %>
+</p>
+
+<p>
+  <strong>Montant:</strong>
+  <%= @aligne.montant %>
+</p>
+
+<p>
+  <strong>Etat:</strong>
+  <%= @aligne.etat %>
+</p>
+
+<%= link_to 'Edit', edit_aligne_path(@aligne) %> |
+<%= link_to 'Back', alignes_path %>

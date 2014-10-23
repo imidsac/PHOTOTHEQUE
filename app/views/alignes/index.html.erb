@@ -1,0 +1,33 @@
+<h1>Listing alignes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Achat</th>
+      <th>Qte</th>
+      <th>Qtelivre</th>
+      <th>Montant</th>
+      <th>Etat</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @alignes.each do |aligne| %>
+      <tr>
+        <td><%= aligne.achat %></td>
+        <td><%= aligne.qte %></td>
+        <td><%= aligne.qtelivre %></td>
+        <td><%= aligne.montant %></td>
+        <td><%= aligne.etat %></td>
+        <td><%= link_to 'Show', aligne %></td>
+        <td><%= link_to 'Edit', edit_aligne_path(aligne) %></td>
+        <td><%= link_to 'Destroy', aligne, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Aligne', new_aligne_path %>
