@@ -1,15 +1,12 @@
-<%= simple_form_for(@client) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :nom %>
-    <%= f.input :prenom %>
-    <%= f.input :phone %>
-    <%= f.input :address %>
-    <%= f.input :email %>
-  </div>
-
+<%= simple_form_for @client, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :nom %>
+  <%= f.input :prenom %>
+  <%= f.input :phone %>
+  <%= f.input :address %>
+  <%= f.input :email %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                clients_path, :class => 'btn' %>
   </div>
 <% end %>

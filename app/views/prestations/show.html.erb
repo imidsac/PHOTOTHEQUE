@@ -1,34 +1,31 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Prestation -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <strong>Client:</strong>
-  <%= @prestation.client %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:client_id) %>:</strong></dt>
+  <dd><%= @prestation.client_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:employe_id) %>:</strong></dt>
+  <dd><%= @prestation.employe_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date_perstation) %>:</strong></dt>
+  <dd><%= @prestation.date_perstation %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:etat_prestation) %>:</strong></dt>
+  <dd><%= @prestation.etat_prestation %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:somme) %>:</strong></dt>
+  <dd><%= @prestation.somme %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:payee) %>:</strong></dt>
+  <dd><%= @prestation.payee %></dd>
+</dl>
 
-<p>
-  <strong>Employe:</strong>
-  <%= @prestation.employe %>
-</p>
-
-<p>
-  <strong>Date perstation:</strong>
-  <%= @prestation.date_perstation %>
-</p>
-
-<p>
-  <strong>Etat prestation:</strong>
-  <%= @prestation.etat_prestation %>
-</p>
-
-<p>
-  <strong>Somme:</strong>
-  <%= @prestation.somme %>
-</p>
-
-<p>
-  <strong>Payee:</strong>
-  <%= @prestation.payee %>
-</p>
-
-<%= link_to 'Edit', edit_prestation_path(@prestation) %> |
-<%= link_to 'Back', prestations_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              prestations_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_prestation_path(@prestation), :class => 'btn btn-primary' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              prestation_path(@prestation),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
