@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 20141023173731) do
     t.decimal  "qtelivre",                default: 0.0
     t.decimal  "montant",                 default: 0.0
     t.integer  "numero_prise",            default: 0
-    t.boolean  "type_pl"
+    t.string   "type_pl",       limit: 2, default: "sp"
     t.string   "etat",          limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -173,9 +173,10 @@ ActiveRecord::Schema.define(version: 20141023173731) do
     t.integer  "client_id"
     t.integer  "employe_id"
     t.datetime "date_perstation"
-    t.string   "etat_prestation", limit: 1
+    t.string   "etat_prestation", limit: 1, default: "n"
     t.decimal  "somme",                     default: 0.0
     t.decimal  "payee",                     default: 0.0
+    t.string   "type_pr",                   default: "s"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -233,7 +234,7 @@ ActiveRecord::Schema.define(version: 20141023173731) do
     t.string   "etat_vente",  limit: 1, default: "n"
     t.decimal  "somme",                 default: 0.0
     t.decimal  "payee",                 default: 0.0
-    t.string   "type",        limit: 1, default: "m"
+    t.string   "type_ve",     limit: 1, default: "m"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

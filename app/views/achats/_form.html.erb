@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :fournisseur %>
+    <%= f.association :fournisseur, label_method: :nom_company %>
     <%= f.input :date_achat %>
     <%= f.input :type %>
     <%= f.input :somme %>

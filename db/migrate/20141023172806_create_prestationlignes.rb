@@ -6,7 +6,7 @@ class CreatePrestationlignes < ActiveRecord::Migration
       t.decimal :qtelivre, default: 0
       t.decimal :montant, default: 0
       t.integer :numero_prise, default: 0
-      t.boolean :type_pl
+      t.string :type_pl, limit: 2, default: 'sp'
       t.string :etat, limit: 1
 
       t.timestamps
