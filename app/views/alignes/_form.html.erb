@@ -1,15 +1,12 @@
-<%= simple_form_for(@aligne) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.association :achat %>
-    <%= f.input :qte %>
-    <%= f.input :qtelivre %>
-    <%= f.input :montant %>
-    <%= f.input :etat %>
-  </div>
-
+<%= simple_form_for @aligne, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :achat_id %>
+  <%= f.input :qte %>
+  <%= f.input :qtelivre %>
+  <%= f.input :montant %>
+  <%= f.input :etat %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                alignes_path, :class => 'btn' %>
   </div>
 <% end %>

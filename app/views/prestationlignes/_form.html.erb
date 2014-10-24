@@ -1,17 +1,14 @@
-<%= simple_form_for(@prestationligne) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.association :prestation %>
-    <%= f.input :qte %>
-    <%= f.input :qtelivre %>
-    <%= f.input :montant %>
-    <%= f.input :numero_prise %>
-    <%= f.input :type %>
-    <%= f.input :etat %>
-  </div>
-
+<%= simple_form_for @prestationligne, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :prestation_id %>
+  <%= f.input :qte %>
+  <%= f.input :qtelivre %>
+  <%= f.input :montant %>
+  <%= f.input :numero_prise %>
+  <%= f.input :type_pl %>
+  <%= f.input :etat %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                prestationlignes_path, :class => 'btn' %>
   </div>
 <% end %>

@@ -1,17 +1,14 @@
-<%= simple_form_for(@paiement) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.association :vente %>
-    <%= f.association :client %>
-    <%= f.association :achat %>
-    <%= f.association :fournisseur %>
-    <%= f.input :datepaiement %>
-    <%= f.input :motif %>
-    <%= f.input :montant %>
-  </div>
-
+<%= simple_form_for @paiement, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :vente_id %>
+  <%= f.input :client_id %>
+  <%= f.input :achat_id %>
+  <%= f.input :fournisseur_id %>
+  <%= f.input :datepaiement %>
+  <%= f.input :motif %>
+  <%= f.input :montant %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                paiements_path, :class => 'btn' %>
   </div>
 <% end %>

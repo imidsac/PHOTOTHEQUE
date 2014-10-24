@@ -1,11 +1,8 @@
-<%= simple_form_for(@banque) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :nom %>
-  </div>
-
+<%= simple_form_for @banque, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :nom %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                banques_path, :class => 'btn' %>
   </div>
 <% end %>

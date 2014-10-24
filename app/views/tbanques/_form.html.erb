@@ -1,14 +1,11 @@
-<%= simple_form_for(@tbanque) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.association :banque %>
-    <%= f.input :type_rv %>
-    <%= f.input :montant %>
-    <%= f.input :porteur %>
-  </div>
-
+<%= simple_form_for @tbanque, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :banque_id %>
+  <%= f.input :type_rv %>
+  <%= f.input :montant %>
+  <%= f.input :porteur %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                tbanques_path, :class => 'btn' %>
   </div>
 <% end %>

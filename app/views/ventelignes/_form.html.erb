@@ -1,15 +1,12 @@
-<%= simple_form_for(@venteligne) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.association :vente %>
-    <%= f.input :qte %>
-    <%= f.input :qtelivre %>
-    <%= f.input :montant %>
-    <%= f.input :etat %>
-  </div>
-
+<%= simple_form_for @venteligne, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :vente_id %>
+  <%= f.input :qte %>
+  <%= f.input :qtelivre %>
+  <%= f.input :montant %>
+  <%= f.input :etat %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                ventelignes_path, :class => 'btn' %>
   </div>
 <% end %>

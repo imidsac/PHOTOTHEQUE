@@ -1,24 +1,27 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Tbanque -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <strong>Banque:</strong>
-  <%= @tbanque.banque %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:banque_id) %>:</strong></dt>
+  <dd><%= @tbanque.banque_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:type_rv) %>:</strong></dt>
+  <dd><%= @tbanque.type_rv %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:montant) %>:</strong></dt>
+  <dd><%= @tbanque.montant %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:porteur) %>:</strong></dt>
+  <dd><%= @tbanque.porteur %></dd>
+</dl>
 
-<p>
-  <strong>Type rv:</strong>
-  <%= @tbanque.type_rv %>
-</p>
-
-<p>
-  <strong>Montant:</strong>
-  <%= @tbanque.montant %>
-</p>
-
-<p>
-  <strong>Porteur:</strong>
-  <%= @tbanque.porteur %>
-</p>
-
-<%= link_to 'Edit', edit_tbanque_path(@tbanque) %> |
-<%= link_to 'Back', tbanques_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              tbanques_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_tbanque_path(@tbanque), :class => 'btn btn-primary' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              tbanque_path(@tbanque),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

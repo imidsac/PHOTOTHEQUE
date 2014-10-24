@@ -1,16 +1,13 @@
-<%= simple_form_for(@achat) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.association :fournisseur, label_method: :nom_company %>
-    <%= f.input :date_achat %>
-    <%= f.input :type %>
-    <%= f.input :somme %>
-    <%= f.input :payee %>
-    <%= f.input :etat_achat %>
-  </div>
-
+<%= simple_form_for @achat, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :fournisseur_id %>
+  <%= f.input :date_achat %>
+  <%= f.input :type %>
+  <%= f.input :somme %>
+  <%= f.input :payee %>
+  <%= f.input :etat_achat %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                achats_path, :class => 'btn' %>
   </div>
 <% end %>

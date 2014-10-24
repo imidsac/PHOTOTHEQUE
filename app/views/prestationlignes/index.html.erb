@@ -1,37 +1,48 @@
-<h1>Listing prestationlignes</h1>
-
-<table>
+<%- model_class = Prestationligne -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Prestation</th>
-      <th>Qte</th>
-      <th>Qtelivre</th>
-      <th>Montant</th>
-      <th>Numero prise</th>
-      <th>Type</th>
-      <th>Etat</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:prestation_id) %></th>
+      <th><%= model_class.human_attribute_name(:qte) %></th>
+      <th><%= model_class.human_attribute_name(:qtelivre) %></th>
+      <th><%= model_class.human_attribute_name(:montant) %></th>
+      <th><%= model_class.human_attribute_name(:numero_prise) %></th>
+      <th><%= model_class.human_attribute_name(:type_pl) %></th>
+      <th><%= model_class.human_attribute_name(:etat) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @prestationlignes.each do |prestationligne| %>
       <tr>
-        <td><%= prestationligne.prestation %></td>
+        <td><%= link_to prestationligne.id, prestationligne_path(prestationligne) %></td>
+        <td><%= prestationligne.prestation_id %></td>
         <td><%= prestationligne.qte %></td>
         <td><%= prestationligne.qtelivre %></td>
         <td><%= prestationligne.montant %></td>
         <td><%= prestationligne.numero_prise %></td>
-        <td><%= prestationligne.type %></td>
+        <td><%= prestationligne.type_pl %></td>
         <td><%= prestationligne.etat %></td>
-        <td><%= link_to 'Show', prestationligne %></td>
-        <td><%= link_to 'Edit', edit_prestationligne_path(prestationligne) %></td>
-        <td><%= link_to 'Destroy', prestationligne, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l prestationligne.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_prestationligne_path(prestationligne), :class => 'btn btn-primary btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      prestationligne_path(prestationligne),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-danger btn-xs' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Prestationligne', new_prestationligne_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_prestationligne_path,
+            :class => 'btn btn-primary' %>
