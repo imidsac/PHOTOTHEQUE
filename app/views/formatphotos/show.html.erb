@@ -1,14 +1,23 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Formatphoto -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <strong>Dimention:</strong>
-  <%= @formatphoto.dimention %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:dimention) %>:</strong></dt>
+  <dd><%= @formatphoto.dimention %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:info) %>:</strong></dt>
+  <dd><%= @formatphoto.info %></dd>
+</dl>
 
-<p>
-  <strong>Info:</strong>
-  <%= @formatphoto.info %>
-</p>
-
-<%= link_to 'Edit', edit_formatphoto_path(@formatphoto) %> |
-<%= link_to 'Back', formatphotos_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              formatphotos_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_formatphoto_path(@formatphoto), :class => 'btn btn-primary' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              formatphoto_path(@formatphoto),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

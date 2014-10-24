@@ -1,12 +1,9 @@
-<%= simple_form_for(@formatphoto) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :dimention %>
-    <%= f.input :info %>
-  </div>
-
+<%= simple_form_for @formatphoto, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :dimention %>
+  <%= f.input :info %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                formatphotos_path, :class => 'btn' %>
   </div>
 <% end %>

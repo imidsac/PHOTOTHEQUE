@@ -1,12 +1,9 @@
-<%= simple_form_for(@cadre) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :numerobaguete %>
-    <%= f.input :info %>
-  </div>
-
+<%= simple_form_for @cadre, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :numerobaguete %>
+  <%= f.input :info %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                cadres_path, :class => 'btn' %>
   </div>
 <% end %>
