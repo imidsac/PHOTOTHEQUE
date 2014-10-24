@@ -178,8 +178,45 @@ namespace :dev_data do
         reference: "20*25"
       )
       
- puts "===> Sample date have been set in DB !"
+ puts "===> Sample date have been set in DB Articles !"
     
+    Fournisseur.create!(
+        name_company: "TOTAL",
+        nom: "Abdoul kader",
+        prenom: "Sacko",
+        phone: "76 43 83 41",
+        address: "Lafiabougou",
+        email: "sackoabdoulkader@live.fr"
+      )
+ Fournisseur.create!(
+        name_company: "E.D.M",
+        nom: "Moussa",
+        prenom: "CAMARA",
+        phone: "76 43 83 41",
+        address: "Lafiabougou",
+        email: "sackoabdoulkader@live.fr"
+      )
+ Fournisseur.create!(
+        name_company: "TOTAL",
+        nom: "Abdoul kader",
+        prenom: "Sacko",
+        phone: "76 43 83 41",
+        address: "Lafiabougou",
+        email: "sackoabdoulkader@live.fr"
+      )
+ puts "===> Sample date have been set in DB  Fournisseurs!"
+
+ Boutique.create!(
+        name: "SIKASSO",
+        phone: "88 88 88 88",
+        address: "WAYERMA"
+      )
+ Boutique.create!(
+        name: "BANCONI",
+        phone: "88 88 88 88",
+        address: "RUE 456 PORTE 345"
+      )
+ puts "===> Sample date have been set in DB  Boutique!"
   end
   
 end
