@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
-
+<%= render 'layouts/sidebar' %>
+<div class="col-sm-10">
 <p>
   <strong>Cadre:</strong>
   <%= @stock.cadre %>
@@ -17,3 +18,4 @@
 
 <%= link_to 'Edit', edit_stock_path(@stock) %> |
 <%= link_to 'Back', stocks_path %>
+</div><!-- /.col-sm-10 -->

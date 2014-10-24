@@ -2,7 +2,8 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 </div>
-
+<%= render 'layouts/sidebar' %>
+<div class="col-sm-10">
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:name_company) %>:</strong></dt>
   <dd><%= @fournisseur.name_company %></dd>
@@ -29,3 +30,5 @@
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
 </div>
+</div><!-- /.col-sm-10 -->
+
