@@ -1,24 +1,27 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Depense -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @depense.description %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @depense.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:categoriedep_id) %>:</strong></dt>
+  <dd><%= @depense.categoriedep_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:montant) %>:</strong></dt>
+  <dd><%= @depense.montant %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:etat_dep) %>:</strong></dt>
+  <dd><%= @depense.etat_dep %></dd>
+</dl>
 
-<p>
-  <strong>Categoriedep:</strong>
-  <%= @depense.categoriedep %>
-</p>
-
-<p>
-  <strong>Montant:</strong>
-  <%= @depense.montant %>
-</p>
-
-<p>
-  <strong>Etat dep:</strong>
-  <%= @depense.etat_dep %>
-</p>
-
-<%= link_to 'Edit', edit_depense_path(@depense) %> |
-<%= link_to 'Back', depenses_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              depenses_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_depense_path(@depense), :class => 'btn btn-primary' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              depense_path(@depense),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

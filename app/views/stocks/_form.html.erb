@@ -1,13 +1,10 @@
-<%= simple_form_for(@stock) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.association :cadre %>
-    <%= f.association :article %>
-    <%= f.input :stoc %>
-  </div>
-
+<%= simple_form_for @stock, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :cadre_id %>
+  <%= f.input :article_id %>
+  <%= f.input :stoc %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                stocks_path, :class => 'btn' %>
   </div>
 <% end %>

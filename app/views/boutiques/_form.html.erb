@@ -1,13 +1,10 @@
-<%= simple_form_for(@boutique) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :phone %>
-    <%= f.input :address %>
-  </div>
-
+<%= simple_form_for @boutique, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :phone %>
+  <%= f.input :address %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                boutiques_path, :class => 'btn' %>
   </div>
 <% end %>
