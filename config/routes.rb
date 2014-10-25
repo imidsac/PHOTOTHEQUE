@@ -1,45 +1,44 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :tbanques
 
+  resources :tbanques
   resources :banques
 
   resources :employes
 
   resources :tcaisses
-
   resources :caisses
 
   resources :depenses
-
   resources :categoriedeps
 
   resources :paiements
 
-  resources :ventelignes
 
-  resources :ventes
+  resources :ventes do
+    resources :ventelignes
+  end
 
-  resources :prestationlignes
 
-  resources :prestations
+  resources :prestations do
+    resources :prestationlignes
+  end
 
   resources :clients
 
   resources :boutiques
 
-  resources :alignes
 
-  resources :achats
+  resources :achats do
+    resources :alignes
+  end
 
   resources :fournisseurs
-
   resources :stocks
 
   resources :articles
 
   resources :cadres
-
   resources :formatphotos
 
   get 'welcome/home'
