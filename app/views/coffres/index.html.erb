@@ -1,0 +1,27 @@
+<h1>Listing coffres</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Paiement</th>
+      <th>Font</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coffres.each do |coffre| %>
+      <tr>
+        <td><%= coffre.paiement %></td>
+        <td><%= coffre.font %></td>
+        <td><%= link_to 'Show', coffre %></td>
+        <td><%= link_to 'Edit', edit_coffre_path(coffre) %></td>
+        <td><%= link_to 'Destroy', coffre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Coffre', new_coffre_path %>

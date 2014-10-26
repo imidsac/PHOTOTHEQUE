@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
+  resources :tcoffres
+
+  resources :coffres
+
   devise_for :users
 
   resources :tbanques
   resources :banques
 
   resources :employes
-
-  resources :tcaisses
-  resources :caisses
-
   resources :depenses
   resources :categoriedeps
 

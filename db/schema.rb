@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141024112645) do
+ActiveRecord::Schema.define(version: 20141026100058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20141024112645) do
     t.decimal  "qte",                  default: 0.0
     t.decimal  "qtelivre",             default: 0.0
     t.decimal  "montant",              default: 0.0
-    t.string   "etat",       limit: 1
+    t.string   "etat",       limit: 1, default: "n"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -66,13 +66,7 @@ ActiveRecord::Schema.define(version: 20141024112645) do
   create_table "cadres", force: true do |t|
     t.string   "numerobaguete", limit: 30
     t.text     "info"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "caisses", force: true do |t|
-    t.decimal  "paiement",   default: 0.0
-    t.decimal  "font",       default: 0.0
+    t.string   "etat",          limit: 1,  default: "a"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -90,6 +84,13 @@ ActiveRecord::Schema.define(version: 20141024112645) do
     t.string   "phone"
     t.text     "address"
     t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "coffres", force: true do |t|
+    t.decimal  "paiement"
+    t.decimal  "font"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -123,6 +124,7 @@ ActiveRecord::Schema.define(version: 20141024112645) do
   create_table "formatphotos", force: true do |t|
     t.string   "dimention",  limit: 20
     t.text     "info"
+    t.string   "etat",       limit: 1,  default: "a"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -162,7 +164,7 @@ ActiveRecord::Schema.define(version: 20141024112645) do
     t.decimal  "montant",                 default: 0.0
     t.integer  "numero_prise",            default: 0
     t.string   "type_pl",       limit: 2, default: "sp"
-    t.string   "etat",          limit: 1
+    t.string   "etat",          limit: 1, default: "n"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -176,7 +178,7 @@ ActiveRecord::Schema.define(version: 20141024112645) do
     t.string   "etat_prestation", limit: 1, default: "n"
     t.decimal  "somme",                     default: 0.0
     t.decimal  "payee",                     default: 0.0
-    t.string   "type_pr",                   default: "s"
+    t.string   "type_pr",         limit: 1, default: "s"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -206,10 +208,10 @@ ActiveRecord::Schema.define(version: 20141024112645) do
 
   add_index "tbanques", ["banque_id"], name: "index_tbanques_on_banque_id", using: :btree
 
-  create_table "tcaisses", force: true do |t|
+  create_table "tcoffres", force: true do |t|
     t.datetime "date_tc"
-    t.string   "crencier"
-    t.string   "type_tc",    limit: 1, default: "p"
+    t.string   "beneficier"
+    t.string   "type_tc"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Paiement:</strong>
+  <%= @coffre.paiement %>
+</p>
+
+<p>
+  <strong>Font:</strong>
+  <%= @coffre.font %>
+</p>
+
+<%= link_to 'Edit', edit_coffre_path(@coffre) %> |
+<%= link_to 'Back', coffres_path %>

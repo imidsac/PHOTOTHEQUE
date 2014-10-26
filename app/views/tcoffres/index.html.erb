@@ -1,0 +1,29 @@
+<h1>Listing tcoffres</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date tc</th>
+      <th>Beneficier</th>
+      <th>Type tc</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tcoffres.each do |tcoffre| %>
+      <tr>
+        <td><%= tcoffre.date_tc %></td>
+        <td><%= tcoffre.beneficier %></td>
+        <td><%= tcoffre.type_tc %></td>
+        <td><%= link_to 'Show', tcoffre %></td>
+        <td><%= link_to 'Edit', edit_tcoffre_path(tcoffre) %></td>
+        <td><%= link_to 'Destroy', tcoffre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tcoffre', new_tcoffre_path %>
