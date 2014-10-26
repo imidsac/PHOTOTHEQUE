@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20141026100058) do
 
   create_table "alignes", force: true do |t|
     t.integer  "achat_id"
+    t.integer  "article_id"
+    t.integer  "cadre_id"
     t.decimal  "qte",                  default: 0.0
     t.decimal  "qtelivre",             default: 0.0
     t.decimal  "montant",              default: 0.0
@@ -40,6 +42,8 @@ ActiveRecord::Schema.define(version: 20141026100058) do
   end
 
   add_index "alignes", ["achat_id"], name: "index_alignes_on_achat_id", using: :btree
+  add_index "alignes", ["article_id"], name: "index_alignes_on_article_id", using: :btree
+  add_index "alignes", ["cadre_id"], name: "index_alignes_on_cadre_id", using: :btree
 
   create_table "articles", force: true do |t|
     t.string   "name"

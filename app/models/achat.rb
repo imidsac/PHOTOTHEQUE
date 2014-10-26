@@ -2,6 +2,7 @@ class Achat < ActiveRecord::Base
   belongs_to :fournisseur
   has_many :alignes
   has_many :articles, through: :alignes
+  has_many :cadres, through: :alignes
   validates :fournisseur_id, presence: true
   accepts_nested_attributes_for :alignes
 

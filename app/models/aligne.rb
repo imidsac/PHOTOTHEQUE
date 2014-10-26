@@ -1,6 +1,7 @@
 class Aligne < ActiveRecord::Base
   belongs_to :achat
   belongs_to :article
+  belongs_to :cadre
   validates :achat_id, presence: true
 
   after_create :give_montant_to_somme
@@ -15,5 +16,5 @@ class Aligne < ActiveRecord::Base
   	achat.somme -= montant
   	achat.save
   end
-  
+
 end
