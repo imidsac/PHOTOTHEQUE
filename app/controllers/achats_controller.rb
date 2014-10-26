@@ -69,6 +69,6 @@ class AchatsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def achat_params
-      params.require(:achat).permit(:fournisseur_id, :date_achat, :type, :somme, :payee, :etat_achat)
+      params.require(:achat).permit(:fournisseur_id, :date_achat, :type_ac, :somme, :payee, :etat_achat)
     end
 end

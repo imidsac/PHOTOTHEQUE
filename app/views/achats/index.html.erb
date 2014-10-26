@@ -8,7 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:fournisseur_id) %></th>
       <th><%= model_class.human_attribute_name(:date_achat) %></th>
-      <th><%= model_class.human_attribute_name(:type) %></th>
+      <th><%= model_class.human_attribute_name(:type_ac) %></th>
       <th><%= model_class.human_attribute_name(:somme) %></th>
       <th><%= model_class.human_attribute_name(:payee) %></th>
       <th><%= model_class.human_attribute_name(:etat_achat) %></th>
@@ -22,7 +22,7 @@
         <td><%= link_to achat.id, achat_path(achat) %></td>
         <td><%= achat.fournisseur_id %></td>
         <td><%= achat.date_achat %></td>
-        <td><%= achat.type %></td>
+        <td><%= achat.type_ac %></td>
         <td><%= achat.somme %></td>
         <td><%= achat.payee %></td>
         <td><%= achat.etat_achat %></td>

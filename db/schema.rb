@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(version: 20141026100058) do
   create_table "achats", force: true do |t|
     t.integer  "fournisseur_id"
     t.datetime "date_achat"
-    t.string   "type"
+    t.string   "type_ac",        limit: 1, default: "A"
     t.decimal  "somme",                    default: 0.0
     t.decimal  "payee",                    default: 0.0
-    t.string   "etat_achat",     limit: 1
+    t.string   "etat_achat",     limit: 1, default: "n"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
