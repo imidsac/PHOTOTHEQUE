@@ -15,6 +15,8 @@ class AchatsController < ApplicationController
   # GET /achats/1
   # GET /achats/1.json
   def show
+    @alignes = @achat.alignes
+    @aligne = Aligne.new(:achat => @achat)
   end
 
   # GET /achats/new
