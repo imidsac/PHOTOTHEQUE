@@ -18,39 +18,35 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Achats <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
+                <li><%= link_to 'Nouveau', new_achat_path %></li>
+                <li class="divider"></li>                
                 <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
+                <li><%= link_to 'Liste des cadres', achats_path %></li>
+                <li><%= link_to 'Liste des articles', achats_path %></li>
               </ul>
             </li>
 
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ventes <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
+                <li><%= link_to 'Nouveau', new_vente_path %></li>
+                <li class="divider"></li>                
                 <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
+                <li><%= link_to 'Liste des cadres', ventes_path %></li>
+                <li><%= link_to 'Liste des articles', ventes_path %></li>
               </ul>
             </li>
 
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prestations <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
+                <li><%= link_to 'Nouveau', new_prestation_path %></li>
+                <li class="divider"></li>                
                 <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
+                <li><%= link_to 'Liste pour Studio', prestations_path %></li>
+                <li><%= link_to 'Liste pour Retirage', prestations_path %></li>
+                <li><%= link_to 'Liste pour Cadrage', prestations_path %></li>
+                <li><%= link_to 'Liste pour Agrandissement', prestations_path %></li>
               </ul>
             </li>
             <% end %>
