@@ -4,8 +4,12 @@ class AchatsController < ApplicationController
   # GET /achats
   # GET /achats.json
   def index
-    #@four  = Fournisseur.joins(:achats)
-    @achats = Achat.order(date_achat: :desc).tlibre
+    @achats = Achat
+    @achats = @achats.order(date_achat: :desc).article if params[:article]
+    @achats = @achats.order(date_achat: :desc).cadre if params[:cadre]
+    @achats = @achats.order(date_achat: :desc).payee if params[:payee]
+    @achats = @achats.order(date_achat: :desc).nopayee if params[:nopayee]
+    @achats = @achats.order(date_achat: :desc)
   end
 
   # GET /achats/1

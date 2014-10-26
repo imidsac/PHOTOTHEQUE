@@ -21,8 +21,8 @@
                 <li><%= link_to 'Nouveau', new_achat_path %></li>
                 <li class="divider"></li>                
                 <li class="dropdown-header">Nav header</li>
-                <li><%= link_to 'Liste des cadres', achats_path %></li>
-                <li><%= link_to 'Liste des articles', achats_path %></li>
+                <li><%= link_to 'Liste des cadres', achats_path(:cadre => true) %></li>
+                <li><%= link_to 'Liste des articles', achats_path(:article => true) %></li>
               </ul>
             </li>
 
