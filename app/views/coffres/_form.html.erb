@@ -1,12 +1,9 @@
-<%= simple_form_for(@coffre) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :paiement %>
-    <%= f.input :font %>
-  </div>
-
+<%= simple_form_for @coffre, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :paiement %>
+  <%= f.input :font %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                coffres_path, :class => 'btn' %>
   </div>
 <% end %>

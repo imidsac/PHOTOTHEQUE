@@ -1,13 +1,10 @@
-<%= simple_form_for(@tcoffre) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :date_tc %>
-    <%= f.input :beneficier %>
-    <%= f.input :type_tc %>
-  </div>
-
+<%= simple_form_for @tcoffre, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :date_tc %>
+  <%= f.input :beneficier %>
+  <%= f.input :type_tc %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                tcoffres_path, :class => 'btn' %>
   </div>
 <% end %>
