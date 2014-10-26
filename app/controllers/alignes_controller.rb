@@ -75,6 +75,6 @@ class AlignesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def aligne_params
-      params.require(:aligne).permit(:article_id, :cadre_id, :qte, :qtelivre, :montant, :etat)
+      params.require(:aligne).permit(:article_id, :cadre_id, :qte, :qtelivre, :prix_u, :etat)
     end
 end
