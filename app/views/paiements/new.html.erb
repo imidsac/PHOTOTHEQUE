@@ -1,6 +1,12 @@
+<div class="col-sm-2">
+  <%= render 'layouts/sidebar' %>
+</div><!-- /.col-sm-2 -->
+
+<div class="col-sm-10">
 <%- model_class = Paiement -%>
 <div class="page-header">
   <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
                                  :default => "New #{model_class.model_name.human}") %></h1>
 </div>
 <%= render :partial => 'form' %>
+</div><!-- /.col-sm-10 -->
