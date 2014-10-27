@@ -1,9 +1,12 @@
 <%= simple_form_for [@achat, @aligne], :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :achat_id %>
+  <% if @achat.type_ac == 'A' %>
+  <%= f.association :article %>
+<% elsif @achat.type_ac == 'C'%>
+  <%= f.association :cadre, label_method: :numerobaguete %>
+<% end %>
   <%= f.input :qte %>
+  <%= f.input :prix_u %>
   <%= f.input :qtelivre %>
-  <%= f.input :montant %>
-  <%= f.input :etat %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
