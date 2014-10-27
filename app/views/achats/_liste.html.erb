@@ -21,7 +21,7 @@
     <% @achats.each do |achat| %>
       <tr>
         <td><%= link_to achat.id, achat_path(achat) %></td>
-        <td><%= achat.fournisseur_id %></td>
+        <td><%= achat.name_company %></td>
         <td><%= achat.date_achat.strftime("%d %b %Y à %H:%M") %></td>
         <% if achat.type_ac == 'C' %>
         <td><%= 'Cadre' %></td>

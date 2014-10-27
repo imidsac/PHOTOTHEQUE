@@ -9,7 +9,11 @@ class AchatsController < ApplicationController
     @achats = @achats.order(date_achat: :desc).cadre if params[:cadre]
     @achats = @achats.order(date_achat: :desc).payee if params[:payee]
     @achats = @achats.order(date_achat: :desc).nopayee if params[:nopayee]
-    @achats = @achats.order(date_achat: :desc)
+    #@achats = @achats.order(date_achat: :desc).limit(10)
+    @achats = @achats.select("achats.id,fournisseur_id, name_company, nom, prenom,type_ac, date_achat,somme, payee, etat_achat").joins(:fournisseur).order(date_achat: :desc)
+
+    #@cadres = Cadre.joins(" JOIN formatcadres ON formatcadres.id = cadres.formatcadre_id")
+
   end
 
   # GET /achats/1
