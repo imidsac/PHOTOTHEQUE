@@ -20,7 +20,7 @@
 
 <div class="row">
   <div class="col-sm-5">
-<dl class="dl-horizontal">
+<dl class="dl-horizontal span12">
   <dt><strong><%= model_class.human_attribute_name(:type_achat) %>:</strong></dt>
   <% if @achat.type_ac == 'C' %>
   <dd><%= 'Cadre' %></dd>
@@ -45,7 +45,7 @@
   <dd><%= 'T-Livret' %></dd>
   <% end %>
   <dt><strong><%= model_class.human_attribute_name(:somme) %>:</strong></dt>
-  <dd><%= number_to_currency(@achat.somme, precision: 0,  unit: " FCFA", format: "%n %u") %></dd>
+  <dd><%= number_to_currency(@achat.somme, precision: 0,  unit: " F CFA", format: "%n %u") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:payee) %>:</strong></dt>
   <dd><%= @achat.payee %></dd>
 </dl>

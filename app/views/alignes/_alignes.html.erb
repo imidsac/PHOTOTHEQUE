@@ -30,8 +30,8 @@
         <% end %>
         <td><%= number_to_currency(aligne.qte, precision: 0, unit: "") %></td>
         <td><%= number_to_currency(aligne.qtelivre, precision: 0, unit: "") %></td>
-        <td><%= number_to_currency(aligne.prix_u, precision: 0,  unit: "F", format: "%n%u") %></td>
-        <td><%= number_to_currency(aligne.montant, precision: 0,  unit: "F", format: "%n%u") %></td>
+        <td><%= number_to_currency(aligne.prix_u, precision: 0,  unit: "", format: "%n %u") %></td>
+        <td><%= number_to_currency(aligne.montant, precision: 0,  unit: "", format: "%u %n") %></td>
         <td><%= aligne.etat %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
