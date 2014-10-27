@@ -1,0 +1,54 @@
+<%- model_class = Employe -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:nom) %></th>
+      <th><%= model_class.human_attribute_name(:prenom) %></th>
+      <th><%= model_class.human_attribute_name(:sexe) %></th>
+      <th><%= model_class.human_attribute_name(:phone) %></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:compte_banc) %></th>
+      <th><%= model_class.human_attribute_name(:salaireb) %></th>
+      <th><%= model_class.human_attribute_name(:type_em) %></th>
+      <th><%= model_class.human_attribute_name(:date_recru) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employes.each do |employe| %>
+      <tr>
+        <td><%= link_to employe.id, employe_path(employe) %></td>
+        <td><%= employe.nom %></td>
+        <td><%= employe.prenom %></td>
+        <td><%= employe.sexe %></td>
+        <td><%= employe.phone %></td>
+        <td><%= employe.address %></td>
+        <td><%= employe.email %></td>
+        <td><%= employe.compte_banc %></td>
+        <td><%= employe.salaireb %></td>
+        <td><%= employe.type_em %></td>
+        <td><%= employe.date_recru %></td>
+        <td><%=l employe.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_employe_path(employe), :class => 'btn btn-primary btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      employe_path(employe),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-danger btn-xs' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_employe_path,
+            :class => 'btn btn-primary' %>
