@@ -28,8 +28,8 @@
         <% elsif achat.type_ac == 'A' %>
         <td><%= 'Article' %></td>
         <% end %>
-        <td><%= achat.somme %></td>
-        <td><%= achat.payee %></td>
+        <td><%= number_to_currency(achat.somme, precision: 0,  unit: "", format: "%n %u") %></td>
+        <td><%= number_to_currency(achat.payee, precision: 0,  unit: "", format: "%n %u")%></td>
         <% if achat.etat_achat == 'n' %>
         <td><%= 'N-Livret' %></td>
         <% elsif achat.etat_achat == 'p' %>

@@ -28,8 +28,8 @@
         <% elsif @achat.type_ac == 'C'%>
         <td><%= aligne.cadre_id %></td>
         <% end %>
-        <td><%= number_to_currency(aligne.qte, precision: 0, unit: "") %></td>
-        <td><%= number_to_currency(aligne.qtelivre, precision: 0, unit: "") %></td>
+        <td><%= number_to_currency(aligne.qte, precision: 1, unit: "") %></td>
+        <td><%= number_to_currency(aligne.qtelivre, precision: 1, unit: "") %></td>
         <td><%= number_to_currency(aligne.prix_u, precision: 0,  unit: "", format: "%n %u") %></td>
         <td><%= number_to_currency(aligne.montant, precision: 0,  unit: "", format: "%u %n") %></td>
         <td><%= aligne.etat %></td>
