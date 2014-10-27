@@ -5,7 +5,7 @@ class Aligne < ActiveRecord::Base
   validates :achat_id, presence: true
 
   before_save :calcul_de_montant
-  after_save :give_montant_to_somme
+  after_create :give_montant_to_somme
   after_destroy :givey_montant_to_somme
 
 
@@ -14,7 +14,7 @@ class Aligne < ActiveRecord::Base
   end
 
   def give_montant_to_somme
-  	achat.somme = montant 
+  	achat.somme += montant 
   	achat.save
   end
 

@@ -35,7 +35,7 @@ class AchatsController < ApplicationController
 
     respond_to do |format|
       if @achat.save
-        format.html { redirect_to @achat, notice: 'Achat was successfully created.' }
+        format.html { redirect_to @achat }
         format.json { render :show, status: :created, location: @achat }
       else
         format.html { render :new }
