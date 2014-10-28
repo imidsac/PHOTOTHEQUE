@@ -19,6 +19,8 @@ class AchatsController < ApplicationController
   # GET /achats/1
   # GET /achats/1.json
   def show
+    #@fourni = @achat.fournisseur.select("fournisseur_id, name_company, nom, prenom").joins(:fournisseur)
+
     if @achat.type_ac == 'C'
     @alignes = @achat.alignes.select("cadre_id,numerobaguete,qte,qtelivre,prix_u,montant, alignes.id, alignes.etat").joins(:cadre)
     else

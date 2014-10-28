@@ -32,7 +32,14 @@
         <td><%= number_to_currency(aligne.qtelivre, precision: 1, unit: "") %></td>
         <td><%= number_to_currency(aligne.prix_u, precision: 0,  unit: "", format: "%n %u") %></td>
         <td><%= number_to_currency(aligne.montant, precision: 0,  unit: "", format: "%u %n") %></td>
-        <td><%= aligne.etat %></td>
+        <% if aligne.etat == 'n' %>
+        <td><%= 'N-Livret' %></td>
+        <% elsif aligne.etat == 'p' %>
+        <td><%= 'P-Livret' %></td>
+        <% elsif aligne.etat == 't' %>
+        <td><%= 'T-Livret' %></td>
+        <% end %>
+
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_achat_aligne_path(@achat, aligne), :class => 'btn btn-primary btn-xs' %>

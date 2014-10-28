@@ -5,7 +5,6 @@ class AlignesController < ApplicationController
   # GET /alignes.json
   def index
     @alignes = Aligne.all
-    @alignes = alignes.select("achat_id, article_id,cadre_id,alignes.id,qte,qtelivre,prix_u,montant,etat").joins(:article, :cadre).order(created_ad: :desc)
     @achat = Achat.find(params[:achat_id])
   end
 
