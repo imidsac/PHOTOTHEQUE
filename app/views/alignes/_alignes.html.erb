@@ -24,9 +24,9 @@
       <tr>
         <td><%= link_to aligne.id, achat_aligne_path(@achat, aligne) %></td>
         <% if @achat.type_ac == 'A'%>
-        <td><%= aligne.article_id %></td>
+        <td><%= aligne.name %></td>
         <% elsif @achat.type_ac == 'C'%>
-        <td><%= aligne.cadre_id %></td>
+        <td><%= aligne.numerobaguete %></td>
         <% end %>
         <td><%= number_to_currency(aligne.qte, precision: 1, unit: "") %></td>
         <td><%= number_to_currency(aligne.qtelivre, precision: 1, unit: "") %></td>

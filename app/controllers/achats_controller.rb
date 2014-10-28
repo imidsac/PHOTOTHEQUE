@@ -4,7 +4,7 @@ class AchatsController < ApplicationController
   # GET /achats
   # GET /achats.json
   def index
-    @achats = Achat
+    @achats = Achat.all
     @achats = @achats.order(date_achat: :desc).article if params[:article]
     @achats = @achats.order(date_achat: :desc).cadre if params[:cadre]
     @achats = @achats.order(date_achat: :desc).payee if params[:payee]
@@ -19,7 +19,12 @@ class AchatsController < ApplicationController
   # GET /achats/1
   # GET /achats/1.json
   def show
-    @alignes = @achat.alignes
+    if @achat.type_ac == 'C'
+    @alignes = @achat.alignes.select("cadre_id,numerobaguete,qte,qtelivre,prix_u,montant, alignes.id, alignes.etat").joins(:cadre)
+    else
+    @alignes = @achat.alignes.select("article_id,name,qte,qtelivre,prix_u,montant, alignes.id, alignes.etat").joins(:article)
+    end
+    #@alignes = @achat.alignes
     @aligne = Aligne.new(:achat => @achat)
   end
 
