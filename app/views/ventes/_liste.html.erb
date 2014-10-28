@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:boutique_id) %></th>
+      
       <th><%= model_class.human_attribute_name(:client_id) %></th>
       <th><%= model_class.human_attribute_name(:clients) %></th>
       <th><%= model_class.human_attribute_name(:date_vente) %></th>
@@ -14,7 +14,7 @@
       <th><%= model_class.human_attribute_name(:somme) %></th>
       <th><%= model_class.human_attribute_name(:payee) %></th>
       <th><%= model_class.human_attribute_name(:type_ve) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+    
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -22,15 +22,14 @@
     <% @ventes.each do |vente| %>
       <tr>
         <td><%= link_to vente.id, vente_path(vente) %></td>
-        <td><%= vente.boutique_id %></td>
-        <td><%= vente.client_id %></td>
-        <td><%= vente.clients %></td>
+        
+        <td><%= vente.nom %></td>
+        <td><%= vente.client_libre %></td>
         <td><%= vente.date_vente %></td>
         <td><%= vente.etat_vente %></td>
         <td><%= vente.somme %></td>
         <td><%= vente.payee %></td>
         <td><%= vente.type_ve %></td>
-        <td><%=l vente.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_vente_path(vente), :class => 'btn btn-primary btn-xs' %>

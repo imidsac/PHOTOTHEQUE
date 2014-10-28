@@ -5,11 +5,13 @@ class VentelignesController < ApplicationController
   # GET /ventelignes.json
   def index
     @ventelignes = Venteligne.all
+    @vente = Vente.find(params[:vente_id])
   end
 
   # GET /ventelignes/1
   # GET /ventelignes/1.json
   def show
+    @vente = Vente.find(params[:vente_id])
   end
 
   # GET /ventelignes/new
@@ -24,11 +26,12 @@ class VentelignesController < ApplicationController
   # POST /ventelignes
   # POST /ventelignes.json
   def create
-    @venteligne = Venteligne.new(venteligne_params)
+    @vente = Vente.find(params[:vente_id])
+    @venteligne = @vente.ventelignes.new(venteligne_params)
 
     respond_to do |format|
       if @venteligne.save
-        format.html { redirect_to @venteligne, notice: 'Venteligne was successfully created.' }
+        format.html { redirect_to @venteligne.vente, notice: 'Venteligne was successfully created.' }
         format.json { render :show, status: :created, location: @venteligne }
       else
         format.html { render :new }
@@ -40,9 +43,12 @@ class VentelignesController < ApplicationController
   # PATCH/PUT /ventelignes/1
   # PATCH/PUT /ventelignes/1.json
   def update
+    @vente = Vente.find(params[:vente_id])
+      #@venteligne = Venteligne.find(params[:id])
+
     respond_to do |format|
       if @venteligne.update(venteligne_params)
-        format.html { redirect_to @venteligne, notice: 'Venteligne was successfully updated.' }
+        format.html { redirect_to @venteligne.vente, notice: 'Venteligne was successfully updated.' }
         format.json { render :show, status: :ok, location: @venteligne }
       else
         format.html { render :edit }
@@ -56,7 +62,7 @@ class VentelignesController < ApplicationController
   def destroy
     @venteligne.destroy
     respond_to do |format|
-      format.html { redirect_to ventelignes_url, notice: 'Venteligne was successfully destroyed.' }
+      format.html { redirect_to @venteligne.vente, notice: 'Venteligne was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +75,6 @@ class VentelignesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def venteligne_params
-      params.require(:venteligne).permit(:vente_id, :qte, :qtelivre, :montant, :etat)
+      params.require(:venteligne).permit(:vente_id, :article_id, :cadre_id, :qte, :qtelivre, :prix_u, :montant, :etat)
     end
 end

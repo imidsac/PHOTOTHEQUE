@@ -3,7 +3,7 @@ class CreateVentes < ActiveRecord::Migration
     create_table :ventes do |t|
       t.references :boutique, index: true
       t.references :client, index: true
-      t.string :clients
+      t.string :client_libre
       t.datetime :date_vente
       t.string :etat_vente, limit: 1
       t.decimal :somme, default: 0

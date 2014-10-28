@@ -5,11 +5,28 @@ class VentesController < ApplicationController
   # GET /ventes.json
   def index
     @ventes = Vente.all
+    @ventes = @ventes.order(date_vente: :desc).article if params[:article]
+    @ventes = @ventes.order(date_vente: :desc).cadre if params[:cadre]
+    @ventes = @ventes.order(date_vente: :desc).payee if params[:payee]
+    @ventes = @ventes.order(date_vente: :desc).nopayee if params[:nopayee]
+
+    @ventes = @ventes.select("ventes.id,client_id,nom, prenom,type_ve,client_libre, date_vente,somme, payee, etat_vente").joins(:client).order(date_vente: :desc)
+
   end
 
   # GET /ventes/1
   # GET /ventes/1.json
   def show
+    @cli = Client.select("id,nom, prenom").find(@vente.client_id)
+    
+
+    if @vente.type_ve == 'C'
+    @ventelignes = @vente.ventelignes.select("cadre_id,numerobaguete,qte,qtelivre,prix_u,montant,ventelignes.id, ventelignes.etat").joins(:cadre)
+    else
+    @ventelignes = @vente.ventelignes.select("article_id,name,qte,qtelivre,prix_u,montant, ventelignes.id, ventelignes.etat").joins(:article)
+    end
+    #@ventelignes = @vente.ventelignes
+    @venteligne = Venteligne.new(:vente => @vente)
   end
 
   # GET /ventes/new
@@ -69,6 +86,6 @@ class VentesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vente_params
-      params.require(:vente).permit(:boutique_id, :client_id, :clients, :date_vente, :etat_vente, :somme, :payee, :type, :etat_vente)
+      params.require(:vente).permit(:boutique_id, :client_id, :client_libre, :date_vente, :etat_vente, :somme, :payee, :type_ve, :etat_vente)
     end
 end

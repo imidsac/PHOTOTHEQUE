@@ -1,12 +1,12 @@
 <%= simple_form_for @vente, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :boutique_id %>
-  <%= f.input :client_id %>
-  <%= f.input :clients %>
   <%= f.input :date_vente %>
-  <%= f.input :etat_vente %>
+  <%= f.association :boutique %>
+  <%= f.association :client, label_method: :nom   %>
+  <%= f.input :client_libre %>
+  <%= f.collection_radio_buttons :type_ve, [['C', 'Cadre'], ['A', 'Article']], :first, :last %>
+  <!--<%= f.input :etat_vente %>
   <%= f.input :somme %>
-  <%= f.input :payee %>
-  <%= f.input :type_ve %>
+  <%= f.input :payee %>-->
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

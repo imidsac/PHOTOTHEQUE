@@ -45,7 +45,7 @@ class AlignesController < ApplicationController
   # PATCH/PUT /alignes/1.json
   def update
     @achat = Achat.find(params[:achat_id])
-    @aligne = @achat.alignes.find(params[:id])
+    #@aligne = @achat.alignes.find(params[:id])
     respond_to do |format|
       if @aligne.update(aligne_params)
         format.html { redirect_to @aligne.achat, notice: 'Aligne was successfully updated.' }

@@ -243,25 +243,30 @@ ActiveRecord::Schema.define(version: 20141026100058) do
 
   create_table "ventelignes", force: true do |t|
     t.integer  "vente_id"
+    t.integer  "article_id"
+    t.integer  "cadre_id"
     t.decimal  "qte",                  default: 0.0
     t.decimal  "qtelivre",             default: 0.0
+    t.decimal  "prix_u",               default: 0.0
     t.decimal  "montant",              default: 0.0
     t.string   "etat",       limit: 1, default: "n"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "ventelignes", ["article_id"], name: "index_ventelignes_on_article_id", using: :btree
+  add_index "ventelignes", ["cadre_id"], name: "index_ventelignes_on_cadre_id", using: :btree
   add_index "ventelignes", ["vente_id"], name: "index_ventelignes_on_vente_id", using: :btree
 
   create_table "ventes", force: true do |t|
     t.integer  "boutique_id"
     t.integer  "client_id"
-    t.string   "clients"
+    t.string   "client_libre"
     t.datetime "date_vente"
-    t.string   "etat_vente",  limit: 1, default: "n"
-    t.decimal  "somme",                 default: 0.0
-    t.decimal  "payee",                 default: 0.0
-    t.string   "type_ve",     limit: 1, default: "m"
+    t.string   "etat_vente",   limit: 1, default: "n"
+    t.decimal  "somme",                  default: 0.0
+    t.decimal  "payee",                  default: 0.0
+    t.string   "type_ve",      limit: 1, default: "A"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
