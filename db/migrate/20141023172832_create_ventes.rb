@@ -8,7 +8,7 @@ class CreateVentes < ActiveRecord::Migration
       t.string :etat_vente, limit: 1
       t.decimal :somme, default: 0
       t.decimal :payee, default: 0
-      t.string :type_ve, limit: 1, default: 'm'
+      t.string :type_ve, limit: 1, default: 'A'
       t.string :etat_vente, limit: 1, default: 'n'
 
       t.timestamps
