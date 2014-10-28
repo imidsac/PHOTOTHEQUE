@@ -4,8 +4,8 @@
 <% elsif @achat.type_ac == 'C'%>
   <%= f.association :cadre, label_method: :numerobaguete, required: true %>
 <% end %>
-  <%= f.input :qte, placeholder: 'prix' %>
-  <%= f.input :prix_u %>
+  <%= f.input :qte, input_html: { value: '1'} %>
+  <%= f.input :prix_u, input_html: { placeholder: '1000'} %>
   <!--<%= f.input :qtelivre %>
   <%= f.input :etat %>-->
   <div class="form-actions">

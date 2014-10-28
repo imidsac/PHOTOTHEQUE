@@ -27,8 +27,13 @@
   <% elsif @achat.type_ac == 'A' %>
   <dd><%= 'Article' %></dd>
   <% end %>
+  <% if @achat.fournisseur_id != nil %>
   <dt><strong><%= model_class.human_attribute_name(:fournisseur_id) %>:</strong></dt>
-  <dd><%= @achat.fournisseur_id %></dd>
+  <dd><%= link_to @fourni.name_company, fournisseur_path %></dd>
+  <% else %>
+  <dt><strong><%= model_class.human_attribute_name(:fournisseur_libre) %>:</strong></dt>
+  <dd><%= @achat.fournisseur_libre %></dd>
+  <% end %>
   <dt><strong><%= model_class.human_attribute_name(:date_achat) %>:</strong></dt>
   <dd><%= @achat.date_achat.strftime("%d %b %Y à %H:%M") %></dd>
 </dl>
@@ -47,7 +52,7 @@
   <dt><strong><%= model_class.human_attribute_name(:somme) %>:</strong></dt>
   <dd><%= number_to_currency(@achat.somme, precision: 0,  unit: " F CFA", format: "%n %u") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:payee) %>:</strong></dt>
-  <dd><%= @achat.payee %></dd>
+  <dd><%= number_to_currency(@achat.payee, precision: 0,  unit: " F CFA", format: "%n %u") %></dd>
 </dl>
 </div>
 </div>

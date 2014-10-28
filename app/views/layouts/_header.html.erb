@@ -21,8 +21,10 @@
                 <li><%= link_to 'Nouveau', new_achat_path %></li>
                 <li class="divider"></li>                
                 <li class="dropdown-header">Nav header</li>
+                <li><%= link_to 'Liste des achats', achats_path() %></li>
                 <li><%= link_to 'Liste des cadres', achats_path(:cadre => true) %></li>
                 <li><%= link_to 'Liste des articles', achats_path(:article => true) %></li>
+                <li><%= link_to "Liste d'achats chez les fournisseurs libres", achats_path(:fournisseur_libre => true) %></li>
               </ul>
             </li>
 

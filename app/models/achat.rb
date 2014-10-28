@@ -3,8 +3,11 @@ class Achat < ActiveRecord::Base
   has_many :alignes
   has_many :articles, through: :alignes
   has_many :cadres, through: :alignes
-  validates :fournisseur_id, presence: true
+  #validates :fournisseur_id, presence: true
   accepts_nested_attributes_for :alignes
+
+  scope :fournisseur_libre, -> { where("fournisseur_id = ? ", nil) }
+
 
   scope :article, -> { where("type_ac = ? ", 'A') }
   scope :cadre, -> { where("type_ac = ? ", 'C') }

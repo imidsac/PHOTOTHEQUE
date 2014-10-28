@@ -9,8 +9,19 @@ class AchatsController < ApplicationController
     @achats = @achats.order(date_achat: :desc).cadre if params[:cadre]
     @achats = @achats.order(date_achat: :desc).payee if params[:payee]
     @achats = @achats.order(date_achat: :desc).nopayee if params[:nopayee]
+    @achats = @achats.select("achats.id,fournisseur_libre,type_ac, date_achat,somme, payee, etat_achat").order(date_achat: :desc).fournisseur_libre if params[:fournisseur_libre]
+
     #@achats = @achats.order(date_achat: :desc).limit(10)
-    @achats = @achats.select("achats.id,fournisseur_id, name_company, nom, prenom,type_ac, date_achat,somme, payee, etat_achat").joins(:fournisseur).order(date_achat: :desc)
+    @achats = @achats.select("achats.id,fournisseur_id,fournisseur_libre, name_company, nom, prenom,type_ac, date_achat,somme, payee, etat_achat").joins(:fournisseur).order(date_achat: :desc)
+
+    #@achats.each do |achat|
+     # if achat.fournisseur_id != nil
+      #  @achats = @achats.select("achats.id,fournisseur_libre,type_ac, date_achat,somme, payee, etat_achat").order(date_achat: :desc)
+      #else
+       # @achats = @achats.select("achats.id,fournisseur_id,fournisseur_libre, name_company, nom, prenom,type_ac, date_achat,somme, payee, etat_achat").joins(:fournisseur).order(date_achat: :desc)
+
+      #end 
+    #end
 
     #@cadres = Cadre.joins(" JOIN formatcadres ON formatcadres.id = cadres.formatcadre_id")
 
@@ -19,7 +30,6 @@ class AchatsController < ApplicationController
   # GET /achats/1
   # GET /achats/1.json
   def show
-    #@fourni = @achat.fournisseur.select("fournisseur_id, name_company, nom, prenom").joins(:fournisseur)
 
     if @achat.type_ac == 'C'
     @alignes = @achat.alignes.select("cadre_id,numerobaguete,qte,qtelivre,prix_u,montant, alignes.id, alignes.etat").joins(:cadre)
@@ -83,10 +93,14 @@ class AchatsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_achat
       @achat = Achat.find(params[:id])
+      if @achat.fournisseur_id == nil
+      else
+     @fourni = Fournisseur.find(@achat.fournisseur_id)
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def achat_params
-      params.require(:achat).permit(:fournisseur_id, :date_achat, :type_ac, :somme, :payee, :etat_achat)
+      params.require(:achat).permit(:fournisseur_id, :fournisseur_libre, :date_achat, :type_ac, :somme, :payee, :etat_achat)
     end
 end
