@@ -1,7 +1,7 @@
 class CreateAchats < ActiveRecord::Migration
   def change
     create_table :achats do |t|
-      t.references :fournisseur, index: true
+      t.references :fournisseur, index: true, default: -1
       t.string :fournisseur_libre
       t.datetime :date_achat
       t.string :type_ac, limit: 1, default: 'A'

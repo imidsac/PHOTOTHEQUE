@@ -65,6 +65,10 @@ namespace :dev_data do
    puts "===> Sample date have been set in Format Photo !"      
 
     Cadre.create!(
+        id: -1,
+        numerobaguete: "No"
+      )
+    Cadre.create!(
         numerobaguete: "E6"
       )
     Cadre.create!(
@@ -130,6 +134,11 @@ namespace :dev_data do
  puts "===> Sample date have been set in Cadre !"
  
  Article.create!(
+        id: -1,
+        name: "No",
+        reference: "No"
+      )
+ Article.create!(
         name: "ALBUM",
         reference: "10"
       )
@@ -181,6 +190,15 @@ namespace :dev_data do
  puts "===> Sample date have been set in DB Articles !"
     
     Fournisseur.create!(
+        id: -1,
+        name_company: "No",
+        nom: "No",
+        prenom: "No",
+        phone: "No",
+        address: "No",
+        email: "No"
+      )
+  Fournisseur.create!(
         name_company: "TOTAL",
         nom: "Abdoul kader",
         prenom: "Sacko",
@@ -207,6 +225,12 @@ namespace :dev_data do
  puts "===> Sample date have been set in DB  Fournisseurs!"
 
  Boutique.create!(
+        id: -1,
+        name: "No",
+        phone: "No",
+        address: "No"
+      )
+ Boutique.create!(
         name: "SIKASSO",
         phone: "88 88 88 88",
         address: "WAYERMA"
@@ -217,6 +241,78 @@ namespace :dev_data do
         address: "RUE 456 PORTE 345"
       )
  puts "===> Sample date have been set in DB  Boutique!"
+
+ Client.create!(
+        id: -1,
+        nom: "No",
+        prenom: "No",
+        phone: "No",
+        address: "No",
+        email: "No"
+      )
+ Client.create!(
+        nom: "CLIENT-1",
+        prenom: "CLIENT-1",
+        phone: "88 88 88 88",
+        address: "RUE 456 PORTE 345",
+        email: "exemple-1@exemple_ex"
+      )
+ Client.create!(
+        nom: "CLIENT-2",
+        prenom: "CLIENT-2",
+        phone: "88 88 88 88",
+        address: "RUE 456 PORTE 345",
+        email: "exemple-2@exemple_ex"
+      )
+ Client.create!(
+        nom: "CLIENT-3",
+        prenom: "CLIENT-3",
+        phone: "88 88 88 88",
+        address: "RUE 456 PORTE 345",
+        email: "exemple-3@exemple_ex"
+      )
+ Client.create!(
+        nom: "CLIENT-4",
+        prenom: "CLIENT-4",
+        phone: "88 88 88 88",
+        address: "RUE 456 PORTE 345",
+        email: "exemple-4@exemple_ex"
+      )
+ Client.create!(
+        nom: "CLIENT-5",
+        prenom: "CLIENT-5",
+        phone: "88 88 88 88",
+        address: "RUE 456 PORTE 345",
+        email: "exemple-5@exemple_ex"
+      )
+ puts "===> Sample date have been set in DB  Client!"
+
+ Employe.create!(
+        nom: "EMPLOYEE-1",
+        prenom: "EMPLOYEE-1",
+        sexe: "m",
+        phone: "88 88 88 88",
+        address: "RUE 456 PORTE 345",
+        email: "exemple-1@exemple_ex"
+      )
+ Employe.create!(
+        nom: "EMPLOYEE-2",
+        prenom: "EMPLOYEE-2",
+        sexe: "f",
+        phone: "88 88 88 88",
+        address: "RUE 456 PORTE 345",
+        email: "exemple-2@exemple_ex"
+      )
+ Employe.create!(
+        nom: "EMPLOYEE-3",
+        prenom: "EMPLOYEE-3",
+        sexe: "m",
+        phone: "88 88 88 88",
+        address: "RUE 456 PORTE 345",
+        email: "exemple-3@exemple_ex"
+      )
+ puts "===> Sample date have been set in DB  Employées!"
+
   end
   
 end

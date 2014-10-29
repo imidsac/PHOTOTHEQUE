@@ -20,23 +20,23 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-5">
-<dl class="dl-horizontal span12">
-  <dt><strong><%= model_class.human_attribute_name(:type_achat) %>:</strong></dt>
+  <div class="col-sm-6">
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:fournisseur_id) %>:</strong></dt>
+  <dd><%= @fourni.name_company%></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
+  <dd><%= @achat.date_achat.strftime("%d %b %Y à %H:%M") %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:type_ac) %>:</strong></dt>
   <% if @achat.type_ac == 'C' %>
   <dd><%= 'Cadre' %></dd>
   <% elsif @achat.type_ac == 'A' %>
   <dd><%= 'Article' %></dd>
   <% end %>
-  <dt><strong><%= model_class.human_attribute_name(:fournisseur_id) %>:</strong></dt>
-  <dd><%= @fourni.name_company%></dd>
-  <dt><strong><%= model_class.human_attribute_name(:date_achat) %>:</strong></dt>
-  <dd><%= @achat.date_achat.strftime("%d %b %Y à %H:%M") %></dd>
 </dl>
 </div>
-<div class="col-sm-5">
+<div class="col-sm-6">
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:etat_achat) %>:</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:etat) %>:</strong></dt>
   <% if @achat.etat_achat == 'n' %>
   <dd><%= 'N-Livret' %></dd>
 
@@ -45,7 +45,7 @@
   <% elsif @achat.etat_achat == 'p' %>
   <dd><%= 'T-Livret' %></dd>
   <% end %>
-  <dt><strong><%= model_class.human_attribute_name(:somme) %>:</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:total) %>:</strong></dt>
   <dd><%= number_to_currency(@achat.somme, precision: 0,  unit: " F CFA", format: "%n %u") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:payee) %>:</strong></dt>
   <dd><%= number_to_currency(@achat.payee, precision: 0,  unit: " F CFA", format: "%n %u") %></dd>

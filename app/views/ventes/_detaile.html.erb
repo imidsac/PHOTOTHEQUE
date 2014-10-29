@@ -20,19 +20,27 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-5">
-<dl class="dl-horizontal span12">
+  <div class="col-sm-6">
+<dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:boutique_id) %>:</strong></dt>
   <dd><%= @vente.boutique_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:client_id) %>:</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:client_abonnée) %>:</strong></dt>
   <dd><%= @vente.client_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:clients) %>:</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:client_libre) %>:</strong></dt>
   <dd><%= @vente.client_libre %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:date_vente) %>:</strong></dt>
-  <dd><%= @vente.date_vente %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
+  <dd><%= @vente.date_vente.strftime("%d %b %Y à %H:%M") %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:type) %>:</strong></dt>
+  <% if @vente.type_ve == 'C' %>
+  <dd><%= 'Cadre' %></dd>
+  <% elsif @vente.type_ve == 'A' %>
+  <dd><%= 'Article' %></dd>
+  <% end %>
+  </dl>
   </div>
-<div class="col-sm-5">
-  <dt><strong><%= model_class.human_attribute_name(:etat_vente) %>:</strong></dt>
+<div class="col-sm-6">
+  <dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:etat) %>:</strong></dt>
   <% if @vente.etat_vente == 'n' %>
   <dd><%= 'N-Livret' %></dd>
   <% elsif @vente.etat_vente == 'p' %>
@@ -40,13 +48,13 @@
   <% elsif @vente.etat_vente == 'p' %>
   <dd><%= 'T-Livret' %></dd>
   <% end %>
-  <dt><strong><%= model_class.human_attribute_name(:somme) %>:</strong></dt>
-  <dd><%= @vente.somme %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:total) %>:</strong></dt>
+  <dd><%= number_to_currency(@vente.somme, precision: 0,  unit: " F CFA", format: "%n %u") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:payee) %>:</strong></dt>
-  <dd><%= @vente.payee %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:type_ve) %>:</strong></dt>
-  <dd><%= @vente.type_ve %></dd>
+  <dd><%= number_to_currency(@vente.payee, precision: 0,  unit: " F CFA", format: "%n %u") %></dd>
+  
 </dl>
 </div>
 </div>
+
 

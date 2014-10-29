@@ -2,8 +2,8 @@ class CreateVentelignes < ActiveRecord::Migration
   def change
     create_table :ventelignes do |t|
       t.references :vente, index: true
-      t.references :article, index: true
-      t.references :cadre, index: true
+      t.references :article, index: true, default: -1
+      t.references :cadre, index: true, default: -1
       t.decimal :qte, default: 0
       t.decimal :qtelivre, default: 0
       t.decimal :prix_u, default: 0

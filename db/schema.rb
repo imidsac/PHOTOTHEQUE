@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20141026100058) do
   enable_extension "plpgsql"
 
   create_table "achats", force: true do |t|
-    t.integer  "fournisseur_id"
+    t.integer  "fournisseur_id",              default: -1
     t.string   "fournisseur_libre"
     t.datetime "date_achat"
     t.string   "type_ac",           limit: 1, default: "A"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20141026100058) do
 
   create_table "alignes", force: true do |t|
     t.integer  "achat_id"
-    t.integer  "article_id"
-    t.integer  "cadre_id"
+    t.integer  "article_id",           default: -1
+    t.integer  "cadre_id",             default: -1
     t.decimal  "qte",                  default: 0.0
     t.decimal  "qtelivre",             default: 0.0
     t.decimal  "prix_u",               default: 0.0
@@ -178,8 +178,9 @@ ActiveRecord::Schema.define(version: 20141026100058) do
   add_index "prestationlignes", ["prestation_id"], name: "index_prestationlignes_on_prestation_id", using: :btree
 
   create_table "prestations", force: true do |t|
-    t.integer  "client_id"
-    t.integer  "employe_id"
+    t.integer  "client_id",                 default: -1
+    t.string   "client_libre"
+    t.integer  "employe_id",                default: -1
     t.datetime "date_perstation"
     t.string   "etat_prestation", limit: 1, default: "n"
     t.decimal  "somme",                     default: 0.0
@@ -259,8 +260,8 @@ ActiveRecord::Schema.define(version: 20141026100058) do
   add_index "ventelignes", ["vente_id"], name: "index_ventelignes_on_vente_id", using: :btree
 
   create_table "ventes", force: true do |t|
-    t.integer  "boutique_id"
-    t.integer  "client_id"
+    t.integer  "boutique_id",            default: -1
+    t.integer  "client_id",              default: -1
     t.string   "client_libre"
     t.datetime "date_vente"
     t.string   "etat_vente",   limit: 1, default: "n"

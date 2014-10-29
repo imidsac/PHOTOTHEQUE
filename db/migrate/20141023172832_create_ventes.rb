@@ -1,9 +1,9 @@
 class CreateVentes < ActiveRecord::Migration
   def change
     create_table :ventes do |t|
-      t.references :boutique, index: true
-      t.references :client, index: true
-      t.string :client_libre
+      t.references :boutique, index: true, default: -1
+      t.references :client, index: true, default: -1
+      t.string :client_libre, default: 'No'
       t.datetime :date_vente
       t.string :etat_vente, limit: 1
       t.decimal :somme, default: 0
