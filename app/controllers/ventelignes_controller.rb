@@ -32,7 +32,7 @@ class VentelignesController < ApplicationController
 
     respond_to do |format|
       if @venteligne.save
-        format.html { redirect_to @venteligne.vente, notice: 'Venteligne was successfully created.' }
+        format.html { redirect_to @venteligne.vente}
         format.json { render :show, status: :created, location: @venteligne }
       else
         format.html { render :new }
