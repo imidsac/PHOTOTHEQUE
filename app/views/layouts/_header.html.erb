@@ -18,37 +18,58 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Achats <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><%= link_to 'Nouveau', new_achat_path %></li>
-                <li class="divider"></li>                
-                <li class="dropdown-header">Nav header</li>
+                <li><%= link_to 'Crée', new_achat_path %></li>
                 <li><%= link_to 'Liste des achats', achats_path() %></li>
-                <li><%= link_to 'Liste des cadres', achats_path(:cadre => true) %></li>
-                <li><%= link_to 'Liste des articles', achats_path(:article => true) %></li>
-                <li><%= link_to "Liste d'achats chez les fournisseurs libres", achats_path(:fournisseur_libre => true) %></li>
+                <li class="divider"></li>                
+                <li class="dropdown-header">FOURNISSEURS LIBRES</li>
+                <li><%= link_to 'Liste des achats', '#' %></li>
+                <li><%= link_to 'Achats nom payées', '#' %></li>
+                
+                <li class="divider"></li>                
+                <li class="dropdown-header">FOURNISSEURS ABONNÉES</li>
+                <li><%= link_to 'Liste des achats', achats_path(:cadre => true) %></li>
+                <li><%= link_to 'Achats nom payées', '#' %></li>
               </ul>
             </li>
 
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ventes <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><%= link_to 'Nouveau', new_vente_path %></li>
+                <li><%= link_to 'Crée', new_vente_path %></li>
+                <li><%= link_to 'Liste des ventes', ventes_path() %></li>
                 <li class="divider"></li>                
-                <li class="dropdown-header">Nav header</li>
-                <li><%= link_to 'Liste des cadres', ventes_path %></li>
-                <li><%= link_to 'Liste des articles', ventes_path %></li>
+                <li class="dropdown-header">CLIENTS LIBRES</li>
+                <li><%= link_to 'Liste des ventes', '#' %></li>
+                <li><%= link_to 'Ventes non payée', '#' %></li>
+                <li class="divider"></li>                
+                <li class="dropdown-header">CLIENTS ABONNEES</li>
+                <li><%= link_to 'Liste des ventes', ventes_path(:cadre => true) %></li>
+                <li><%= link_to 'Ventes non payée', ventes_path(:cadre => true) %></li>
+                
+                
+                <li class="divider"></li>                
+                <li class="dropdown-header">BOUTIQUES</li>
+                <li><%= link_to 'Liste des ventes', ventes_path(:cadre => true) %></li>
+                <li><%= link_to 'Ventes non payée', ventes_path(:cadre => true) %></li>
+                
+                
               </ul>
             </li>
 
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prestations <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><%= link_to 'Nouveau', new_prestation_path %></li>
+                <li><%= link_to 'Crée', new_prestation_path %></li>
+                <li><%= link_to 'Liste des Prestations', prestations_path() %></li>
                 <li class="divider"></li>                
-                <li class="dropdown-header">Nav header</li>
-                <li><%= link_to 'Liste pour Studio', prestations_path %></li>
-                <li><%= link_to 'Liste pour Retirage', prestations_path %></li>
-                <li><%= link_to 'Liste pour Cadrage', prestations_path %></li>
-                <li><%= link_to 'Liste pour Agrandissement', prestations_path %></li>
+                <li class="dropdown-header">CLIENTS LIBRES</li>
+                <li><%= link_to 'Liste des Prestations', '#' %></li>
+                <li><%= link_to 'Prestations nom payées', '#' %></li>
+                
+                <li class="divider"></li>                
+                <li class="dropdown-header">LIENTS ABONNÉES</li>
+                <li><%= link_to 'Liste des Prestations', prestations_path(:cadre => true) %></li>
+                <li><%= link_to 'Prestations nom payées', prestations_path(:article => true) %></li>
               </ul>
             </li>
             <% end %>
