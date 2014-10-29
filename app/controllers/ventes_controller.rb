@@ -10,7 +10,7 @@ class VentesController < ApplicationController
     @ventes = @ventes.order(date_vente: :desc).payee if params[:payee]
     @ventes = @ventes.order(date_vente: :desc).nopayee if params[:nopayee]
 
-    @ventes = @ventes.select("ventes.id,client_id,nom, prenom,type_ve,client_libre, date_vente,somme, payee, etat_vente").joins(:client).order(date_vente: :desc)
+    @ventes = @ventes.select("ventes.id,boutique_id,name, client_id,nom, prenom,type_ve,client_libre, date_vente,somme, payee, etat_vente").joins(:client, :boutique).order(date_vente: :desc)
 
   end
 
@@ -18,6 +18,7 @@ class VentesController < ApplicationController
   # GET /ventes/1.json
   def show
     @cli = Client.select("id,nom, prenom").find(@vente.client_id)
+    @bou = Boutique.select("id, name").find(@vente.boutique_id)
     
 
     if @vente.type_ve == 'C'
@@ -45,7 +46,7 @@ class VentesController < ApplicationController
 
     respond_to do |format|
       if @vente.save
-        format.html { redirect_to @vente, notice: 'Vente was successfully created.' }
+        format.html { redirect_to @vente}
         format.json { render :show, status: :created, location: @vente }
       else
         format.html { render :new }

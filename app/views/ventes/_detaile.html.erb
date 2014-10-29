@@ -1,7 +1,7 @@
 <div class="row">
   <%- model_class = Vente -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %> contenu</h1>
+  <h3><%=t '.title', :default => model_class.model_name.human %> contenu</h3>
 </div>
 </div>
 <div class="row">
@@ -22,12 +22,16 @@
 <div class="row">
   <div class="col-sm-6">
 <dl class="dl-horizontal">
+  <% if @vente.boutique_id != -1 %>
   <dt><strong><%= model_class.human_attribute_name(:boutique_id) %>:</strong></dt>
-  <dd><%= @vente.boutique_id %></dd>
+  <dd><%= @bou.name %></dd>
+  <% elsif @vente.client_id != -1 %>
   <dt><strong><%= model_class.human_attribute_name(:client_abonnée) %>:</strong></dt>
-  <dd><%= @vente.client_id %></dd>
+  <dd><%= @cli.nom %></dd>
+  <% elsif @vente.boutique_id == -1 and @vente.client_id == -1  %>
   <dt><strong><%= model_class.human_attribute_name(:client_libre) %>:</strong></dt>
   <dd><%= @vente.client_libre %></dd>
+  <% end %>
   <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
   <dd><%= @vente.date_vente.strftime("%d %b %Y à %H:%M") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:type) %>:</strong></dt>

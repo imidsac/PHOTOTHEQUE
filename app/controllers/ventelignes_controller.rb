@@ -21,6 +21,7 @@ class VentelignesController < ApplicationController
 
   # GET /ventelignes/1/edit
   def edit
+    @vente = Vente.find(params[:vente_id])
   end
 
   # POST /ventelignes

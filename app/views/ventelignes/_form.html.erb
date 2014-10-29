@@ -1,12 +1,14 @@
-<%= simple_form_for @venteligne, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :vente_id %>
-  <%= f.input :qte %>
-  <%= f.input :qtelivre %>
-  <%= f.input :montant %>
-  <%= f.input :etat %>
+<%= simple_form_for [@vente, @venteligne], :html => { :class => 'form-horizontal' } do |f| %>
+  <% if @vente.type_ve == 'A' %>
+  <%= f.association :article , required: true %>
+<% elsif @vente.type_ve == 'C'%>
+  <%= f.association :cadre, label_method: :numerobaguete, required: true %>
+<% end %>
+  <%= f.input :qte, input_html: { value: '1'} %>
+  <%= f.input :prix_u, input_html: { placeholder: 'Prix unitaire'} %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                ventelignes_path, :class => 'btn' %>
+                [@vente], :class => 'btn' %>
   </div>
 <% end %>
