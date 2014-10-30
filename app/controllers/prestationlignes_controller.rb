@@ -5,11 +5,13 @@ class PrestationlignesController < ApplicationController
   # GET /prestationlignes.json
   def index
     @prestationlignes = Prestationligne.all
+    @prestation = Prestation.find(params[:id])
   end
 
   # GET /prestationlignes/1
   # GET /prestationlignes/1.json
   def show
+      @prestation = Prestation.find(params[:id])
   end
 
   # GET /prestationlignes/new
@@ -19,16 +21,18 @@ class PrestationlignesController < ApplicationController
 
   # GET /prestationlignes/1/edit
   def edit
+      @prestation = Prestation.find(params[:id])
   end
 
   # POST /prestationlignes
   # POST /prestationlignes.json
   def create
-    @prestationligne = Prestationligne.new(prestationligne_params)
+    @prestation = Prestation.find(params[:prestation_id])
+    @prestationligne = @prestation.prestationlignes.new(prestationligne_params)
 
     respond_to do |format|
       if @prestationligne.save
-        format.html { redirect_to @prestationligne, notice: 'Prestationligne was successfully created.' }
+        format.html { redirect_to @prestationligne.prestation }
         format.json { render :show, status: :created, location: @prestationligne }
       else
         format.html { render :new }
@@ -40,9 +44,11 @@ class PrestationlignesController < ApplicationController
   # PATCH/PUT /prestationlignes/1
   # PATCH/PUT /prestationlignes/1.json
   def update
+    @prestation = Prestation.find(params[:id])
+
     respond_to do |format|
       if @prestationligne.update(prestationligne_params)
-        format.html { redirect_to @prestationligne, notice: 'Prestationligne was successfully updated.' }
+        format.html { redirect_to @prestationligne.prestation, notice: 'Prestationligne was successfully updated.' }
         format.json { render :show, status: :ok, location: @prestationligne }
       else
         format.html { render :edit }
@@ -56,7 +62,7 @@ class PrestationlignesController < ApplicationController
   def destroy
     @prestationligne.destroy
     respond_to do |format|
-      format.html { redirect_to prestationlignes_url, notice: 'Prestationligne was successfully destroyed.' }
+      format.html { redirect_to @prestationligne.prestation, notice: 'Prestationligne was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +75,6 @@ class PrestationlignesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prestationligne_params
-      params.require(:prestationligne).permit(:prestation_id, :qte, :qtelivre, :montant, :numero_prise, :type, :etat)
+      params.require(:prestationligne).permit(:formatphoto_id, :cadre_id, :qte, :qtelivre, :prix_u, :numero_prise, :type_pl, :etat)
     end
 end

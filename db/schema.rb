@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20141026100058) do
   create_table "articles", force: true do |t|
     t.string   "name"
     t.string   "reference"
+    t.decimal  "stock",                default: 0.0
     t.string   "etat",       limit: 1, default: "a"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(version: 20141026100058) do
   create_table "cadres", force: true do |t|
     t.string   "numerobaguete", limit: 30
     t.text     "info"
+    t.decimal  "stock",                    default: 0.0
     t.string   "etat",          limit: 1,  default: "a"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -165,23 +167,28 @@ ActiveRecord::Schema.define(version: 20141026100058) do
 
   create_table "prestationlignes", force: true do |t|
     t.integer  "prestation_id"
-    t.decimal  "qte",                     default: 0.0
-    t.decimal  "qtelivre",                default: 0.0
-    t.decimal  "montant",                 default: 0.0
-    t.integer  "numero_prise",            default: 0
-    t.string   "type_pl",       limit: 2, default: "sp"
-    t.string   "etat",          limit: 1, default: "n"
+    t.integer  "cadre_id",                 default: -1
+    t.integer  "formatphoto_id",           default: -1
+    t.decimal  "qte",                      default: 0.0
+    t.decimal  "qtelivre",                 default: 0.0
+    t.decimal  "prix_u",                   default: 0.0
+    t.decimal  "montant",                  default: 0.0
+    t.integer  "numero_prise",             default: 0
+    t.string   "type_pl",        limit: 2, default: "sp"
+    t.string   "etat",           limit: 1, default: "n"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "prestationlignes", ["cadre_id"], name: "index_prestationlignes_on_cadre_id", using: :btree
+  add_index "prestationlignes", ["formatphoto_id"], name: "index_prestationlignes_on_formatphoto_id", using: :btree
   add_index "prestationlignes", ["prestation_id"], name: "index_prestationlignes_on_prestation_id", using: :btree
 
   create_table "prestations", force: true do |t|
     t.integer  "client_id",                 default: -1
-    t.string   "client_libre"
+    t.string   "client_libre",              default: "No"
     t.integer  "employe_id",                default: -1
-    t.datetime "date_perstation"
+    t.datetime "date_prestation"
     t.string   "etat_prestation", limit: 1, default: "n"
     t.decimal  "somme",                     default: 0.0
     t.decimal  "payee",                     default: 0.0
@@ -244,8 +251,8 @@ ActiveRecord::Schema.define(version: 20141026100058) do
 
   create_table "ventelignes", force: true do |t|
     t.integer  "vente_id"
-    t.integer  "article_id"
-    t.integer  "cadre_id"
+    t.integer  "article_id",           default: -1
+    t.integer  "cadre_id",             default: -1
     t.decimal  "qte",                  default: 0.0
     t.decimal  "qtelivre",             default: 0.0
     t.decimal  "prix_u",               default: 0.0
@@ -262,7 +269,7 @@ ActiveRecord::Schema.define(version: 20141026100058) do
   create_table "ventes", force: true do |t|
     t.integer  "boutique_id",            default: -1
     t.integer  "client_id",              default: -1
-    t.string   "client_libre"
+    t.string   "client_libre",           default: "No"
     t.datetime "date_vente"
     t.string   "etat_vente",   limit: 1, default: "n"
     t.decimal  "somme",                  default: 0.0

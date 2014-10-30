@@ -3,7 +3,7 @@ class CreateAchats < ActiveRecord::Migration
     create_table :achats do |t|
       t.references :fournisseur, index: true, default: -1
       t.string :fournisseur_libre
-      t.datetime :date_achat
+      t.datetime :date_achat, default: 'No'
       t.string :type_ac, limit: 1, default: 'A'
       t.decimal :somme, default: 0
       t.decimal :payee, default: 0

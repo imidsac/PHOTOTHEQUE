@@ -5,11 +5,23 @@ class PrestationsController < ApplicationController
   # GET /prestations.json
   def index
     @prestations = Prestation.all
+    @prestations = @prestations.select("prestations.id,employe_id,employes.nom as em_nom,employes.prenom,client_id,client_libre, clients.nom as cl_nom, clients.prenom,type_pr, date_prestation,somme, payee, etat_prestation").joins(:client, :employe).order(date_prestation: :desc)
+
   end
 
   # GET /prestations/1
   # GET /prestations/1.json
   def show
+    @cli = Client.select("id,nom, prenom").find(@prestation.client_id)
+    @emp = Employe.select("id,nom, prenom").find(@prestation.employe_id)
+
+    @prestationlignes = @prestation.prestationlignes.select("cadre_id,numerobaguete,formatphoto_id,dimention, qte,qtelivre,prix_u,montant,prestationlignes.numero_prise,prestationlignes.type_pl, prestationlignes.id, prestationlignes.etat").joins(:cadre, :formatphoto)
+
+    #if @prestation.type_pr == 'C'
+    #elsif
+    #@prestationlignes = @prestation.prestationlignes.select("formatphoto_id,dimention,qte,qtelivre,prix_u,montant, prestationlignes.id,prestationlignes.type_pl, prestationlignes.etat").joins(:formatphoto)
+    #end
+    @prestationligne = Prestationligne.new(:prestation => @prestation)
   end
 
   # GET /prestations/new
@@ -28,7 +40,7 @@ class PrestationsController < ApplicationController
 
     respond_to do |format|
       if @prestation.save
-        format.html { redirect_to @prestation, notice: 'Prestation was successfully created.' }
+        format.html { redirect_to @prestation}
         format.json { render :show, status: :created, location: @prestation }
       else
         format.html { render :new }
@@ -69,6 +81,6 @@ class PrestationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prestation_params
-      params.require(:prestation).permit(:client_id, :employe_id, :date_perstation, :etat_prestation, :somme, :payee)
+      params.require(:prestation).permit(:type_pr,:client_id, :client_libre, :employe_id, :date_prestation, :etat_prestation, :somme, :payee)
     end
 end

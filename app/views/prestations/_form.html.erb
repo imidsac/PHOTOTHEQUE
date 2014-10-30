@@ -1,7 +1,10 @@
 <%= simple_form_for @prestation, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.association :client, label_method: :nom &&:prenom %>
+  <%= f.input :date_prestation %>
+  <%= f.association :client, label_method: :nom %>
+  <%= f.input :client_libre %>
   <%= f.association :employe, label_method: :nom %>
-  <%= f.input :date_perstation %>
+  <%= f.collection_select :type_pr, [['A', 'Agradissemnt'], ['C', 'Cadrage'], ['S', 'Studio'], ['R', 'Retirage']], :first, :last %>
+
   <!--<%= f.input :etat_prestation %>
   <%= f.input :somme %>
   <%= f.input :payee %>-->
