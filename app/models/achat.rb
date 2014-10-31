@@ -1,14 +1,16 @@
 class Achat < ActiveRecord::Base
   belongs_to :fournisseur
-  has_many :alignes
+  has_many :alignes, dependent: :destroy
   has_many :articles, through: :alignes
   has_many :cadres, through: :alignes
   #validates :fournisseur_id, presence: true
   accepts_nested_attributes_for :alignes
 
-  scope :fournisseur_libre, -> { where("fournisseur_id = ? ", nil) }
+  # Fournisseur libre
+  scope :fournisseur_libre, -> { where("fournisseur_id = ? and type_ac = ? ", -1, 'C') }
 
-
+  # Fournisseur
+  scope :fournisseur, -> { where("fournisseur_id != ? ", -1) }
   scope :article, -> { where("type_ac = ? ", 'A') }
   scope :cadre, -> { where("type_ac = ? ", 'C') }
   scope :payee, -> { where("somme != 0 and somme=payee") }
