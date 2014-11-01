@@ -73,3 +73,6 @@ gem 'devise'
 gem 'paperclip'
 gem 'jquery-fileupload-rails'
 gem 'wicked'
+
+gem 'carrierwave'
+gem 'rmagick'
