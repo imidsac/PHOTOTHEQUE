@@ -3,23 +3,18 @@ class Prestationligne < ActiveRecord::Base
   belongs_to :cadre
   belongs_to :formatphoto
 
-  before_save :calcul_de_montant
-  after_create :give_montant_to_somme
-  after_destroy :givey_montant_to_somme
+  before_save :montant 
+  after_save  :total
+  #after_save :total
+  after_destroy :total
 
 
-  def calcul_de_montant
-  	self.montant = qte * prix_u
+  def montant
+    self.montant = qte * prix_u
   end
 
-  def give_montant_to_somme
-  	prestation.somme += montant 
-  	prestation.save
+  def total
+    prestation.somme = Prestationligne.where("prestation_id = ?", prestation.id).sum('montant')
+    prestation.save
   end
-
-  def givey_montant_to_somme
-  	prestation.somme -= montant
-  	prestation.save
-  end
-
 end

@@ -4,23 +4,19 @@ class Venteligne < ActiveRecord::Base
   belongs_to :article
   validates :vente_id, presence: true
 
-  before_save :calcul_de_montant
-  after_create :give_montant_to_somme
-  after_destroy :givey_montant_to_somme
+  before_save :montant 
+  after_save  :total
+  #after_save :total
+  after_destroy :total
 
 
-  def calcul_de_montant
-  	self.montant = qte * prix_u
+  def montant
+    self.montant = qte * prix_u
   end
 
-  def give_montant_to_somme
-  	vente.somme += montant 
-  	vente.save
-  end
-
-  def givey_montant_to_somme
-  	vente.somme -= montant
-  	vente.save
+  def total
+    vente.somme = Venteligne.where("vente_id = ?", vente.id).sum('montant')
+    vente.save
   end
 
 end

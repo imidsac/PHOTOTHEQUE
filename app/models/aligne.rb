@@ -5,7 +5,7 @@ class Aligne < ActiveRecord::Base
   validates :achat_id, presence: true
 
   before_save :montant 
-  after_save  :total, :etat_n, :etat_p, :etat_t
+  after_save  :total
   #after_save :total
   after_destroy :total
 
@@ -19,6 +19,7 @@ class Aligne < ActiveRecord::Base
   	achat.save
   end
 
+=begin
   def etat_n
     self.etat = 'n' if qtelivre = 0 
   end
@@ -28,7 +29,6 @@ class Aligne < ActiveRecord::Base
   def etat_t
     self.etat = 't' if qtelivre = qte
   end
-
-
+=end
 
 end
