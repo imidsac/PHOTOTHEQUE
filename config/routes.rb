@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :prestation_attachments
 
   resources :tcoffres
 
@@ -23,7 +22,11 @@ Rails.application.routes.draw do
 
 
   resources :prestations do
+    resources :prestation_attachments
     resources :prestationlignes
+    collection do
+         get 'image'
+    end
   end
 
   resources :clients

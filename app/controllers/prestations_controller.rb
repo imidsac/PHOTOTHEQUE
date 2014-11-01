@@ -16,15 +16,18 @@ class PrestationsController < ApplicationController
     @emp = Employe.select("id,nom, prenom").find(@prestation.employe_id)
 
     @prestationlignes = @prestation.prestationlignes.select("cadre_id,numerobaguete,formatphoto_id,dimention, qte,qtelivre,prix_u,montant,prestationlignes.numero_prise,prestationlignes.type_pl, prestationlignes.id, prestationlignes.etat").joins(:cadre, :formatphoto)
-
-    #if @prestation.type_pr == 'C'
-    #elsif
-    #@prestationlignes = @prestation.prestationlignes.select("formatphoto_id,dimention,qte,qtelivre,prix_u,montant, prestationlignes.id,prestationlignes.type_pl, prestationlignes.etat").joins(:formatphoto)
-    #end
     @prestationligne = Prestationligne.new(:prestation => @prestation)
 
-    @prestation_attachments = @prestation.prestation_attachments.all
-    @prestation_attachment = @prestation.prestation_attachments.build
+    #@prestation_attachments = @prestation.prestation_attachments.all
+    #@prestation_attachment = @prestation.prestation_attachments.build
+  end
+
+
+  
+  def image
+
+    @prestation_attachments = @prestation.prestation_attachments.select("prestation_id, photo").joins(:prestation_attachment)
+    @prestation_attachment = PrestationAttachment.new(:prestation => @prestation)
   end
 
   # GET /prestations/new

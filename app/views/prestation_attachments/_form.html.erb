@@ -1,5 +1,5 @@
 <%= image_tag @prestation_attachment.photo %>
-<%= simple_form_for @prestation_attachment, :html => { :multipart => true } do |f| %>
+<%= simple_form_for [@prestation, @prestation_attachment], :html => { :multipart => true } do |f| %>
   <%= f.error_notification %>
   
   <div>

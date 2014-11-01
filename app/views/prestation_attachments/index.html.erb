@@ -3,12 +3,13 @@
   <h1>Listing prestation_attachments</h1>
 </p>
 
-<%= link_to 'New Prestation attachment', new_prestation_attachment_path %>
+<%= link_to 'New Prestation attachment', new_prestation_prestation_attachment_path %>
 
 <% @prestation_attachments.each do |p| %>
   <%= image_tag p.photo_url %>
-  <%= link_to "Edit Attachment", edit_prestation_attachment_path(p) %>
-  <%= link_to 'Destroy', prestation_attachment_path(p), method: :delete, data: { confirm: 'Are you sure?' } %><br/> 
+  <%= link_to "Edit Attachment", edit_prestation_prestation_attachment_path(@prestation, p) %>
+  <%= link_to 'Destroy',  prestation_prestation_attachment_path(@prestation,p), method: :delete, data: { confirm: 'Are you sure?' } %>
+  
 <hr />
 <% end %>
 
