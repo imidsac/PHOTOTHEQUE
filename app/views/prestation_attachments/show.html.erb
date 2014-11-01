@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Prestation:</strong>
+  <%= @prestation_attachment.prestation %>
+</p>
+
+<p>
+  <strong>Photo:</strong>
+  <%= @prestation_attachment.photo %>
+</p>
+
+<%= link_to 'Edit', edit_prestation_attachment_path(@prestation_attachment) %> |
+<%= link_to 'Back', prestation_attachments_path %>

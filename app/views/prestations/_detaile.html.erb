@@ -4,8 +4,8 @@
   <h3><%=t '.title', :default => model_class.model_name.human %> contenue</h3>
 </div>
 </div><!-- ligne1 -->
-
-<div class="row ligne2">
+<div class="row ligne1">
+<div class="col-sm-6 blog1">
   <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               prestations_path, :class => 'btn-xs btn-info'  %>
@@ -17,6 +17,14 @@
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn-xs btn-danger' %>
 </div>
+</div>
+<!-- blog1 -->
+
+<div class="col-sm-6 blog2">
+  <%= link_to t('.phot', :default => t("helpers.links.photo")),
+              prestation_attachments_path, :class => 'btn-xs btn-info'  %>
+</div><!-- blog2 -->
+
 </div><!-- ligne2 -->
 <div class="row ligne3">
   <div class="col-sm-6 blog1">

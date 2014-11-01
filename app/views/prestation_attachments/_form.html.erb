@@ -1,0 +1,13 @@
+<%= image_tag @prestation_attachment.photo %>
+<%= simple_form_for @prestation_attachment, :html => { :multipart => true } do |f| %>
+  <%= f.error_notification %>
+  
+  <div>
+    <%= f.file_field :photo %>
+  </div>
+  
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

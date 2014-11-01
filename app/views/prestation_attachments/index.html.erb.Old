@@ -1,0 +1,27 @@
+<h1>Listing prestation_attachments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prestation</th>
+      <th>Photo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @prestation_attachments.each do |prestation_attachment| %>
+      <tr>
+        <td><%= prestation_attachment.prestation %></td>
+        <td><%= image_tag prestation_attachment.photo_url %></td>
+        <td><%= link_to 'Show', prestation_attachment %></td>
+        <td><%= link_to 'Edit', edit_prestation_attachment_path(prestation_attachment) %></td>
+        <td><%= link_to 'Destroy', prestation_attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Prestation attachment', new_prestation_attachment_path %>

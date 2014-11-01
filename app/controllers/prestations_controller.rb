@@ -22,6 +22,9 @@ class PrestationsController < ApplicationController
     #@prestationlignes = @prestation.prestationlignes.select("formatphoto_id,dimention,qte,qtelivre,prix_u,montant, prestationlignes.id,prestationlignes.type_pl, prestationlignes.etat").joins(:formatphoto)
     #end
     @prestationligne = Prestationligne.new(:prestation => @prestation)
+
+    @prestation_attachments = @prestation.prestation_attachments.all
+    @prestation_attachment = @prestation.prestation_attachments.build
   end
 
   # GET /prestations/new

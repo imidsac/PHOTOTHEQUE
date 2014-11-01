@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :prestation_attachments
+
   resources :tcoffres
 
   resources :coffres
