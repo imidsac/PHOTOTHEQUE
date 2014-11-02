@@ -9,7 +9,6 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:numerobaguete) %></th>
       <th><%= model_class.human_attribute_name(:info) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -19,7 +18,6 @@
         <td><%= link_to cadre.id, cadre_path(cadre) %></td>
         <td><%= cadre.numerobaguete %></td>
         <td><%= cadre.info %></td>
-        <td><%=l cadre.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_cadre_path(cadre), :class => 'btn btn-primary btn-xs' %>

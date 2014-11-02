@@ -7,11 +7,11 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       
+      <th><%= model_class.human_attribute_name(:date) %></th>
       <th><%= model_class.human_attribute_name(:boutique_id) %></th>
       <th><%= model_class.human_attribute_name(:client_id) %></th>
       <th><%= model_class.human_attribute_name(:client_libre) %></th>
       <th><%= model_class.human_attribute_name(:type) %></th>
-      <th><%= model_class.human_attribute_name(:date) %></th>
       <th><%= model_class.human_attribute_name(:etat) %></th>
       <th><%= model_class.human_attribute_name(:total) %></th>
       <th><%= model_class.human_attribute_name(:payee) %></th>
@@ -23,6 +23,7 @@
     <% @ventes.each do |vente| %>
       <tr>
         <td><%= link_to vente.id, vente_path(vente) %></td>
+        <td><%= vente.date_vente.strftime("%d %b %Y à %H:%M") %></td>
         
         <td><%= vente.name %></td>
         <td><%= vente.nom %></td>
@@ -32,7 +33,6 @@
         <% elsif vente.type_ve == 'A' %>
         <td><%= 'Article' %></td>
         <% end %>
-        <td><%= vente.date_vente.strftime("%d %b %Y à %H:%M") %></td>
         <% if vente.etat_vente == 'n' %>
         <td><%= 'N-Livret' %></td>
         <% elsif vente.etat_vente == 'p' %>

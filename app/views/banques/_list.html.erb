@@ -7,7 +7,6 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:nom) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -16,7 +15,6 @@
       <tr>
         <td><%= link_to banque.id, banque_path(banque) %></td>
         <td><%= banque.nom %></td>
-        <td><%=l banque.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_banque_path(banque), :class => 'btn btn-primary btn-xs' %>

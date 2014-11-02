@@ -7,9 +7,9 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:date) %></th>
       <th><%= model_class.human_attribute_name(:fournisseur_id) %></th>
       <th><%= model_class.human_attribute_name(:fournisseur_libre) %></th>
-      <th><%= model_class.human_attribute_name(:date) %></th>
       <th><%= model_class.human_attribute_name(:type) %></th>
       <th><%= model_class.human_attribute_name(:somme) %></th>
       <th><%= model_class.human_attribute_name(:payee) %></th>
@@ -22,9 +22,9 @@
     <% @achats.each do |achat| %>
       <tr>
         <td><%= link_to achat.id, achat_path(achat) %></td>
+        <td><%= achat.date_achat.strftime("%d %b %Y à %H:%M") %></td>
         <td><%= achat.name_company %></td>
         <td><%= achat.fournisseur_libre %></td>
-        <td><%= achat.date_achat.strftime("%d %b %Y à %H:%M") %></td>
         <% if achat.type_ac == 'C' %>
         <td><%= 'Cadre' %></td>
         <% elsif achat.type_ac == 'A' %>

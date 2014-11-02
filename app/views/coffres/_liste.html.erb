@@ -5,20 +5,20 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <!--<th><%= model_class.human_attribute_name(:id) %></th>-->
       <th><%= model_class.human_attribute_name(:paiement) %></th>
       <th><%= model_class.human_attribute_name(:font) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <!--<th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>-->
     </tr>
   </thead>
   <tbody>
     <% @coffres.each do |coffre| %>
       <tr>
-        <td><%= link_to coffre.id, coffre_path(coffre) %></td>
+        <!--<td><%= link_to coffre.id, coffre_path(coffre) %></td>-->
         <td><%= coffre.paiement %></td>
         <td><%= coffre.font %></td>
-        <td><%=l coffre.created_at %></td>
+        <!--<td><%=l coffre.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_coffre_path(coffre), :class => 'btn btn-primary btn-xs' %>
@@ -27,12 +27,12 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-danger btn-xs' %>
-        </td>
+        </td>-->
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<!--<%= link_to t('.new', :default => t("helpers.links.new")),
             new_coffre_path,
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-primary' %>-->

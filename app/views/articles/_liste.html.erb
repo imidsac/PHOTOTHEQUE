@@ -9,7 +9,6 @@
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:reference) %></th>
       <th><%= model_class.human_attribute_name(:etat) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -20,7 +19,6 @@
         <td><%= article.name %></td>
         <td><%= article.reference %></td>
         <td><%= article.etat %></td>
-        <td><%=l article.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_article_path(article), :class => 'btn btn-primary btn-xs' %>

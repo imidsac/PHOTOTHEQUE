@@ -1,4 +1,5 @@
 class Prestation < ActiveRecord::Base
+	#default_scope { where("client_id = ? ", -1)}
   belongs_to :client
   belongs_to :employe
   has_many :prestationlignes, dependent: :destroy
