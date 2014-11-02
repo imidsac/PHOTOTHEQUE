@@ -1,19 +1,16 @@
+<%= image_tag @prestation_attachment.photo %>
 <%= simple_form_for [@prestation, @prestation_attachment], :html => { :multipart => true } do |f| %>
   <%= f.error_notification %>
 
-  <!--
-  <div class="form-inputs">
-    <%= f.association :prestation %>
-  </div>
--->
-
   
   <div>
-    <%= f.file_field :photo, :multiple => true, name: "prestation_attachment[photo][]" %>
+    <%= f.file_field :photo, :multiple => true, name: "prestation_attachment[photo][]", :class => 'btn-xs btn-success'  %>
   </div>
   
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn-xs btn-danger'%>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                [@prestation], :class => 'btn-xs btn-info' %>
   </div>
 <% end %>

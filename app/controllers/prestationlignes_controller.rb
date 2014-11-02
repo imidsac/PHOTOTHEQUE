@@ -21,7 +21,7 @@ class PrestationlignesController < ApplicationController
 
   # GET /prestationlignes/1/edit
   def edit
-      @prestation = Prestation.find(params[:id])
+      @prestation = Prestation.find(params[:prestation_id])
   end
 
   # POST /prestationlignes

@@ -1,6 +1,6 @@
 class Aligne < ActiveRecord::Base
   belongs_to :achat
-  belongs_to :article
+  belongs_to :article#, ->  { where.not(id: Aligne.where("achat_id = ?", 1)) } 
   belongs_to :cadre
   validates :achat_id, presence: true
 

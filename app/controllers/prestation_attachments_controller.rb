@@ -6,6 +6,7 @@ class PrestationAttachmentsController < ApplicationController
   def index
     @prestation = Prestation.find(params[:prestation_id])
     @prestation_attachments = PrestationAttachment.where("prestation_id = ?", @prestation.id)
+    @prestation_attachment = PrestationAttachment.new
   end
 
   # GET /prestation_attachments/1
@@ -70,7 +71,7 @@ class PrestationAttachmentsController < ApplicationController
 
     @prestation_attachment.destroy
     respond_to do |format|
-      format.html { redirect_to prestation_prestation_attachments, notice: 'Prestation attachment was successfully destroyed.' }
+      format.html { redirect_to prestation_prestation_attachments_path, notice: 'Prestation attachment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -36,7 +36,7 @@ class AchatsController < ApplicationController
     if @achat.type_ac == 'C'
     @alignes = @achat.alignes.select("cadre_id,numerobaguete,qte,qtelivre,prix_u,montant, alignes.id, alignes.etat").joins(:cadre)
     else
-    @alignes = @achat.alignes.select("article_id,name,qte,qtelivre,prix_u,montant, alignes.id, alignes.etat").joins(:article)
+    @alignes = @achat.alignes.select("article_id,name,qte,qtelivre,prix_u,montant, alignes.id, alignes.etat, alignes.achat_id").joins(:article)
     end
     #@alignes = @achat.alignes
     @aligne = Aligne.new(:achat => @achat)

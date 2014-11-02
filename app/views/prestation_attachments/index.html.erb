@@ -1,14 +1,18 @@
-<p>
-  <strong>Title:</strong>
-  <h1>Listing prestation_attachments</h1>
-</p>
+<div class="row ligne1">
+  
+<div class="page-header">
+  <h3>PHOTO</h3>
+</div>
+</div><!-- ligne1 -->
 
-<%= link_to 'New Prestation attachment', new_prestation_prestation_attachment_path %>
-
+<%= render 'form_insert' %>
+<hr />
 <% @prestation_attachments.each do |p| %>
-  <%= image_tag p.photo_url %>
-  <%= link_to "Edit Attachment", edit_prestation_prestation_attachment_path(@prestation, p) %>
-  <%= link_to 'Destroy',  prestation_prestation_attachment_path(@prestation,p), method: :delete, data: { confirm: 'Are you sure?' } %>
+<div class="img-responsive">
+  <%= image_tag p.photo_url, :class=>"img-responsive img-thumbnail img-circle" %>
+</div>
+  <%= link_to "Edit Attachment", edit_prestation_prestation_attachment_path(@prestation, p), :class => 'btn-xs btn-info' %>
+  <%= link_to 'Destroy',  prestation_prestation_attachment_path(@prestation,p), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn-xs btn-danger' %>
   
 <hr />
 <% end %>
