@@ -4,6 +4,8 @@ class Aligne < ActiveRecord::Base
   belongs_to :cadre
   validates :achat_id, presence: true
 
+  validates_uniqueness_of :achat_id, scope: [:article_id, :cadre_id]
+
   before_save :montant 
   after_save  :total
   #after_save :total

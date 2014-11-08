@@ -69,10 +69,11 @@ end
 
 gem 'quiet_assets', :group => :development
 
-gem 'devise'
+gem 'devise', '~> 3.2'
 gem 'paperclip'
 gem 'jquery-fileupload-rails'
 gem 'wicked'
 
 gem 'carrierwave'
 gem 'rmagick'
+#gem 'passenger'
