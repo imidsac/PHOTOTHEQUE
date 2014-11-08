@@ -250,68 +250,50 @@ namespace :dev_data do
         address: "No",
         email: "No"
       )
- Client.create!(
-        nom: "CLIENT-1",
-        prenom: "CLIENT-1",
-        phone: "88 88 88 88",
-        address: "RUE 456 PORTE 345",
-        email: "exemple-1@exemple_ex"
-      )
- Client.create!(
-        nom: "CLIENT-2",
-        prenom: "CLIENT-2",
-        phone: "88 88 88 88",
-        address: "RUE 456 PORTE 345",
-        email: "exemple-2@exemple_ex"
-      )
- Client.create!(
-        nom: "CLIENT-3",
-        prenom: "CLIENT-3",
-        phone: "88 88 88 88",
-        address: "RUE 456 PORTE 345",
-        email: "exemple-3@exemple_ex"
-      )
- Client.create!(
-        nom: "CLIENT-4",
-        prenom: "CLIENT-4",
-        phone: "88 88 88 88",
-        address: "RUE 456 PORTE 345",
-        email: "exemple-4@exemple_ex"
-      )
- Client.create!(
-        nom: "CLIENT-5",
-        prenom: "CLIENT-5",
-        phone: "88 88 88 88",
-        address: "RUE 456 PORTE 345",
-        email: "exemple-5@exemple_ex"
-      )
+
+    (0..110).map do |i|
+      Client.create!(
+        nom: "Client-#{i}", 
+        prenom: "Client-#{i}", 
+        address: "address Client-#{i}", 
+        email: "Client-#{i}@test.com" )
+    end
  puts "===> Sample date have been set in DB  Client!"
 
  Employe.create!(
-        nom: "EMPLOYEE-1",
-        prenom: "EMPLOYEE-1",
+        id: -1,
+        nom: "No",
+        prenom: "No",
+        sexe: "m",
+        phone: "No",
+        address: "No",
+        email: "No"
+      )
+ (0..50).map do |i|
+      Employe.create!(
+        nom: "EMPLOYEE-#{i}",
+        prenom: "EMPLOYEE-#{i}",
         sexe: "m",
         phone: "88 88 88 88",
         address: "RUE 456 PORTE 345",
-        email: "exemple-1@exemple_ex"
-      )
- Employe.create!(
-        nom: "EMPLOYEE-2",
-        prenom: "EMPLOYEE-2",
-        sexe: "f",
-        phone: "88 88 88 88",
-        address: "RUE 456 PORTE 345",
-        email: "exemple-2@exemple_ex"
-      )
- Employe.create!(
-        nom: "EMPLOYEE-3",
-        prenom: "EMPLOYEE-3",
-        sexe: "m",
-        phone: "88 88 88 88",
-        address: "RUE 456 PORTE 345",
-        email: "exemple-3@exemple_ex"
-      )
+        email: "exemple-#{i}@exemple_ex"
+     )
+    end
  puts "===> Sample date have been set in DB  Employées!"
+
+  Banque.create!(
+        nom: "BDM",
+        compte: "xx xx xx xx xx - xx"
+      )
+  Banque.create!(
+        nom: "BHM",
+        compte: "xx xx xx xx xx - xx"
+      )
+  Banque.create!(
+        nom: "BNDA",
+        compte: "xx xx xx xx xx - xx"
+      )
+ puts "===> Sample date have been set in DB  Banques!"
 
   end
   

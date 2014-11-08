@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20141101115024) do
 
   create_table "banques", force: true do |t|
     t.string   "nom"
+    t.string   "compte"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -165,13 +166,6 @@ ActiveRecord::Schema.define(version: 20141101115024) do
   add_index "paiements", ["fournisseur_id"], name: "index_paiements_on_fournisseur_id", using: :btree
   add_index "paiements", ["vente_id"], name: "index_paiements_on_vente_id", using: :btree
 
-  create_table "paintings", force: true do |t|
-    t.string   "name"
-    t.string   "image"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "prestation_attachments", force: true do |t|
     t.integer  "prestation_id"
     t.string   "photo"
@@ -190,7 +184,8 @@ ActiveRecord::Schema.define(version: 20141101115024) do
     t.decimal  "prix_u",                   default: 0.0
     t.decimal  "montant",                  default: 0.0
     t.integer  "numero_prise",             default: 0
-    t.string   "type_pl",        limit: 2, default: "sp"
+    t.string   "type_pl",        limit: 2
+    t.string   "color",          limit: 2
     t.string   "etat",           limit: 1, default: "n"
     t.datetime "created_at"
     t.datetime "updated_at"
