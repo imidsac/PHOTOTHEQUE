@@ -1,12 +1,15 @@
+<% title "BANQUE" %>
+
 <%- model_class = Banque -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h3><%=t '.title', :default => model_class.model_name.human.pluralize %></h3>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:nom) %></th>
+      <th><%= model_class.human_attribute_name(:compte) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -15,7 +18,10 @@
       <tr>
         <td><%= link_to banque.id, banque_path(banque) %></td>
         <td><%= banque.nom %></td>
+        <td><%= banque.compte %></td>
         <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      banque_path(banque), :class => 'btn btn-info btn-xs' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_banque_path(banque), :class => 'btn btn-primary btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

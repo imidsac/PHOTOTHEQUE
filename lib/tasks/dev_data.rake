@@ -295,6 +295,12 @@ namespace :dev_data do
       )
  puts "===> Sample date have been set in DB  Banques!"
 
+ Coffre.create!(
+        paiement: 0,
+        font: 0
+      )
+ puts "===> Sample date have been set in DB  Coffres!"
+
   end
   
 end

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+gem 'will_paginate', '~> 3.0.7'
+gem 'kaminari', '~> 0.16.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
@@ -17,6 +18,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -37,12 +39,14 @@ gem 'spring',        group: :development
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+#gem 'debugger', group: [:development, :test]
 
 gem 'simple_form'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'therubyracer', :require => 'v8'
+
+gem 'jquery-datatables-rails', '~> 3.0.0'
 
 gem 'twitter-bootswatch-rails', '~> 3.2'
 #gem 'twitter-bootswatch-rails-helpers', '~> 3.1'
@@ -77,3 +81,4 @@ gem 'wicked'
 gem 'carrierwave'
 gem 'rmagick'
 #gem 'passenger'
+gem 'prawn', '~> 1.3.0'

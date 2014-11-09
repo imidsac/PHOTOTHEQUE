@@ -9,7 +9,11 @@
   <dt><strong><%= model_class.human_attribute_name(:reference) %>:</strong></dt>
   <dd><%= @article.reference %></dd>
   <dt><strong><%= model_class.human_attribute_name(:etat) %>:</strong></dt>
-  <dd><%= @article.etat %></dd>
+  <% if @article.etat == 'a' %>
+  <dd><%= 'Actif' %></dd>
+<% elsif @article.etat == 'i' %>
+  <dd><%= 'Inactif' %></dd>
+<% end %>
 </dl>
 
 <div class="form-actions">

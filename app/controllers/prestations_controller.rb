@@ -12,7 +12,7 @@ class PrestationsController < ApplicationController
   # GET /prestations/1
   # GET /prestations/1.json
   def show
-    @cli = Client.select("id,nom, prenom").find(@prestation.client_id)
+    @cli = Client.select("clients.id,nom, prenom").find(@prestation.client_id)
     @emp = Employe.select("id,nom, prenom").find(@prestation.employe_id)
 
     @prestationlignes = @prestation.prestationlignes.select("cadre_id,numerobaguete,formatphoto_id,dimention, qte,qtelivre,prix_u,montant,prestationlignes.numero_prise,prestationlignes.type_pl, prestationlignes.id, prestationlignes.etat").joins(:cadre, :formatphoto)

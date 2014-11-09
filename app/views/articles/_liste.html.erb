@@ -1,6 +1,7 @@
+<% title "ARTICLES" %>
 <%- model_class = Article -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h3><%=t '.title', :default => model_class.model_name.human.pluralize %></h3>
 </div>
 <table class="table table-striped">
   <thead>
@@ -18,8 +19,15 @@
         <td><%= link_to article.id, article_path(article) %></td>
         <td><%= article.name %></td>
         <td><%= article.reference %></td>
-        <td><%= article.etat %></td>
+        <% if article.etat == 'a' %>
+        <td><%= 'Actif' %></td>
+        <% elsif article.etat == 'i' %>
+        <td><%= 'Inactif' %></td>
+        <% end %>
+
         <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      article_path(article), :class => 'btn btn-info btn-xs' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_article_path(article), :class => 'btn btn-primary btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :banques do
   resources :tbanques
-  resources :banques
+  end
 
   resources :employes
   resources :depenses
