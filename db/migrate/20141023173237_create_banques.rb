@@ -3,6 +3,7 @@ class CreateBanques < ActiveRecord::Migration
     create_table :banques do |t|
       t.string :nom
       t.string :compte
+      t.decimal :solde
 
       t.timestamps
     end

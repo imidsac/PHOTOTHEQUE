@@ -20,6 +20,16 @@ class PrestationsController < ApplicationController
 
     #@prestation_attachments = @prestation.prestation_attachments.all
     #@prestation_attachment = @prestation.prestation_attachments.build
+
+    ##pdf
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = OrderPdf.new(@prestation)
+        send_data pdf.render, filename: "prestation_#{@prestation.id}.pdf",
+        type: "application/pdf", disposition: "inline"
+      end
+    end
   end
 
 
