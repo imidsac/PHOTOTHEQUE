@@ -10,4 +10,8 @@
 
 <div class="col-sm-2">
 <%= render 'prestationlignes/form_pligne'  %>
+<hr />
+<% if @prestation.somme!=0 %>
+<%= render 'paiements/form_ppaie'  %>
+<% end %>
 </div>

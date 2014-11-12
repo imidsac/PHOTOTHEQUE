@@ -1,10 +1,7 @@
-class PresPdf < Prawn::Document
-  def initialize(prestation, prestationlignes, cli)
+class ClientsPdf < Prawn::Document
+  def initialize(clients)
   	super(top_margin: 70)
-  	@prestation = prestation
-  	@prestationlignes = prestationlignes
-    @cli = cli
-
+  	@clients = clients
   	#@view = view
     #text "Order goes here"
     header
@@ -13,12 +10,13 @@ class PresPdf < Prawn::Document
  
   def header
     #This inserts an image in the pdf file and sets the size of the image
+=begin
     logo = "#{Rails.root}/app/assets/images/images.jpg"
     image logo, width: 130, height: 150
     text "Order \##{@prestation.id}", size: 30, style: :bold
     text "Order \##{@prestation.somme}", size: 30, style: :bold
     text "Client :  \##{@cli.nom}", size: 30, style: :bold
-
+=end
   end
 
   def line_items
@@ -32,9 +30,9 @@ class PresPdf < Prawn::Document
   end
 
   def lignetable
-    [['Produit', 'Qte', 'Prix_unitaire', 'Montant']] +
-    @prestationlignes.map do |item|
-      [item.dimention, item.qte, item.prix_u, item.montant]
+    [['Id','Nom', 'Prenom', 'Adresse', 'E-mail']] +
+    @clients.map do |item|
+      [item.id,item.nom, item.prenom, item.address, item.email]
     end
   end
  

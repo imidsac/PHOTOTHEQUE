@@ -4,8 +4,18 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    #@clients = Client.all
-    @clients = Client.paginate(:page => params[:page], :per_page => 5)
+    @clients = Client.all
+    #@clients = Client.paginate(:page => params[:page], :per_page => 5)
+
+    ##pdf
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ClientsPdf.new(@clients)
+        send_data pdf.render, filename: 'clients.pdf', type: 'application/pdf'
+      end
+    end
+
   end
 
   # GET /clients/1

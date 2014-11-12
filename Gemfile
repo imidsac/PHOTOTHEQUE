@@ -81,4 +81,11 @@ gem 'wicked'
 gem 'carrierwave'
 gem 'rmagick'
 #gem 'passenger'
-gem 'prawn', '~> 1.3.0'
+gem 'prawn'#, '~> 1.3.0'
+gem 'prawn-table'#, '~> 0.2.1'
+#gem 'prawn-layout', '~> 0.8.4'
+gem 'prawnto_2', '~> 0.2.6', :require => "prawnto" 
+#gem "prawnto_2", :require => "prawnto"
+gem 'pdf-core', '~> 0.4.0'
+gem 'ttfunk', '~> 1.4.0'
+gem 'cancan'

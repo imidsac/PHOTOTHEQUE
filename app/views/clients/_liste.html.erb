@@ -3,8 +3,13 @@
 <%- model_class = Client -%>
 <div class="page-header">
   <h3><%=t '.title', :default => model_class.model_name.human.pluralize %></h3>
+
+  <%= link_to t('.pdf', :default => t("helpers.links.pdf")),
+              clients_path(@clients, format: "pdf"), :class => 'btn-xs btn-info'  %>
 </div>
-<%= will_paginate @clients %>
+<!--
+
+-->
 <table class="table table-striped">
   <thead>
     <tr>

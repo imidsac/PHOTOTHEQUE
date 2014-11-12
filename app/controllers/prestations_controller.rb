@@ -1,11 +1,22 @@
+        require 'prestation_pdf.rb'
 class PrestationsController < ApplicationController
   before_action :set_prestation, only: [:show, :edit, :update, :destroy]
+        #require 'test.rb'
 
   # GET /prestations
   # GET /prestations.json
   def index
     @prestations = Prestation.all
     @prestations = @prestations.select("prestations.id,employe_id,employes.nom as em_nom,employes.prenom,client_id,client_libre, clients.nom as cl_nom, clients.prenom,type_pr, date_prestation,somme, payee, etat_prestation").joins(:client, :employe).order(date_prestation: :desc).limit(10)
+
+    ##pdf
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = PresPdf.new(@prestations)
+        send_data pdf.render, filename: 'report.pdf', type: 'application/pdf'
+      end
+    end
 
   end
 
@@ -18,6 +29,9 @@ class PrestationsController < ApplicationController
     @prestationlignes = @prestation.prestationlignes.select("cadre_id,numerobaguete,formatphoto_id,dimention, qte,qtelivre,prix_u,montant,prestationlignes.numero_prise,prestationlignes.type_pl, prestationlignes.id, prestationlignes.etat").joins(:cadre, :formatphoto)
     @prestationligne = Prestationligne.new(:prestation => @prestation)
 
+
+    @paiement = Paiement.new(:prestation => @prestation, :client => @cli)
+
     #@prestation_attachments = @prestation.prestation_attachments.all
     #@prestation_attachment = @prestation.prestation_attachments.build
 
@@ -25,11 +39,14 @@ class PrestationsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = OrderPdf.new(@prestation)
-        send_data pdf.render, filename: "prestation_#{@prestation.id}.pdf",
-        type: "application/pdf", disposition: "inline"
+        pdf = PresPdf.new(@prestation, @prestationlignes, @cli)
+        send_data pdf.render, 
+                filename: 'report.pdf', 
+                type: 'application/pdf',
+                disposition: "inline"
       end
     end
+    
   end
 
 

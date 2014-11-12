@@ -251,7 +251,7 @@ namespace :dev_data do
         email: "No"
       )
 
-    (0..110).map do |i|
+    (0..1110).map do |i|
       Client.create!(
         nom: "Client-#{i}", 
         prenom: "Client-#{i}", 

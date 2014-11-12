@@ -19,3 +19,4 @@ config/database.yml
 
 Gemfile.lock
 /public/uploads/**/*
+/app/assets/images/**/*

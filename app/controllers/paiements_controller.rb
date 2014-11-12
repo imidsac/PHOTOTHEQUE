@@ -24,11 +24,13 @@ class PaiementsController < ApplicationController
   # POST /paiements
   # POST /paiements.json
   def create
-    @paiement = Paiement.new(paiement_params)
+    @prestation = Prestation.find(params[:prestation_id])
+    @cli = @prestation.client_id
+    @paiement = @prestation.paiements.new(paiement_params)
 
     respond_to do |format|
       if @paiement.save
-        format.html { redirect_to @paiement, notice: 'Paiement was successfully created.' }
+        format.html { redirect_to @paiement.prestation, notice: 'Paiement was successfully created.' }
         format.json { render :show, status: :created, location: @paiement }
       else
         format.html { render :new }
@@ -69,6 +71,6 @@ class PaiementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def paiement_params
-      params.require(:paiement).permit(:vente_id, :client_id, :achat_id, :fournisseur_id, :datepaiement, :motif, :montant)
+      params.require(:paiement).permit(:boutique_id, :client_id, :vente_id, :achat_id, :fournisseur_id, :datepaiement, :motif, :montant)
     end
 end

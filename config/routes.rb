@@ -1,5 +1,33 @@
 Rails.application.routes.draw do
 
+  concern :sociable do
+    resources :paiements
+  end
+
+  resources :fournisseurs
+
+  resources :achats do
+    resources :alignes
+    concerns :sociable
+  end
+
+  resources :boutiques
+  resources :clients
+
+  resources :ventes do
+    resources :ventelignes
+    concerns :sociable
+  end
+
+  resources :prestations do
+    resources :prestation_attachments
+    resources :prestationlignes
+    concerns :sociable
+    collection do
+         get 'image'
+    end
+  end
+
   resources :tcoffres
 
   resources :coffres
@@ -11,39 +39,13 @@ Rails.application.routes.draw do
   end
 
   resources :employes
+
   resources :depenses
   resources :categoriedeps
 
-  resources :paiements
-
-
-  resources :ventes do
-    resources :ventelignes
-  end
-
-
-  resources :prestations do
-    resources :prestation_attachments
-    resources :prestationlignes
-    collection do
-         get 'image'
-    end
-  end
-
-  resources :clients
-
-  resources :boutiques
-
-
-  resources :achats do
-    resources :alignes
-  end
-
-  resources :fournisseurs
   resources :stocks
 
   resources :articles
-
   resources :cadres
   resources :formatphotos
 

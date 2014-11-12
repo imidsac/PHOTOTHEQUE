@@ -44,7 +44,7 @@ class PrestationlignesController < ApplicationController
   # PATCH/PUT /prestationlignes/1
   # PATCH/PUT /prestationlignes/1.json
   def update
-    @prestation = Prestation.find(params[:id])
+    @prestation = Prestation.find(params[:prestation_id])
 
     respond_to do |format|
       if @prestationligne.update(prestationligne_params)

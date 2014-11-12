@@ -1,5 +1,6 @@
 class Paiement < ActiveRecord::Base
   belongs_to :vente
+  belongs_to :prestation
   belongs_to :client
   belongs_to :achat
   belongs_to :fournisseur

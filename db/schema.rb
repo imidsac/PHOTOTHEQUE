@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20141101115024) do
   create_table "banques", force: true do |t|
     t.string   "nom"
     t.string   "compte"
+    t.decimal  "solde"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -150,10 +151,12 @@ ActiveRecord::Schema.define(version: 20141101115024) do
   end
 
   create_table "paiements", force: true do |t|
-    t.integer  "vente_id"
+    t.integer  "boutique_id"
     t.integer  "client_id"
-    t.integer  "achat_id"
+    t.integer  "vente_id"
+    t.integer  "prestation_id"
     t.integer  "fournisseur_id"
+    t.integer  "achat_id"
     t.datetime "datepaiement"
     t.string   "motif"
     t.decimal  "montant",        default: 0.0
@@ -162,8 +165,10 @@ ActiveRecord::Schema.define(version: 20141101115024) do
   end
 
   add_index "paiements", ["achat_id"], name: "index_paiements_on_achat_id", using: :btree
+  add_index "paiements", ["boutique_id"], name: "index_paiements_on_boutique_id", using: :btree
   add_index "paiements", ["client_id"], name: "index_paiements_on_client_id", using: :btree
   add_index "paiements", ["fournisseur_id"], name: "index_paiements_on_fournisseur_id", using: :btree
+  add_index "paiements", ["prestation_id"], name: "index_paiements_on_prestation_id", using: :btree
   add_index "paiements", ["vente_id"], name: "index_paiements_on_vente_id", using: :btree
 
   create_table "prestation_attachments", force: true do |t|
