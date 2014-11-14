@@ -1,16 +1,17 @@
 <%= simple_form_for [@prestation, @prestationligne], :html => { :class => 'form-horizontal' } do |f| %>
 <% if @prestation.type_pr == 'C'%>
-  <%= f.association :cadre, label_method: :numerobaguete %>
-  <% end %>
-  <%= f.association :formatphoto, label_method: :dimention %>
-  <%= f.input :qte %>
-  <%= f.input :prix_u %>
-  <% if @prestation.type_pr == 'S'%>
-  <%= f.input :numero_prise %>
-  <%= f.collection_radio_buttons :type_pl, [['sp', 'SP'], ['rv', 'RV']], :first, :last %>
-  <% end%>
-  <div class="form-actions">
-    <%= f.button :submit, :class => 'btn btn-success' %>
-    
-  </div>
+<%= f.association :cadre, label_method: :numerobaguete %>
+<% end %>
+<%= f.association :formatphoto, label_method: :dimention %>
+<%= f.input :qte %>
+<%= f.input :prix_u %>
+<% if @prestation.type_pr == 'S'%>
+<%= f.input :numero_prise %>
+<%= f.collection_radio_buttons :type_pl, [['sp', 'SP'], ['rv', 'RV']], :first, :last %><br />
+<%= f.collection_radio_buttons :color, [['c', 'E-C'], ['n', 'N-B']], :first, :last %>
+<% end%>
+<div class="form-actions">
+  <%= f.button :submit, :class => 'btn btn-success' %>
+  
+</div>
 <% end %>

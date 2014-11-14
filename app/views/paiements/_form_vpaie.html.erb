@@ -1,0 +1,14 @@
+<%= simple_form_for [@vente, @paiement], :html => { :class => 'form-horizontal' } do |f| %>
+
+<% if @vente.client_id != -1%>
+<% end %>
+<%= f.input :client_id, :as => :hidden %>
+<%= f.input :boutique_id,  :as => :hidden %>
+<%= f.input :datepaiement, :as => :hidden %>
+<%= f.input :motif, prompt: 'motif de payement' %>
+<%= f.input :montant, :value => @vente.somme %>
+<div class="form-actions">
+  <%= f.button :submit, :class => 'btn btn-success' %>
+
+</div>
+<% end %>

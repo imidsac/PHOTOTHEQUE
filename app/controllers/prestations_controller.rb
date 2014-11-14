@@ -1,6 +1,6 @@
         require 'prestation_pdf.rb'
-class PrestationsController < ApplicationController
-  before_action :set_prestation, only: [:show, :edit, :update, :destroy]
+        class PrestationsController < ApplicationController
+          before_action :set_prestation, only: [:show, :edit, :update, :destroy]
         #require 'test.rb'
 
   # GET /prestations
@@ -26,7 +26,7 @@ class PrestationsController < ApplicationController
     @cli = Client.select("clients.id,nom, prenom").find(@prestation.client_id)
     @emp = Employe.select("id,nom, prenom").find(@prestation.employe_id)
 
-    @prestationlignes = @prestation.prestationlignes.select("cadre_id,numerobaguete,formatphoto_id,dimention, qte,qtelivre,prix_u,montant,prestationlignes.numero_prise,prestationlignes.type_pl, prestationlignes.id, prestationlignes.etat").joins(:cadre, :formatphoto)
+    @prestationlignes = @prestation.prestationlignes.select("color,cadre_id,numerobaguete,formatphoto_id,dimention, qte,qtelivre,prix_u,montant,prestationlignes.numero_prise,prestationlignes.type_pl, prestationlignes.id, prestationlignes.etat").joins(:cadre, :formatphoto)
     @prestationligne = Prestationligne.new(:prestation => @prestation)
 
 
@@ -41,9 +41,9 @@ class PrestationsController < ApplicationController
       format.pdf do
         pdf = PresPdf.new(@prestation, @prestationlignes, @cli)
         send_data pdf.render, 
-                filename: 'report.pdf', 
-                type: 'application/pdf',
-                disposition: "inline"
+        filename: 'report.pdf', 
+        type: 'application/pdf',
+        disposition: "inline"
       end
     end
     
@@ -116,4 +116,4 @@ class PrestationsController < ApplicationController
     def prestation_params
       params.require(:prestation).permit(:type_pr,:client_id, :client_libre, :employe_id, :date_prestation, :etat_prestation, :somme, :payee)
     end
-end
+  end

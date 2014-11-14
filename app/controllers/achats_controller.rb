@@ -40,6 +40,10 @@ class AchatsController < ApplicationController
     end
     #@alignes = @achat.alignes
     @aligne = Aligne.new(:achat => @achat)
+
+    @paiement = Paiement.new(:achat => @achat, :fournisseur => @fourni)
+
+
   end
 
   # GET /achats/new

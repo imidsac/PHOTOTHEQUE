@@ -22,12 +22,16 @@ class VentesController < ApplicationController
     
 
     if @vente.type_ve == 'C'
-    @ventelignes = @vente.ventelignes.select("cadre_id,numerobaguete,qte,qtelivre,prix_u,montant,ventelignes.id, ventelignes.etat").joins(:cadre)
+      @ventelignes = @vente.ventelignes.select("cadre_id,numerobaguete,qte,qtelivre,prix_u,montant,ventelignes.id, ventelignes.etat").joins(:cadre)
     else
-    @ventelignes = @vente.ventelignes.select("article_id,name,qte,qtelivre,prix_u,montant, ventelignes.id, ventelignes.etat").joins(:article)
+      @ventelignes = @vente.ventelignes.select("article_id,name,qte,qtelivre,prix_u,montant, ventelignes.id, ventelignes.etat").joins(:article)
     end
     #@ventelignes = @vente.ventelignes
     @venteligne = Venteligne.new(:vente => @vente)
+
+    @paiement = Paiement.new(:vente => @vente, :client => @cli, :boutique => @bou)
+
+
   end
 
   # GET /ventes/new
@@ -89,4 +93,4 @@ class VentesController < ApplicationController
     def vente_params
       params.require(:vente).permit(:boutique_id, :client_id, :client_libre, :date_vente, :etat_vente, :somme, :payee, :type_ve, :etat_vente)
     end
-end
+  end

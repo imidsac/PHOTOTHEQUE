@@ -1,17 +1,17 @@
 <div class="col-sm-2">
-  <%= render 'layouts/sidebar' %>
+	<%= render 'layouts/sidebar' %>
 </div><!-- /.col-sm-2 -->
 
 <div class="col-sm-8">
-<%= render 'detaile'  %>
-<hr />
-<%= render 'prestationlignes/plignes'  %>
+	<%= render 'detaile'  %>
+	<hr />
+	<%= render 'prestationlignes/plignes'  %>
 </div>
 
 <div class="col-sm-2">
-<%= render 'prestationlignes/form_pligne'  %>
-<hr />
-<% if @prestation.somme!=0 %>
-<%= render 'paiements/form_ppaie'  %>
-<% end %>
+	<%= render 'prestationlignes/form_pligne'  %>
+	<hr />
+	<% if @prestation.somme!=0 %>
+	<%= render 'paiements/form_ppaie'  %>
+	<% end %>
 </div>

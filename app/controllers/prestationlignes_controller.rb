@@ -11,7 +11,7 @@ class PrestationlignesController < ApplicationController
   # GET /prestationlignes/1
   # GET /prestationlignes/1.json
   def show
-      @prestation = Prestation.find(params[:id])
+    @prestation = Prestation.find(params[:id])
   end
 
   # GET /prestationlignes/new
@@ -21,7 +21,7 @@ class PrestationlignesController < ApplicationController
 
   # GET /prestationlignes/1/edit
   def edit
-      @prestation = Prestation.find(params[:prestation_id])
+    @prestation = Prestation.find(params[:prestation_id])
   end
 
   # POST /prestationlignes
@@ -75,6 +75,6 @@ class PrestationlignesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prestationligne_params
-      params.require(:prestationligne).permit(:formatphoto_id, :cadre_id, :qte, :qtelivre, :prix_u, :numero_prise, :type_pl, :etat)
+      params.require(:prestationligne).permit(:formatphoto_id, :cadre_id, :qte, :qtelivre, :prix_u, :numero_prise, :type_pl, :color, :etat)
     end
-end
+  end

@@ -1,29 +1,31 @@
 class PaiementsController < ApplicationController
   before_action :set_paiement, only: [:show, :edit, :update, :destroy]
 
-  # GET /paiements
-  # GET /paiements.json
-  def index
-    @paiements = Paiement.all
-  end
+# GET /paiements
+# GET /paiements.json
+def index
+  @paiements = Paiement.all
+end
 
-  # GET /paiements/1
-  # GET /paiements/1.json
-  def show
-  end
+# GET /paiements/1
+# GET /paiements/1.json
+def show
+end
 
-  # GET /paiements/new
-  def new
-    @paiement = Paiement.new
-  end
+# GET /paiements/new
+def new
+  @paiement = Paiement.new
+end
 
-  # GET /paiements/1/edit
-  def edit
-  end
+# GET /paiements/1/edit
+def edit
+end
 
-  # POST /paiements
-  # POST /paiements.json
-  def create
+# POST /paiements
+# POST /paiements.json
+def create
+  if params[:prestation_id]
+    
     @prestation = Prestation.find(params[:prestation_id])
     @cli = @prestation.client_id
     @paiement = @prestation.paiements.new(paiement_params)
@@ -37,40 +39,71 @@ class PaiementsController < ApplicationController
         format.json { render json: @paiement.errors, status: :unprocessable_entity }
       end
     end
-  end
+    
+  elsif params[:achat_id]
+    @achat = Achat.find(params[:achat_id])
+      #@cli = @achat.client_id
+      @paiement = @achat.paiements.new(paiement_params)
 
-  # PATCH/PUT /paiements/1
-  # PATCH/PUT /paiements/1.json
-  def update
-    respond_to do |format|
-      if @paiement.update(paiement_params)
-        format.html { redirect_to @paiement, notice: 'Paiement was successfully updated.' }
-        format.json { render :show, status: :ok, location: @paiement }
-      else
-        format.html { render :edit }
-        format.json { render json: @paiement.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @paiement.save
+          format.html { redirect_to @paiement.achat, notice: 'Paiement was successfully created.' }
+          format.json { render :show, status: :created, location: @paiement }
+        else
+          format.html { render :new }
+          format.json { render json: @paiement.errors, status: :unprocessable_entity }
+        end
+      end
+
+    elsif params[:vente_id]
+      @vente = Vente.find(params[:vente_id])
+      #@cli = @vente.client_id
+      @paiement = @vente.paiements.new(paiement_params)
+
+      respond_to do |format|
+        if @paiement.save
+          format.html { redirect_to @paiement.vente, notice: 'Paiement was successfully created.' }
+          format.json { render :show, status: :created, location: @paiement }
+        else
+          format.html { render :new }
+          format.json { render json: @paiement.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
 
-  # DELETE /paiements/1
-  # DELETE /paiements/1.json
-  def destroy
-    @paiement.destroy
-    respond_to do |format|
-      format.html { redirect_to paiements_url, notice: 'Paiement was successfully destroyed.' }
-      format.json { head :no_content }
+# PATCH/PUT /paiements/1
+# PATCH/PUT /paiements/1.json
+def update
+  respond_to do |format|
+    if @paiement.update(paiement_params)
+      format.html { redirect_to @paiement, notice: 'Paiement was successfully updated.' }
+      format.json { render :show, status: :ok, location: @paiement }
+    else
+      format.html { render :edit }
+      format.json { render json: @paiement.errors, status: :unprocessable_entity }
     end
   end
+end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_paiement
-      @paiement = Paiement.find(params[:id])
-    end
+# DELETE /paiements/1
+# DELETE /paiements/1.json
+def destroy
+  @paiement.destroy
+  respond_to do |format|
+    format.html { redirect_to paiements_url, notice: 'Paiement was successfully destroyed.' }
+    format.json { head :no_content }
+  end
+end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def paiement_params
-      params.require(:paiement).permit(:boutique_id, :client_id, :vente_id, :achat_id, :fournisseur_id, :datepaiement, :motif, :montant)
-    end
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_paiement
+    @paiement = Paiement.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def paiement_params
+    params.require(:paiement).permit(:boutique_id, :client_id, :vente_id, :achat_id, :fournisseur_id, :datepaiement, :motif, :montant)
+  end
 end

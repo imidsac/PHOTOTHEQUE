@@ -1,6 +1,6 @@
 class ReportPdf < Prawn::Document
   def initialize(products)
-    
+    super()
     @products = products
     header
     text_content

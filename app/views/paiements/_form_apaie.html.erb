@@ -1,9 +1,9 @@
-<%= simple_form_for [@prestation, @paiement], :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_form_for [@achat, @paiement], :html => { :class => 'form-horizontal' } do |f| %>
 <!--
 -->
-<% if @prestation.client_id != -1%>
+<% if @achat.fournisseur_id != -1%>
 <% end %>
-<%= f.input :client_id, :as => :hidden %>
+<%= f.input :fournisseur_id, :as => :hidden %>
 <%= f.input :datepaiement, :as => :hidden %>
 <%= f.input :motif %>
 <%= f.input :montant %>

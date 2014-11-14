@@ -8,8 +8,8 @@
               clients_path(@clients, format: "pdf"), :class => 'btn-xs btn-info'  %>
 </div>
 <!--
-
 -->
+<%= will_paginate @clients, previous_label: h("<"), next_label: h(">") %>
 <table class="table table-striped">
   <thead>
     <tr>

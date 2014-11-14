@@ -3,7 +3,7 @@ class Achat < ActiveRecord::Base
   has_many :alignes, dependent: :destroy
   has_many :articles, through: :alignes
   has_many :cadres, through: :alignes
-  has_many :paiements, through: :fournisseurs
+  has_many :paiements#, through: :fournisseurs
 
   #validates :fournisseur_id, presence: true
   accepts_nested_attributes_for :alignes
