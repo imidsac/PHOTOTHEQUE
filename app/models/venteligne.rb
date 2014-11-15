@@ -1,7 +1,7 @@
 class Venteligne < ActiveRecord::Base
   belongs_to :vente
   belongs_to :cadre
-  belongs_to :article
+  belongs_to :article#, -> where.not(id: Venteligne.where("vente_id = #{id}"))
   validates :vente_id, presence: true
 
   before_save :montant 
