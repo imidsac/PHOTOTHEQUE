@@ -9,6 +9,7 @@ class CreatePrestations < ActiveRecord::Migration
       t.decimal :somme, default: 0
       t.decimal :payee, default: 0
       t.string :type_pr, limit:1, default: 's'
+      t.string :num_pr
 
       t.timestamps
     end
