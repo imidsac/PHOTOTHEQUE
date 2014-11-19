@@ -1,0 +1,16 @@
+<%= simple_form_for(@balance) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :exercice %>
+    <%= f.input :mois %>
+    <%= f.input :achats %>
+    <%= f.input :depenses %>
+    <%= f.input :ventes %>
+    <%= f.input :tva %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

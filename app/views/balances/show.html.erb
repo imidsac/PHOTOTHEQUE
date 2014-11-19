@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Exercice:</strong>
+  <%= @balance.exercice %>
+</p>
+
+<p>
+  <strong>Mois:</strong>
+  <%= @balance.mois %>
+</p>
+
+<p>
+  <strong>Achats:</strong>
+  <%= @balance.achats %>
+</p>
+
+<p>
+  <strong>Depenses:</strong>
+  <%= @balance.depenses %>
+</p>
+
+<p>
+  <strong>Ventes:</strong>
+  <%= @balance.ventes %>
+</p>
+
+<p>
+  <strong>Tva:</strong>
+  <%= @balance.tva %>
+</p>
+
+<%= link_to 'Edit', edit_balance_path(@balance) %> |
+<%= link_to 'Back', balances_path %>
