@@ -4,9 +4,9 @@
 <% if @achat.fournisseur_id != -1%>
 <% end %>
 <%= f.input :fournisseur_id, :as => :hidden %>
-<%= f.input :datepaiement, :as => :hidden %>
-<%= f.input :motif %>
-<%= f.input :montant %>
+<%= f.input :datepaiement, :as => :hidden, input_html: {value: Time.now} %>
+<%= f.input :motif, input_html: {:value => 'ESPECE'} %>
+<%= f.input :montant, input_html: {:value => @achat.somme-@achat.payee} %>
 <div class="form-actions">
   <%= f.button :submit, :class => 'btn btn-success' %>
 

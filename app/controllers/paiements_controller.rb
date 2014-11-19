@@ -15,6 +15,8 @@ end
 # GET /paiements/new
 def new
   @paiement = Paiement.new
+  @resteclient = Vente.select('id,somme-payee as reste').where("client_id = ? and somme-payee > ? ", @vente.client_id, 0).order(date_vente: :asc)
+
 end
 
 # GET /paiements/1/edit
@@ -57,11 +59,25 @@ def create
 
     elsif params[:vente_id]
       @vente = Vente.find(params[:vente_id])
-      #@cli = @vente.client_id
-      @paiement = @vente.paiements.new(paiement_params)
+      @resteclients = Vente.select('id,somme-payee as reste').where("client_id = ? ", @vente.client_id).order(date_vente: :asc)
+      #@resteclient = Vente.select('id,somme-payee as reste').sum('somme')
+      #@montant = params[:montant]
+      if params[:vente_id] != -1
+      end
+
+      #if @reste_client<params[:montant] 
+=begin
+      loop do
+        while params[:client_id] = @reste_client.client_id do
+            @paiement = @vente.paiements.create!(:client_id => @reste_client.id)
+        end
+      end 
+=end
+      #end
+            @paiement = @vente.paiements.new(paiement_params)
 
       respond_to do |format|
-        if @paiement.save
+        if @paiement.save          
           format.html { redirect_to @paiement.vente, notice: 'Paiement was successfully created.' }
           format.json { render :show, status: :created, location: @paiement }
         else

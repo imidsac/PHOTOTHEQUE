@@ -4,7 +4,7 @@ class BoutiquesController < ApplicationController
   # GET /boutiques
   # GET /boutiques.json
   def index
-    @boutiques = Boutique.all
+    @boutiques = Boutique.where("id != ?", -1)
   end
 
   # GET /boutiques/1

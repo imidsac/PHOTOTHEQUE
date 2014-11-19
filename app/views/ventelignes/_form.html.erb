@@ -1,11 +1,16 @@
 <%= simple_form_for [@vente, @venteligne], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.error_notification %>
+
   <% if @vente.type_ve == 'A' %>
   <%= f.association :article , required: true %>
 <% elsif @vente.type_ve == 'C'%>
   <%= f.association :cadre, label_method: :numerobaguete, required: true %>
 <% end %>
-  <%= f.input :qte, input_html: { value: '1'} %>
-  <%= f.input :prix_u, input_html: { placeholder: 'Prix unitaire'} %>
+  <%= f.input :qte %>
+  <%= f.input :qtelivre %>
+  <%= f.input :prix_u, input_html: { :placeholder=> 'Prix unitaire'} %>
+  <%= f.error :base %>
+
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'will_paginate', '~> 3.0.7'
 gem 'kaminari', '~> 0.16.1'
 
+#gem 'activeadmin', '~> 0.6.3'
+
 #ruby '2.1.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'

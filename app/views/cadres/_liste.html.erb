@@ -10,6 +10,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:numerobaguete) %></th>
       <th><%= model_class.human_attribute_name(:info) %></th>
+      <th><%= model_class.human_attribute_name(:stock) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
         <td><%= link_to cadre.id, cadre_path(cadre) %></td>
         <td><%= cadre.numerobaguete %></td>
         <td><%= cadre.info %></td>
+        <td><%= cadre.stock %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       cadre_path(cadre), :class => 'btn btn-info btn-xs' %>

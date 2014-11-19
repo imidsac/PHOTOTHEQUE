@@ -4,8 +4,8 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clientspdf = Client.all
-    @clients = Client.paginate(:page => params[:page], :per_page => 5)
+    @clientspdf = Client.where("id != ?", -1)
+    @clients = Client.where("id != ?", -1).paginate(:page => params[:page], :per_page => 5)
 
     ##pdf
     respond_to do |format|

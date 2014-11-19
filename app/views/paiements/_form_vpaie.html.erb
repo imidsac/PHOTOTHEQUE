@@ -4,9 +4,9 @@
 <% end %>
 <%= f.input :client_id, :as => :hidden %>
 <%= f.input :boutique_id,  :as => :hidden %>
-<%= f.input :datepaiement, :as => :hidden %>
-<%= f.input :motif, prompt: 'motif de payement' %>
-<%= f.input :montant, :value => @vente.somme %>
+<%= f.input :datepaiement, :as => :hidden, input_html: {value: Time.now} %>
+<%= f.input :motif, input_html: {:value => 'ESPECE'} %>
+<%= f.input :montant, input_html: {:value => @vente.somme-@vente.payee} %>
 <div class="form-actions">
   <%= f.button :submit, :class => 'btn btn-success' %>
 

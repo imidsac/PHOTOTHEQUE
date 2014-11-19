@@ -54,6 +54,8 @@
   <dd><%= number_to_currency(@achat.somme, precision: 0,  unit: " F CFA", format: "%n %u") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:payee) %>:</strong></dt>
   <dd><%= number_to_currency(@achat.payee, precision: 0,  unit: " F CFA", format: "%n %u") %></dd>
+  <dt><strong>Reste:</strong></dt>
+  <dd><%= number_to_currency(@achat.somme-@achat.payee, precision: 0,  unit: " F CFA", format: "%n %u") %></dd>
 </dl>
 </div>
 </div>

@@ -22,4 +22,13 @@ class Vente < ActiveRecord::Base
   scope :plibre, -> { where("etat_achat = ? ", 'p') }
   scope :nlibre, -> { where("etat_achat = ? ", 'n') }
 
+
+  def datestring
+    date_vente.to_s(:db)
+  end
+
+  def datestring=(date_vente_str)
+    self.date_vente = Time.parse(date_vente_str)
+  end
+
 end

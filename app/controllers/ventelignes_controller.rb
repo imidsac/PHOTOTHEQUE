@@ -52,6 +52,7 @@ class VentelignesController < ApplicationController
         format.html { redirect_to @venteligne.vente, notice: 'Venteligne was successfully updated.' }
         format.json { render :show, status: :ok, location: @venteligne }
       else
+        
         format.html { render :edit }
         format.json { render json: @venteligne.errors, status: :unprocessable_entity }
       end
@@ -76,6 +77,6 @@ class VentelignesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def venteligne_params
-      params.require(:venteligne).permit(:vente_id, :article_id, :cadre_id, :qte, :qtelivre, :prix_u, :montant, :etat)
+      params.require(:venteligne).permit(:vente_id, :article_id, :cadre_id, :qte, :qtelivre, :prix_u, :montant)
     end
 end

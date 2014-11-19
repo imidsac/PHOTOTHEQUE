@@ -4,7 +4,7 @@ class CadresController < ApplicationController
   # GET /cadres
   # GET /cadres.json
   def index
-    @cadres = Cadre.all
+    @cadres = Cadre.where("id != ?", -1)
   end
 
   # GET /cadres/1

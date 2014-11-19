@@ -17,8 +17,13 @@ class VentesController < ApplicationController
   # GET /ventes/1
   # GET /ventes/1.json
   def show
-    @cli = Client.select("id,nom, prenom").find(@vente.client_id)
-    @bou = Boutique.select("id, name").find(@vente.boutique_id)
+    if @vente.boutique_id != -1 
+      @bou = Boutique.select("id, name").find(@vente.boutique_id)
+    else @vente.boutique_id = -1 
+      @cli = Client.select("id,nom, prenom").find(@vente.client_id)
+      #@reste = Vente.select('id,somme-payee as reste').where("client_id = ? and somme-payee > ? ", @cli.id, 0).order(date_vente: :asc)
+
+    end
     
 
     if @vente.type_ve == 'C'

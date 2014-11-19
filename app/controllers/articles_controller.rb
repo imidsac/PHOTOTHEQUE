@@ -4,14 +4,14 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    #@articles = Article.all
+    @articles = Article.where("id != ?", -1)
     @search = Article.search do
       fulltext params[:search]
       #with(:published_at).less_than(Time.zone.now)
       #facet(:publish_month)
       #with(:publish_month, params[:month]) if params[:month].present?
     end
-    @articles = @search.results
+    @articles = @search.results if params[:search].present?
   end
 
   # GET /articles/1

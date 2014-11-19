@@ -4,7 +4,7 @@ class EmployesController < ApplicationController
   # GET /employes
   # GET /employes.json
   def index
-    @employes = Employe.all
+    @employes = Employe.where("id != ?", -1)
   end
 
   # GET /employes/1

@@ -13,7 +13,7 @@
 <div class="col-sm-2">
 	<%= render 'alignes/form_aligne'  %>
 	<hr />
-	<% if @achat.somme!=0 %>
+	<% if @achat.somme-@achat.payee!=0 %>
 	<%= render 'paiements/form_apaie'  %>
 	<% end %>
 </div>

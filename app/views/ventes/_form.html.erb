@@ -1,5 +1,6 @@
 <%= simple_form_for @vente, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :date_vente %>
+  <%= f.error_notification %>
+  <%= f.input :date_vente, label: "Date" %>
   <%= f.association :boutique %>
   <%= f.association :client, label_method: :nom   %>
   <%= f.input :client_libre %>
@@ -7,6 +8,8 @@
   <!--<%= f.input :etat_vente %>
   <%= f.input :somme %>
   <%= f.input :payee %>-->
+  <%= f.error :base %>
+
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

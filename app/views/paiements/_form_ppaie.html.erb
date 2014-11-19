@@ -5,8 +5,8 @@
 <% end %>
 <%= f.input :client_id, :as => :hidden %>
 <%= f.input :datepaiement, :as => :hidden, input_html: {value: Time.now} %>
-<%= f.input :motif %>
-<%= f.input :montant %>
+<%= f.input :motif, input_html: {:value => 'ESPECE'} %>
+<%= f.input :montant, input_html: {:value => @prestation.somme-@prestation.payee} %>
 <div class="form-actions">
   <%= f.button :submit, :class => 'btn btn-success' %>
 

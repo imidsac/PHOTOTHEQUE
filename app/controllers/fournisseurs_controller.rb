@@ -4,7 +4,7 @@ class FournisseursController < ApplicationController
   # GET /fournisseurs
   # GET /fournisseurs.json
   def index
-    @fournisseurs = Fournisseur.all
+    @fournisseurs = Fournisseur.where("id != ?", -1)
   end
 
   # GET /fournisseurs/1

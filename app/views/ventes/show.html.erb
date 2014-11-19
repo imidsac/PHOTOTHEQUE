@@ -12,7 +12,7 @@
 	<div class="col-sm-2">
 		<%= render 'ventelignes/form_vligne'  %>
 		<hr />
-		<% if @vente.somme!=0 %>
+		<% if @vente.somme-@vente.payee!=0 %>
 		<%= render 'paiements/form_vpaie'  %>
 		<% end %>
 	</div>
