@@ -4,6 +4,14 @@
 <div class="page-header">
   <h3><%=t '.title', :default => model_class.model_name.human.pluralize %></h3>
 </div>
+
+<%= search_form_for @search  do |f| %>
+  <%= f.label :nom_cont, "Nom" %>
+  <%= f.text_field :nom_cont %>
+  <%= f.submit "search" %>
+<% end %>
+
+<%= will_paginate @clients, previous_label: h("<"), next_label: h(">") %>
 <table id="employe" class="table table-striped">
   <thead>
     <tr>

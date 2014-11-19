@@ -7,6 +7,11 @@
   <%= link_to t('.pdf', :default => t("helpers.links.pdf")),
               clients_path(@clients, format: "pdf"), :class => 'btn-xs btn-info'  %>
 </div>
+<%= search_form_for @search  do |f| %>
+  <%= f.label :nom_cont, "Non" %>
+  <%= f.text_field :nom_cont %>
+  <%= f.submit "search" %>
+<% end %>
 <!--
 -->
 <%= will_paginate @clients, previous_label: h("<"), next_label: h(">") %>

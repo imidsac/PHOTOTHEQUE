@@ -4,7 +4,9 @@ class EmployesController < ApplicationController
   # GET /employes
   # GET /employes.json
   def index
-    @employes = Employe.where("id != ?", -1)
+    #@employes = Employe.where("id != ?", -1)
+    @search = Employe.where("id != ?", -1).paginate(:page => params[:page], :per_page => 5).search(params[:q])
+    @employes = @search.result #if params[:search].present?
   end
 
   # GET /employes/1

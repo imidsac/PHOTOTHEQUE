@@ -103,5 +103,5 @@ group :development do
 
 
 gem 'progress_bar'
-#gem 'ransack', '~> 1.5.1'
+gem 'ransack', '~> 1.5.1'
 gem 'jquery-turbolinks'

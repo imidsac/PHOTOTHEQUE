@@ -4,11 +4,10 @@
   <h3><%=t '.title', :default => model_class.model_name.human.pluralize %></h3>
 </div>
 
-<%= form_tag articles_path, :method => :get do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Recherche",:class => 'btn btn-success btn-ms', :name => nil %>
-  </p>
+<%= search_form_for @search  do |f| %>
+  <%= f.label :name_cont, "Name" %>
+  <%= f.text_field :name_cont %>
+  <%= f.submit "search" %>
 <% end %>
 
 
@@ -16,9 +15,9 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:reference) %></th>
-      <th><%= model_class.human_attribute_name(:stock) %></th>
+      <th><%= sort_link @search, :name,  model_class.human_attribute_name(:name) %></th>
+      <th><%= sort_link @search, :reference, model_class.human_attribute_name(:reference) %></th>
+      <th><%= sort_link @search, :stock, model_class.human_attribute_name(:stock) %></th>
       <th><%= model_class.human_attribute_name(:etat) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
