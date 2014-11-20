@@ -4,7 +4,7 @@ class Vente < ActiveRecord::Base
   has_many :ventelignes, dependent: :destroy
   has_many :articles, through: :ventelignes
   has_many :cadres, through: :alignes
-  has_many :paiements#, through: :clients
+  has_many :paiements, dependent: :destroy
   #validates :fournisseur_id, presence: true
   accepts_nested_attributes_for :ventelignes
 

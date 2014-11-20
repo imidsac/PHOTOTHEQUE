@@ -6,6 +6,7 @@ class CreateBalances < ActiveRecord::Migration
       t.decimal :achats
       t.decimal :depenses
       t.decimal :ventes
+      t.decimal :prestations
       t.decimal :tva
 
       t.timestamps
