@@ -5,18 +5,20 @@ class PrestationlignesController < ApplicationController
   # GET /prestationlignes.json
   def index
     @prestationlignes = Prestationligne.all
-    @prestation = Prestation.find(params[:id])
+    @prestation = Prestation.find(params[:prestation_id])
   end
 
   # GET /prestationlignes/1
   # GET /prestationlignes/1.json
   def show
-    @prestation = Prestation.find(params[:id])
+    @prestation = Prestation.find(params[:prestation_id])
   end
 
   # GET /prestationlignes/new
   def new
     @prestationligne = Prestationligne.new
+    @prestation = Prestation.find(params[:prestation_id])
+    
   end
 
   # GET /prestationlignes/1/edit

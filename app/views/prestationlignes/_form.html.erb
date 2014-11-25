@@ -5,9 +5,14 @@
   <%= f.association :formatphoto, label_method: :dimention %>
   <%= f.input :qte %>
   <%= f.input :prix_u %>
+  
+  <%= f.input :qtelivre %>
+ 
+
   <% if @prestation.type_pr == 'S'%>
   <%= f.input :numero_prise %>
-  <%= f.collection_radio_buttons :type_pl, [['sp', 'SP'], ['rv', 'RV']], :first, :last %>
+  <%= f.collection_radio_buttons :type_pl, [['sp', 'SP'], ['rv', 'RV']], :first, :last %><br />
+  <%= f.collection_radio_buttons :color, [['c', 'E-C'], ['n', 'N-B']], :first, :last %>
   <% end%>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-primary' %>

@@ -1,8 +1,10 @@
 class Aligne < ActiveRecord::Base
   belongs_to :achat
-  belongs_to :article, -> {order('articles.name DESC')}
+  belongs_to :article, -> {order(:name)}
   belongs_to :cadre
   validates :achat_id, presence: true
+  validates :cadre_id, presence: true
+  validates :article_id, presence: true
 
   validates_uniqueness_of :achat_id, scope: [:article_id, :cadre_id]
 

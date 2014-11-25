@@ -93,9 +93,6 @@ namespace :dev_data do
         numerobaguete: "B6"
       )
     Cadre.create!(
-        numerobaguete: "B8"
-      )
-    Cadre.create!(
         numerobaguete: "C10"
       )
     Cadre.create!(
@@ -300,6 +297,20 @@ namespace :dev_data do
         font: 0
       )
  puts "===> Sample date have been set in DB  Coffres!"
+
+
+ (1..12).map do |i|
+      Balance.create!(
+        exercice: 2014,
+        mois: "#{i}",
+        achats: 0, 
+        depenses: 0, 
+        ventes: 0, 
+        tva: 0 
+        )
+    end
+ puts "===> Sample date have been set in DB  balance!"
+
 
   end
   

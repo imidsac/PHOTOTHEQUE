@@ -1,10 +1,11 @@
 <%= simple_form_for [@vente, @venteligne], :html => { :class => 'form-horizontal' } do |f| %>
   <% if @vente.type_ve == 'A' %>
-  <!--<%= f.association :article , required: true %>-->
-  <%= f.association :article, collection: Article.where.not(id: Venteligne.where("vente_id = ?", @vente.id)), prompt: "Choose a article" %>
+
+  <%= f.association :article, collection: Article.where.not(id: Venteligne.select('article_id').where("ventelignes.vente_id = ?", @vente.id)), :label_method => lambda { |article| "#{article.name} | #{article.reference}"}, :include_blank => false %>
+
 <% elsif @vente.type_ve == 'C'%>
-  <!--<%= f.association :cadre, label_method: :numerobaguete, required: true %>-->
-  <%= f.association :cadre, collection: Cadre.all(order: 'numerobaguete'), prompt: "Choose a cadre" %>
+  
+  <%= f.association :cadre, collection: Cadre.where.not(id: Venteligne.select('cadre_id').where("ventelignes.vente_id = ?", @vente.id)), :label_method => lambda { |cadre| "#{cadre.numerobaguete}"}, :include_blank => false %>
 <% end %>
   <%= f.input :qte, input_html: { value: '1'} %>
   <%= f.input :prix_u, input_html: { placeholder: 'Prix unitaire'} %>

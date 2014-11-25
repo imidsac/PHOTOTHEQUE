@@ -4,6 +4,7 @@ class CreateCadres < ActiveRecord::Migration
       t.string :numerobaguete, limit: 30
       t.text :info
       t.decimal :stock, default: 0
+      t.decimal :vstock, default: 0
       t.string :etat, limit: 1, default: 'a'
 
       t.timestamps

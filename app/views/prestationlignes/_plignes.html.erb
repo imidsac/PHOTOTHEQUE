@@ -6,19 +6,27 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+
       <% if @prestation.type_pr == 'C'%>
+
       <th><%= model_class.human_attribute_name(:cadre_id) %></th>
+
       <% end%>
+      
       <th><%= model_class.human_attribute_name(:format) %></th>
       <th><%= model_class.human_attribute_name(:qte) %></th>
       <th><%= model_class.human_attribute_name(:qtelivre) %></th>
       <th><%= model_class.human_attribute_name(:P_u) %></th>
       <th><%= model_class.human_attribute_name(:montant) %></th>
+
       <% if @prestation.type_pr == 'S'%>
+
       <th><%= model_class.human_attribute_name(:no_prise) %></th>
       <th><%= model_class.human_attribute_name(:type) %></th>
       <th><%= model_class.human_attribute_name(:colore) %></th>
-      <% end%>
+
+      <% end %>
+      
       <th><%= model_class.human_attribute_name(:etat) %></th>
       
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -36,19 +44,25 @@
       <td><%= prestationligne.qtelivre %></td>
       <td><%= prestationligne.prix_u %></td>
       <td><%= prestationligne.montant %></td>
-      <% if @prestation.type_pr == 'S'%>
-      <td><%= prestationligne.numero_prise %></td>
-      <% if prestationligne.type_pl == 'sp' %>
-      <td><%= 'Sur place' %></td>
-      <% elsif prestationligne.type_pl == 'rv' %>
-      <td><%= 'Rendez-vous' %></td>
-      <% end %>
 
-      <% if prestationligne.color == 'c' %>
-      <td><%= 'En couleur' %></td>
-      <% elsif prestationligne.color == 'n' %>
-      <td><%= 'Noir & Blanc' %></td>
-      <% end %>
+      <% if @prestation.type_pr == 'S'%>
+
+        <td><%= prestationligne.numero_prise %></td>
+        
+
+        <% if prestationligne.type_pl == 'sp' %>
+          <td><%= 'Sur place' %></td>
+        <% elsif prestationligne.type_pl == 'rv' %>
+          <td><%= 'Rendez-vous' %></td>
+        <% end %>
+
+        <% if prestationligne.color == 'c' %>
+          <td><%= 'En couleur' %></td>
+        <% elsif prestationligne.color == 'n' %>
+          <td><%= 'Noir & Blanc' %></td>
+
+        <% end %>
+
       <% end %>
       
       <% if prestationligne.etat == 'n' %>

@@ -26,7 +26,12 @@
         <td><%= vente.date_vente.strftime("%d %b %Y à %H:%M") %></td>
         
         <td><%= vente.name %></td>
-        <td><%= vente.nom %></td>
+        <% if vente.client_id != -1 %>
+          <td><%= link_to vente.nom+' '+vente.prenom, client_path(vente.client_id), :target => '_blank'  %></td>
+        <% else %>
+          <td><%= vente.nom  %></td>
+        <% end %>
+        
         <td><%= vente.client_libre %></td>
         <% if vente.type_ve == 'C' %>
         <td><%= 'Cadre' %></td>
@@ -37,7 +42,7 @@
         <td><%= 'N-Livret' %></td>
         <% elsif vente.etat_vente == 'p' %>
         <td><%= 'P-Livret' %></td>
-        <% elsif vente.etat_vente == 'p' %>
+        <% elsif vente.etat_vente == 't' %>
         <td><%= 'T-Livret' %></td>
         <% end %>
         <td><%= number_to_currency(vente.somme, precision: 0,  unit: "", format: "%n %u") %></td>

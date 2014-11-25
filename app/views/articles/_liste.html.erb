@@ -4,20 +4,18 @@
   <h3><%=t '.title', :default => model_class.model_name.human.pluralize %></h3>
 </div>
 
-<%= search_form_for @search  do |f| %>
-  <%= f.label :name_cont, "Name" %>
-  <%= f.text_field :name_cont %>
-  <%= f.submit "search" %>
-<% end %>
+
+<%= render :partial => 'form_search' %>
 
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= sort_link @search, :name,  model_class.human_attribute_name(:name) %></th>
-      <th><%= sort_link @search, :reference, model_class.human_attribute_name(:reference) %></th>
-      <th><%= sort_link @search, :stock, model_class.human_attribute_name(:stock) %></th>
+      <th><%= sort_link @q, :name,  model_class.human_attribute_name(:name) %></th>
+      <th><%= sort_link @q, :reference, model_class.human_attribute_name(:reference) %></th>
+      <th><%= sort_link @q, :stock, model_class.human_attribute_name(:stock) %></th>
+      <th><%= sort_link @q, :vstock, model_class.human_attribute_name(:vstock) %></th>
       <th><%= model_class.human_attribute_name(:etat) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -29,6 +27,7 @@
         <td><%= article.name %></td>
         <td><%= article.reference %></td>
         <td><%= article.stock %></td>
+        <td><%= article.vstock %></td>
         <% if article.etat == 'a' %>
         <td><%= 'Actif' %></td>
         <% elsif article.etat == 'i' %>

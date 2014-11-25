@@ -24,7 +24,7 @@
       <tr>
         <td><%= link_to aligne.id, achat_aligne_path(@achat, aligne) %></td>
         <% if @achat.type_ac == 'A'%>
-        <td><%= aligne.name %></td>
+        <td><%= aligne.name+' '+aligne.reference %></td>
         <% elsif @achat.type_ac == 'C'%>
         <td><%= aligne.numerobaguete %></td>
         <% end %>

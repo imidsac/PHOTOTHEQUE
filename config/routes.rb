@@ -47,7 +47,13 @@ Rails.application.routes.draw do
 
   resources :stocks
 
-  resources :articles
+  resources :articles do
+=begin
+    collection do
+    match 'search' => 'article#search', via: [:get, :post], as: :search
+  end
+=end
+  end
   resources :cadres
   resources :formatphotos
 

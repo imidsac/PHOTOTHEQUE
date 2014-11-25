@@ -47,7 +47,7 @@ class VentelignesController < ApplicationController
     @vente = Vente.find(params[:vente_id])
       #@venteligne = Venteligne.find(params[:id])
 
-    respond_to do |format|
+    respond_to do |format|  
       if @venteligne.update(venteligne_params)
         format.html { redirect_to @venteligne.vente, notice: 'Venteligne was successfully updated.' }
         format.json { render :show, status: :ok, location: @venteligne }

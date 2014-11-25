@@ -35,7 +35,7 @@ class AlignesController < ApplicationController
         format.html { redirect_to @aligne.achat}
         format.json { render :show, status: :created, location: @aligne }
       else
-        format.html { render :new }
+        format.html { redirect_to @aligne.achat }
         format.json { render json: @aligne.errors, status: :unprocessable_entity }
       end
     end

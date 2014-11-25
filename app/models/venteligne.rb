@@ -1,8 +1,10 @@
 class Venteligne < ActiveRecord::Base
   belongs_to :vente
   belongs_to :cadre
-  belongs_to :article#, -> where.not(id: Venteligne.where("vente_id = #{id}"))
-  validates :vente_id, presence: true
+  belongs_to :article
+  validates :vente_id, presence: true#, scope: [:article_id, :cadre_id]
+
+  validates_uniqueness_of :vente_id, scope: [:article_id, :cadre_id]
 
   before_save :montant 
   after_save  :total

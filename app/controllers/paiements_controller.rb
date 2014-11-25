@@ -74,7 +74,10 @@ def create
       end 
 =end
       #end
-            @paiement = @vente.paiements.new(paiement_params)
+    
+        @paiement = @vente.paiements.new(paiement_params)
+    
+  
 
       respond_to do |format|
         if @paiement.save          

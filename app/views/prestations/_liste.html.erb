@@ -42,7 +42,7 @@
         <td><%= 'N-Livret' %></td>
         <% elsif prestation.etat_prestation == 'p' %>
         <td><%= 'P-Livret' %></td>
-        <% elsif prestation.etat_prestation == 'p' %>
+        <% elsif prestation.etat_prestation == 't' %>
         <td><%= 'T-Livret' %></td>
         <% end %>
         <td><%= number_to_currency(prestation.somme, precision: 0,  unit: "", format: "%n %u") %></td>

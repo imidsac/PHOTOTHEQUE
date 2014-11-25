@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101115024) do
+ActiveRecord::Schema.define(version: 20141119234748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20141101115024) do
     t.decimal  "somme",                       default: 0.0
     t.decimal  "payee",                       default: 0.0
     t.string   "etat_achat",        limit: 1, default: "n"
+    t.string   "num_ac"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,7 +52,20 @@ ActiveRecord::Schema.define(version: 20141101115024) do
     t.string   "name"
     t.string   "reference"
     t.decimal  "stock",                default: 0.0
+    t.decimal  "vstock",               default: 0.0
     t.string   "etat",       limit: 1, default: "a"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "balances", force: true do |t|
+    t.integer  "exercice"
+    t.integer  "mois"
+    t.decimal  "achats",      default: 0.0
+    t.decimal  "depenses",    default: 0.0
+    t.decimal  "ventes",      default: 0.0
+    t.decimal  "prestations", default: 0.0
+    t.decimal  "tva",         default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -76,6 +90,7 @@ ActiveRecord::Schema.define(version: 20141101115024) do
     t.string   "numerobaguete", limit: 30
     t.text     "info"
     t.decimal  "stock",                    default: 0.0
+    t.decimal  "vstock",                   default: 0.0
     t.string   "etat",          limit: 1,  default: "a"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -209,6 +224,7 @@ ActiveRecord::Schema.define(version: 20141101115024) do
     t.decimal  "somme",                     default: 0.0
     t.decimal  "payee",                     default: 0.0
     t.string   "type_pr",         limit: 1, default: "s"
+    t.string   "num_pr"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -291,6 +307,7 @@ ActiveRecord::Schema.define(version: 20141101115024) do
     t.decimal  "somme",                  default: 0.0
     t.decimal  "payee",                  default: 0.0
     t.string   "type_ve",      limit: 1, default: "A"
+    t.string   "num_ve"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

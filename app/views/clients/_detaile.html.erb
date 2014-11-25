@@ -1,7 +1,14 @@
 <%- model_class = Client -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+ <div class="page-header">
+ <!--<h1><%=t '.title', :default => model_class.model_name.human %></h1>-->
+ <h1><%= @client.nom + '   ' + @client.prenom %></h1>  <h1><%=  %></h1>
 </div>
+
+<ul class="nav nav-pills">
+  <li class="active"><a href="#">Profile <span class="badge"></span></a></li>
+  <li><a href="#">Factures <span class="badge">42</span></a></li>
+  <li><a href="#">Paiements <span class="badge">3</span></a></li>
+</ul>
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:nom) %>:</strong></dt>

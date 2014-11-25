@@ -1,8 +1,7 @@
         require 'prestation_pdf.rb'
-        class PrestationsController < ApplicationController
-          before_action :set_prestation, only: [:show, :edit, :update, :destroy]
-        #require 'test.rb'
-
+class PrestationsController < ApplicationController
+  before_action :set_prestation, only: [:show, :edit, :update, :destroy]
+        
   # GET /prestations
   # GET /prestations.json
   def index

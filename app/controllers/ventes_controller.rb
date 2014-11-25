@@ -29,7 +29,7 @@ class VentesController < ApplicationController
     if @vente.type_ve == 'C'
       @ventelignes = @vente.ventelignes.select("cadre_id,numerobaguete,qte,qtelivre,prix_u,montant,ventelignes.id, ventelignes.etat").joins(:cadre)
     else
-      @ventelignes = @vente.ventelignes.select("article_id,name,qte,qtelivre,prix_u,montant, ventelignes.id, ventelignes.etat").joins(:article)
+      @ventelignes = @vente.ventelignes.select("article_id,name,reference,qte,qtelivre,prix_u,montant, ventelignes.id, ventelignes.etat").joins(:article)
     end
     #@ventelignes = @vente.ventelignes
     @venteligne = Venteligne.new(:vente => @vente)

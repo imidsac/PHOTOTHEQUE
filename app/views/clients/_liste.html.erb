@@ -14,7 +14,8 @@
 <% end %>
 <!--
 -->
-<%= will_paginate @clients, previous_label: h("<"), next_label: h(">") %>
+<div></div>
+<%= will_paginate @clients, :class => 'pagination', previous_label: h("<"), next_label: h(">") %>
 <table class="table table-striped">
   <thead>
     <tr>

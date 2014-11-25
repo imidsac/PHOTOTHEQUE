@@ -37,7 +37,7 @@
     <dd><%= @prestation.date_prestation.strftime("%d %b %Y à %H:%M") %></dd>
     <% if @prestation.client_id != -1 %>
     <dt><strong><%= model_class.human_attribute_name(:client_id) %>:</strong></dt>
-    <dd><%= @cli.nom %></dd>
+    <dd><%= link_to @cli.nom, client_path(@cli.id) %></dd>
     <% else %>
     <dt><strong><%= model_class.human_attribute_name(:client_libre) %>:</strong></dt>
     <dd><%= @prestation.client_libre %></dd>

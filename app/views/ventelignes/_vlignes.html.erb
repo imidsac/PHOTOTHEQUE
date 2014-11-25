@@ -25,7 +25,7 @@
       <tr>
         <td><%= link_to venteligne.id, vente_venteligne_path(@vente, venteligne) %></td>
         <% if @vente.type_ve == 'A'%>
-        <td><%= venteligne.name %></td>
+        <td><%= venteligne.name+' '+venteligne.reference %></td>
         <% elsif @vente.type_ve == 'C'%>
         <td><%= venteligne.numerobaguete %></td>
         <% end %>
