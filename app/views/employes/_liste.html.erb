@@ -31,9 +31,10 @@
     </tr>
   </thead>
   <tbody>
-    <% @employes.each do |employe| %>
+    <% @i=1 
+    @employes.each do |employe| %>
       <tr>
-        <td><%= link_to employe.id, employe_path(employe) %></td>
+        <td><%= @i %></td>
         <td><%= employe.nom %></td>
         <td><%= employe.prenom %></td>
         <!--<td><%= employe.sexe %></td>
@@ -57,7 +58,8 @@
                       :class => 'btn btn-danger btn-xs' %>
         </td>
       </tr>
-    <% end %>
+    <% @i+=1
+    end %>
   </tbody>
 </table>
 

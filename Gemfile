@@ -50,8 +50,8 @@ gem 'less-rails', '~> 2.5.0'
 gem 'twitter-bootstrap-rails'
 gem 'therubyracer', '~> 0.12.1', :require => 'v8'
 
-#gem 'jquery-datatables-rails', '~> 3.0.0'
-gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+gem 'jquery-datatables-rails', '~> 3.0.0'
+#gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 
 gem 'twitter-bootswatch-rails', '~> 3.2'
 #gem 'twitter-bootswatch-rails-helpers', '~> 3.1'
@@ -104,11 +104,11 @@ group :development do
 
 
 gem 'progress_bar'
-#gem 'ransack', '~> 1.5.1', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
-gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
+gem 'ransack', '~> 1.5.1'
 gem 'jquery-turbolinks'
 
 gem "binding_of_caller"
 
 #gem 'client_side_validations', '~> 3.2.6'
 #gem 'client_side_validations-simple_form', '~> 2.1.0'
+gem 'barby', '~> 0.6.2'

@@ -3,7 +3,8 @@ class CreateBanques < ActiveRecord::Migration
     create_table :banques do |t|
       t.string :nom
       t.string :compte
-      t.decimal :solde
+      t.decimal :solde, default: 0
+      t.decimal :font, default: 0
 
       t.timestamps
     end

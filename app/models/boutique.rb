@@ -1,5 +1,5 @@
 class Boutique < ActiveRecord::Base
-	has_many :ventes
-	has_many :paiements
+	has_many :ventes, dependent: :destroy
+	has_many :paiements, dependent: :destroy
 	
 end

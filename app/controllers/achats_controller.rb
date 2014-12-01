@@ -30,7 +30,7 @@ class AchatsController < ApplicationController
   # GET /achats/1
   # GET /achats/1.json
   def show
-      @fourni = Fournisseur.select("id, name_company, nom, prenom").find(@achat.fournisseur_id)
+      @fourni = Fournisseur.select("fournisseurs.id, name_company, nom, prenom").find(@achat.fournisseur_id)
     
 
     if @achat.type_ac == 'C'

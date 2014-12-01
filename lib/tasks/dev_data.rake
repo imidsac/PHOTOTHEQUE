@@ -279,6 +279,11 @@ namespace :dev_data do
  puts "===> Sample date have been set in DB  Employées!"
 
   Banque.create!(
+        id: -1,
+        nom: "CAISSE",
+        compte: "CAISSE"
+      )
+  Banque.create!(
         nom: "BDM",
         compte: "xx xx xx xx xx - xx"
       )

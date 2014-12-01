@@ -1,6 +1,6 @@
 class Aligne < ActiveRecord::Base
   belongs_to :achat
-  belongs_to :article, -> {order(:name)}
+  belongs_to :article
   belongs_to :cadre
   validates :achat_id, presence: true
   validates :cadre_id, presence: true
