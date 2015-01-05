@@ -22,3 +22,6 @@ Gemfile.lock
 /public/uploads/**/*
 
 #/app/assets/images/**/*
+/.idea/
+/public/assets/
+/public/javascripts/
