@@ -7,7 +7,9 @@
     <%= link_to "CLIENTS", clients_path, :class=>"list-group-item"  %>
     <%= link_to "EMPLOYEE", employes_path, :class=>"list-group-item"  %>
     <%= link_to "BANQUE", banques_path, :class=>"list-group-item"  %>
-    <%= link_to "CAISSE", coffres_path, :class=>"list-group-item"  %>
+    <%= link_to "T-BANQUE", tbanques_path, :class=>"list-group-item"  %>
+    <%= link_to "CAISSE", banques_path(:caisse => true), :class=>"list-group-item"  %>
+    <%= link_to "BALANCE", balances_path, :class=>"list-group-item"  %>
 </div>
 
         

@@ -36,9 +36,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :banques do
+  resources :banques 
   resources :tbanques
-  end
 
   resources :employes
 
