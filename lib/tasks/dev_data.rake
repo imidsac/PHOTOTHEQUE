@@ -6,6 +6,48 @@ namespace :dev_data do
     
     Rake::Task['db:reset'].invoke
 
+    User.create!(
+        id: -1000,
+        username: "root",
+        email: "imidsac@hotmail.fr",
+        nom: "SACKO",
+        prenom: "IDRISS",
+        role: "Root",
+        password: "walilahilhamdou"
+    )
+
+    User.create!(
+        id: -1,
+        username: "admin",
+        email: "admin@exemple.ex",
+        nom: "NOM-ADMIN",
+        prenom: "PRENOM-ADMIN",
+        role: "Admin",
+        password: "admin"
+    )
+
+
+    User.create!(
+        username: "manager",
+        email: "manager@exemple.ex",
+        nom: "NOM-manager",
+        prenom: "PRENOM-manager",
+        role: "Manager",
+        password: "manager"
+    )
+
+    User.create!(
+        username: "comptable",
+        email: "comptable@exemple.ex",
+        nom: "NOM-comptable",
+        prenom: "PRENOM-comptable",
+        role: "Comptable",
+        password: "comptable"
+    )
+
+    puts "===> Sample date have been set in DB  Users!"
+
+
     Formatphoto.create!(
         dimention: "10*15"
       )
