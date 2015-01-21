@@ -357,6 +357,7 @@ namespace :dev_data do
           achats: 0,
           depenses: 0,
           ventes: 0,
+          prestations: 0,
           tva_net: 0
       )
     end

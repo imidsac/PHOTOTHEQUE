@@ -1,16 +1,13 @@
-<%= simple_form_for(@balance) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :exercice %>
-    <%= f.input :mois %>
-    <%= f.input :achats %>
-    <%= f.input :depenses %>
-    <%= f.input :ventes %>
-    <%= f.input :tva %>
-  </div>
-
+<%= simple_form_for @balance, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :exercice %>
+  <%= f.input :mois %>
+  <%= f.input :achats %>
+  <%= f.input :depenses %>
+  <%= f.input :ventes %>
+  <%= f.input :tva %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                balances_path, :class => 'btn' %>
   </div>
 <% end %>

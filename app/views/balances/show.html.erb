@@ -1,34 +1,31 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Balance -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <strong>Exercice:</strong>
-  <%= @balance.exercice %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:exercice) %>:</strong></dt>
+  <dd><%= @balance.exercice %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:mois) %>:</strong></dt>
+  <dd><%= @balance.mois %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:achats) %>:</strong></dt>
+  <dd><%= @balance.achats %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:depenses) %>:</strong></dt>
+  <dd><%= @balance.depenses %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:ventes) %>:</strong></dt>
+  <dd><%= @balance.ventes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:tva) %>:</strong></dt>
+  <dd><%= @balance.tva %></dd>
+</dl>
 
-<p>
-  <strong>Mois:</strong>
-  <%= @balance.mois %>
-</p>
-
-<p>
-  <strong>Achats:</strong>
-  <%= @balance.achats %>
-</p>
-
-<p>
-  <strong>Depenses:</strong>
-  <%= @balance.depenses %>
-</p>
-
-<p>
-  <strong>Ventes:</strong>
-  <%= @balance.ventes %>
-</p>
-
-<p>
-  <strong>Tva:</strong>
-  <%= @balance.tva %>
-</p>
-
-<%= link_to 'Edit', edit_balance_path(@balance) %> |
-<%= link_to 'Back', balances_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              balances_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_balance_path(@balance), :class => 'btn btn-primary' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              balance_path(@balance),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

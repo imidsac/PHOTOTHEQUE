@@ -62,10 +62,13 @@ ActiveRecord::Schema.define(version: 20141119234748) do
     t.integer  "exercice"
     t.integer  "mois"
     t.decimal  "achats",      default: 0.0
+    t.decimal  "atva",        default: 0.0
     t.decimal  "depenses",    default: 0.0
+    t.decimal  "dtva",        default: 0.0
     t.decimal  "ventes",      default: 0.0
+    t.decimal  "vtva",        default: 0.0
     t.decimal  "prestations", default: 0.0
-    t.decimal  "tva",         default: 0.0
+    t.decimal  "tva_net",     default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -73,7 +76,8 @@ ActiveRecord::Schema.define(version: 20141119234748) do
   create_table "banques", force: true do |t|
     t.string   "nom"
     t.string   "compte"
-    t.decimal  "solde"
+    t.decimal  "solde",      default: 0.0
+    t.decimal  "font",       default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -166,22 +170,28 @@ ActiveRecord::Schema.define(version: 20141119234748) do
   end
 
   create_table "paiements", force: true do |t|
+    t.integer  "banque_id",                 default: -1
+    t.string   "type_paiement",  limit: 10, default: "p"
     t.integer  "boutique_id"
     t.integer  "client_id"
     t.integer  "vente_id"
     t.integer  "prestation_id"
-    t.integer  "fournisseur_id"
     t.integer  "achat_id"
+    t.integer  "fournisseur_id"
+    t.integer  "employe_id"
     t.datetime "datepaiement"
     t.string   "motif"
-    t.decimal  "montant",        default: 0.0
+    t.decimal  "montant",                   default: 0.0
+    t.string   "etat"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "paiements", ["achat_id"], name: "index_paiements_on_achat_id", using: :btree
+  add_index "paiements", ["banque_id"], name: "index_paiements_on_banque_id", using: :btree
   add_index "paiements", ["boutique_id"], name: "index_paiements_on_boutique_id", using: :btree
   add_index "paiements", ["client_id"], name: "index_paiements_on_client_id", using: :btree
+  add_index "paiements", ["employe_id"], name: "index_paiements_on_employe_id", using: :btree
   add_index "paiements", ["fournisseur_id"], name: "index_paiements_on_fournisseur_id", using: :btree
   add_index "paiements", ["prestation_id"], name: "index_paiements_on_prestation_id", using: :btree
   add_index "paiements", ["vente_id"], name: "index_paiements_on_vente_id", using: :btree
@@ -263,16 +273,19 @@ ActiveRecord::Schema.define(version: 20141119234748) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "nom",                                        null: false
+    t.string   "prenom",                                     null: false
+    t.string   "email",                  default: "",        null: false
+    t.string   "encrypted_password",     default: "",        null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,         null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "role",                   default: "Inviter"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
