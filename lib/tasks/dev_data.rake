@@ -320,25 +320,6 @@ namespace :dev_data do
     end
  puts "===> Sample date have been set in DB  Employées!"
 
-  Banque.create!(
-        id: -1,
-        nom: "CAISSE",
-        compte: "CAISSE"
-      )
-  Banque.create!(
-        nom: "BDM",
-        compte: "xx xx xx xx xx - xx"
-      )
-  Banque.create!(
-        nom: "BHM",
-        compte: "xx xx xx xx xx - xx"
-      )
-  Banque.create!(
-        nom: "BNDA",
-        compte: "xx xx xx xx xx - xx"
-      )
- puts "===> Sample date have been set in DB  Banques!"
-
  Coffre.create!(
         paiement: 0,
         font: 0
@@ -346,17 +327,40 @@ namespace :dev_data do
  puts "===> Sample date have been set in DB  Coffres!"
 
 
- (1..12).map do |i|
+    Banque.create!(
+        id: -1,
+        nom: "CAISSE",
+        compte: "LOCAL"
+    )
+    Banque.create!(
+        nom: "AUTRE",
+        compte: "AUTRE"
+    )
+    Banque.create!(
+        nom: "BDM",
+        compte: "xx xx xx xx xx - xx"
+    )
+    Banque.create!(
+        nom: "BHM",
+        compte: "xx xx xx xx xx - xx"
+    )
+    Banque.create!(
+        nom: "BNDA",
+        compte: "xx xx xx xx xx - xx"
+    )
+    puts "===> Sample date have been set in DB  Banques!"
+
+    (1..12).map do |i|
       Balance.create!(
-        exercice: 2014,
-        mois: "#{i}",
-        achats: 0, 
-        depenses: 0, 
-        ventes: 0, 
-        tva: 0 
-        )
+          exercice: "#{Time.now.strftime("%Y")}",
+          mois: "#{i}",
+          achats: 0,
+          depenses: 0,
+          ventes: 0,
+          tva_net: 0
+      )
     end
- puts "===> Sample date have been set in DB  balance!"
+    puts "===> Sample date have been set in DB  balance!"
 
 
   end
