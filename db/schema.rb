@@ -17,15 +17,17 @@ ActiveRecord::Schema.define(version: 20150121051412) do
   enable_extension "plpgsql"
 
   create_table "achats", force: true do |t|
-    t.integer  "fournisseur_id",              default: -1
+    t.integer  "fournisseur_id",               default: -1
     t.string   "fournisseur_libre"
     t.datetime "date_achat"
-    t.string   "type_ac",           limit: 1, default: "A"
-    t.decimal  "somme",                       default: 0.0
-    t.decimal  "payee",                       default: 0.0
-    t.string   "etat_achat",        limit: 1, default: "n"
-    t.string   "num_ac"
-    t.integer  "monetaire_id",                default: -1
+    t.string   "type_ac",           limit: 1,  default: "A"
+    t.decimal  "somme",                        default: 0.0
+    t.decimal  "payee",                        default: 0.0
+    t.decimal  "tva",                          default: 0.0
+    t.string   "etat_achat",        limit: 1,  default: "n"
+    t.string   "num_ac",            limit: 30
+    t.string   "valide",            limit: 1,  default: "n"
+    t.integer  "monetaire_id",                 default: -1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -57,6 +59,9 @@ ActiveRecord::Schema.define(version: 20150121051412) do
     t.string   "reference"
     t.decimal  "stock",                default: 0.0
     t.decimal  "vstock",               default: 0.0
+    t.decimal  "pachat",               default: 0.0
+    t.decimal  "pdetail",              default: 0.0
+    t.decimal  "pgros",                default: 0.0
     t.string   "etat",       limit: 1, default: "a"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -99,6 +104,9 @@ ActiveRecord::Schema.define(version: 20150121051412) do
     t.text     "info"
     t.decimal  "stock",                    default: 0.0
     t.decimal  "vstock",                   default: 0.0
+    t.decimal  "pachat",                   default: 0.0
+    t.decimal  "pdetail",                  default: 0.0
+    t.decimal  "pgros",                    default: 0.0
     t.string   "etat",          limit: 1,  default: "a"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -117,6 +125,7 @@ ActiveRecord::Schema.define(version: 20150121051412) do
     t.string   "phone"
     t.text     "address"
     t.string   "email"
+    t.string   "type_cl",    limit: 1, default: "o"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -183,7 +192,7 @@ ActiveRecord::Schema.define(version: 20150121051412) do
 
   create_table "paiements", force: true do |t|
     t.integer  "banque_id",                 default: -1
-    t.string   "type_paiement",  limit: 10, default: "p"
+    t.string   "type_paiement",  limit: 10, default: "pv"
     t.integer  "boutique_id"
     t.integer  "client_id"
     t.integer  "vente_id"
@@ -238,15 +247,17 @@ ActiveRecord::Schema.define(version: 20150121051412) do
   add_index "prestationlignes", ["prestation_id"], name: "index_prestationlignes_on_prestation_id", using: :btree
 
   create_table "prestations", force: true do |t|
-    t.integer  "client_id",                 default: -1
-    t.string   "client_libre",              default: "No"
-    t.integer  "employe_id",                default: -1
+    t.integer  "client_id",                  default: -1
+    t.string   "client_libre",               default: "No"
+    t.integer  "employe_id",                 default: -1
     t.datetime "date_prestation"
-    t.string   "etat_prestation", limit: 1, default: "n"
-    t.decimal  "somme",                     default: 0.0
-    t.decimal  "payee",                     default: 0.0
-    t.string   "type_pr",         limit: 1, default: "s"
-    t.string   "num_pr"
+    t.string   "etat_prestation", limit: 1,  default: "n"
+    t.decimal  "somme",                      default: 0.0
+    t.decimal  "payee",                      default: 0.0
+    t.decimal  "tva",                        default: 0.0
+    t.string   "type_pr",         limit: 1,  default: "s"
+    t.string   "num_pr",          limit: 30
+    t.string   "valide",          limit: 1,  default: "n"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -324,15 +335,17 @@ ActiveRecord::Schema.define(version: 20150121051412) do
   add_index "ventelignes", ["vente_id"], name: "index_ventelignes_on_vente_id", using: :btree
 
   create_table "ventes", force: true do |t|
-    t.integer  "boutique_id",            default: -1
-    t.integer  "client_id",              default: -1
-    t.string   "client_libre",           default: "No"
+    t.integer  "boutique_id",             default: -1
+    t.integer  "client_id",               default: -1
+    t.string   "client_libre",            default: "No"
     t.datetime "date_vente"
-    t.string   "etat_vente",   limit: 1, default: "n"
-    t.decimal  "somme",                  default: 0.0
-    t.decimal  "payee",                  default: 0.0
-    t.string   "type_ve",      limit: 1, default: "A"
-    t.string   "num_ve"
+    t.string   "etat_vente",   limit: 1,  default: "n"
+    t.decimal  "somme",                   default: 0.0
+    t.decimal  "payee",                   default: 0.0
+    t.decimal  "tva",                     default: 0.0
+    t.string   "type_ve",      limit: 1,  default: "A"
+    t.string   "num_ve",       limit: 30
+    t.string   "valide",       limit: 1,  default: "n"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
