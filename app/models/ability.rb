@@ -2,6 +2,22 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :index, :show, :to => :read
+    #alias_action :new, :to => :create
+    #alias_action :edit, :to => :update
+
+    user ||= User.new # guest user (not logged in)
+    if user.role == 'Root'
+      can :manage, :all
+    elsif user.role == 'Admin'
+      can :manage, :all
+    elsif user.role == 'Manager'
+      can [:read, :index, :create, :update, :destroy], [Achat, Aligne, Vente, Venteligne, Produit, Categoriepro, Depense, Categoriedep, Fournisseur, Client, Balance, Tbanque, Banque, Paiement, Monetaire]
+    elsif user.role == 'Comptable'
+      can [:read, :index, :create, :update, :delete], [Achat, Aligne, Vente, Venteligne,  Depense, Categoriedep, Fournisseur, Client, Balance, Tbanque, Banque, Paiement, Monetaire]
+    elsif user.role == 'Inviter'
+      can [:index], [Achat, Aligne, Vente, Venteligne, Depense, Categoriedep, Fournisseur, Client, Balance, Tbanque, Banque, Paiement, Monetaire]
+    end
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
@@ -11,12 +27,12 @@ class Ability
     #     can :read, :all
     #   end
     #
-    # The first argument to `can` is the action you are giving the user 
+    # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
     # here are :read, :create, :update and :destroy.
     #
-    # The second argument is the resource the user can perform the action on. 
+    # The second argument is the resource the user can perform the action on.
     # If you pass :all it will apply to every resource. Otherwise pass a Ruby
     # class of the resource.
     #
@@ -27,6 +43,6 @@ class Ability
     #   can :update, Article, :published => true
     #
     # See the wiki for details:
-    # https://github.com/ryanb/cancan/wiki/Defining-Abilities
+    # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end
 end

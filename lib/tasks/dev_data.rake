@@ -363,6 +363,28 @@ namespace :dev_data do
     end
     puts "===> Sample date have been set in DB  balance!"
 
+    Monetaire.create!(
+        id: -1,
+        money: "XOF - Franc CFA",
+        code_money: "CFA",
+        valeur: 1
+    )
+    Monetaire.create!(
+        money: "EUR - Euro",
+        code_money: "EURO",
+        valeur: 655.9570
+    )
+    Monetaire.create!(
+        money: "USD - Dollar des États-Unis",
+        code_money: "USD",
+        valeur: 564.4144
+    )
+    Monetaire.create!(
+        money: "AED - Dirham des Émirats arabes unis",
+        code_money: "AED",
+        valeur: 153.6658
+    )
+    puts "===> Sample date have been set in DB  Money!"
 
   end
   

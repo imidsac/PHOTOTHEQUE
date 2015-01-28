@@ -9,6 +9,9 @@ class CreateAchats < ActiveRecord::Migration
       t.decimal :payee, default: 0
       t.string :etat_achat, limit: 1, default: 'n'
       t.string :num_ac
+      t.string :valide, limit: 1, default: 'n'
+      t.references :monetaire, index: true, default: -1
+
 
       t.timestamps
     end

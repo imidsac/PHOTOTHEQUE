@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :monetaires
+
   resources :balances
 
   concern :sociable do

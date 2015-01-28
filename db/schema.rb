@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119234748) do
+ActiveRecord::Schema.define(version: 20150121051412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,13 @@ ActiveRecord::Schema.define(version: 20141119234748) do
     t.decimal  "payee",                       default: 0.0
     t.string   "etat_achat",        limit: 1, default: "n"
     t.string   "num_ac"
+    t.integer  "monetaire_id",                default: -1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "achats", ["fournisseur_id"], name: "index_achats_on_fournisseur_id", using: :btree
+  add_index "achats", ["monetaire_id"], name: "index_achats_on_monetaire_id", using: :btree
 
   create_table "alignes", force: true do |t|
     t.integer  "achat_id"
@@ -38,7 +40,9 @@ ActiveRecord::Schema.define(version: 20141119234748) do
     t.decimal  "qte",                  default: 0.0
     t.decimal  "qtelivre",             default: 0.0
     t.decimal  "prix_u",               default: 0.0
+    t.decimal  "prix_u1",              default: 0.0
     t.decimal  "montant",              default: 0.0
+    t.decimal  "montant1",             default: 0.0
     t.string   "etat",       limit: 1, default: "n"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -165,6 +169,14 @@ ActiveRecord::Schema.define(version: 20141119234748) do
     t.string   "phone"
     t.text     "address"
     t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "monetaires", force: true do |t|
+    t.string   "money"
+    t.string   "code_money"
+    t.decimal  "valeur"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

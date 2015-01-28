@@ -1,5 +1,6 @@
 class Achat < ActiveRecord::Base
   belongs_to :fournisseur
+  belongs_to :monetaire
   has_many :alignes, dependent: :destroy
   has_many :articles, through: :alignes
   has_many :cadres, through: :alignes

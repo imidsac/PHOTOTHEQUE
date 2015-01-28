@@ -1,0 +1,38 @@
+<%- model_class = Monetaire -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:money) %></th>
+    <th><%= model_class.human_attribute_name(:code_money) %></th>
+    <th><%= model_class.human_attribute_name(:valeur) %></th>
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @monetaires.each do |monetaire| %>
+      <tr>
+        <td><%= link_to monetaire.id, monetaire_path(monetaire) %></td>
+        <td><%= monetaire.money %></td>
+        <td><%= monetaire.code_money %></td>
+        <td><%= monetaire.valeur %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_monetaire_path(monetaire), :class => 'btn btn-primary btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      monetaire_path(monetaire),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-danger btn-xs' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_monetaire_path,
+            :class => 'btn btn-primary' %>
