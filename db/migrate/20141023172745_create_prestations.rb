@@ -8,8 +8,9 @@ class CreatePrestations < ActiveRecord::Migration
       t.string :etat_prestation, limit: 1, default: 'n'
       t.decimal :somme, default: 0
       t.decimal :payee, default: 0
+      t.decimal :tva, default: 0
       t.string :type_pr, limit:1, default: 's'
-      t.string :num_pr
+      t.string :num_pr, limit: 30
       t.string :valide, limit: 1, default: 'n'
 
       t.timestamps

@@ -7,8 +7,9 @@ class CreateAchats < ActiveRecord::Migration
       t.string :type_ac, limit: 1, default: 'A'
       t.decimal :somme, default: 0
       t.decimal :payee, default: 0
+      t.decimal :tva, default: 0
       t.string :etat_achat, limit: 1, default: 'n'
-      t.string :num_ac
+      t.string :num_ac, limit: 30
       t.string :valide, limit: 1, default: 'n'
       t.references :monetaire, index: true, default: -1
 
