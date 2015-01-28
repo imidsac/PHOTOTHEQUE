@@ -8,27 +8,99 @@ class Vente < ActiveRecord::Base
   #validates :fournisseur_id, presence: true
   accepts_nested_attributes_for :ventelignes
 
-  # Client libre
-  scope :client_libre, -> { where("client_id = ? and boutque_id = ?" -1 -1) }
-
-  # Fournisseur 
-  scope :fournisseur, -> { where("fournisseur_id != ? ", -1) }
-  scope :article, -> { where("type_ac = ? ", 'A') }
-  scope :cadre, -> { where("type_ac = ? ", 'C') }
-  scope :payee, -> { where("somme != 0 and somme=payee") }
-  scope :nopayee, -> { where("somme != 0 and payee = 0") }
-  scope :unitule, -> { where("somme = 0 and payee = 0") }
-  scope :tlibre, -> { where("etat_achat = ? ", 't') }
-  scope :plibre, -> { where("etat_achat = ? ", 'p') }
-  scope :nlibre, -> { where("etat_achat = ? ", 'n') }
+  by_star_field :date_vente
 
 
-  def datestring
-    date_vente.to_s(:db)
+  #jointure avec boutique et client
+  scope :jointure_boutique_client, -> { joins(:boutique, :client) }
+
+  # Achats recents
+  scope :recent, -> { past_month.jointure_boutique_client }
+
+  # Achat journaliers de 00:00 h à 23:59
+  scope :journaliers, -> { today.jointure_boutique_client }
+  #scope :journe, -> { today.jointure_boutique_client }
+
+  # TOTAL SOMME D'ACHAT PAR JOUR
+  scope :ttotal, -> { today.sum('somme') }
+
+  # TOTAL PAYEE D'ACHAT PAR JOUR
+  scope :ptotal, -> { today.sum('payee') }
+
+  # LISTE DES ACHATS PAYEES
+  scope :payee, -> { where("somme = payee ").jointure_boutique_client }
+
+  # LISTE DES ACHATS NO PAYEES
+  scope :npayee, -> { where("somme > payee ").jointure_boutique_client }
+
+  # LISTE DES ACHATS TOTALEMENT LIVRET
+  scope :tlivret, -> { where("etat_vente =? ", 't').jointure_boutique_client }
+
+  # LISTE DES ACHATS PARTIELLEMENT LIVRET
+  scope :plivret, -> { where("etat_vente =? ", 'p').jointure_boutique_client }
+
+  # LISTE DES ACHATS NO LIVRET
+  scope :nlivret, -> { where("etat_vente =? ", 'n').jointure_boutique_client }
+
+  # TOUT LES FACTURES NO TOTALEMENT PAYEE PAR CLIENT
+  scope :facture_no_payee_client, ->(client_id) { where("somme > payee  and client_id = ?", client_id)}
+
+  # TOUT LES FACTURES PAR CLIENT
+  scope :factures_client, ->(client_id) { where("client_id = ?", client_id)}
+  # TOUT LES FACTURES PAR BOUTIQUE
+  scope :factures_boutique, ->(boutique_id) { where("boutique_id = ?", boutique_id)}
+
+  # TOTAL DE CREDIT D'UN CLIENT
+  scope :total_doit_payee_client, ->(client_id) { where("somme-payee > ? and client_id = ?", 0, client_id).sum('somme-payee')}
+
+  # TOUT LES FACTURES NO TOTALEMENT PAYEE PAR BOUTIQUE
+  scope :facture_no_payee_boutique, ->(boutique_id) { where("somme-payee > ? and boutique_id = ?", 0, boutique_id)}
+
+  # TOTAL DE CREDIT D'UN BOUTIQUE
+  scope :total_doit_payee_boutique, ->(boutique_id) { where("somme-payee > ? and boutique_id = ?", 0, boutique_id).sum('somme-payee')}
+
+  before_save :verifier_vente
+  before_create :get_code_fac
+
+  def verifier_vente
+    if client_id == -1 and boutique_id == -1 and client_libre == 'No'
+      return false
+    elsif client_id != -1 and boutique_id != -1 and client_libre != 'No'
+      return false
+    elsif client_id == -1 and boutique_id == -1 and client_libre == 'No'
+      return false
+    elsif client_id != -1 and boutique_id != -1 and client_libre == 'No'
+      return false
+    end
   end
 
-  def datestring=(date_vente_str)
-    self.date_vente = Time.parse(date_vente_str)
+
+
+  def get_code_fac
+    @id = Vente.last
+    if client_id > 0
+      if @id == nil
+        self.num_ve = "#{1}"+'-'+ "#{client_id}C"+'/'+Time.now.strftime("%m")+''+Time.now.strftime("%y")
+      else
+        self.num_ve = "#{@id.id+1}"+'-'+ "#{client_id}C"+'/'+Time.now.strftime("%m")+''+Time.now.strftime("%y")
+      end
+    elsif boutique_id > 0
+      if @id == nil
+        self.num_ve = "#{1}"+'-'+ "#{boutique_id}B"+'/'+Time.now.strftime("%m")+''+Time.now.strftime("%y")
+      else
+
+        self.num_ve = "#{@id.id+1}"+'-'+ "#{boutique_id}B"+'/'+Time.now.strftime("%m")+''+Time.now.strftime("%y")
+      end
+    else client_id == -1 and boutique_id == -1
+    if @id == nil
+      self.num_ve = "#{1}"+'-'+ "NC"+'/'+Time.now.strftime("%m")+''+Time.now.strftime("%y")
+    else
+
+      self.num_ve = "#{@id.id+1}"+'-'+ "NC"+'/'+Time.now.strftime("%m")+''+Time.now.strftime("%y")
+    end
+
+    end
+
   end
 
 end
