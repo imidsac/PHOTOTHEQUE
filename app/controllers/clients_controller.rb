@@ -1,28 +1,29 @@
+require "PdfA4p.rb"
+require "clients_pdf.rb"
 class ClientsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   # GET /clients
   # GET /clients.json
   def index
-    @clientspdf = Client.where("id != ?", -1)
-    #@clients = Client.where("id != ?", -1).paginate(:page => params[:page], :per_page => 5)
-    @search = Client.where("id != ?", -1).paginate(:page => params[:page], :per_page => 5).search(params[:q])
-    @clients = @search.result #if params[:search].present?
+    @clients = Client.tout
 
     ##pdf
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = ClientsPdf.new(@clientspdf)
+        pdf = ClientsPdf.new(@clients)
         send_data pdf.render, filename: 'clients.pdf', type: 'application/pdf'
       end
     end
-
   end
 
   # GET /clients/1
   # GET /clients/1.json
   def show
+    @ventes = Vente.factures_client(@client.id)
+    @paiements = Paiement.select(:nom,:compte, :datepaiement, :motif, :montant, :id ).jointure_banque.tout_paiement_client(@client.id)
   end
 
   # GET /clients/new
@@ -71,6 +72,7 @@ class ClientsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
@@ -82,6 +84,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:nom, :prenom, :phone, :address, :email)
+      params.require(:client).permit(:nom, :prenom, :phone, :address, :email, :type_cl)
     end
 end

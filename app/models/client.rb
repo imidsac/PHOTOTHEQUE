@@ -1,7 +1,10 @@
 class Client < ActiveRecord::Base
-	#default_scope { where("clients.id != ? ", -1)}
 	has_many :ventes, dependent: :destroy
 	has_many :paiements, dependent: :destroy
-  	#has_many :paiements, through: :prestations
+
+
+  scope :tout, -> { where("id != ?", -1).order(:type_cl) }
+  scope :detaillant, -> { where("id != ? and type_cl = ?", -1, 'o').order(:nom) }
+  scope :grossiste, -> { where("id != ? and type_cl = ?", -1, 'g').order(:nom) }
 
 end

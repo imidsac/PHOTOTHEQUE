@@ -6,6 +6,7 @@ class CreateClients < ActiveRecord::Migration
       t.string :phone
       t.text :address
       t.string :email
+      t.string :type_cl, limit:1, default: 'o'
 
       t.timestamps
     end
