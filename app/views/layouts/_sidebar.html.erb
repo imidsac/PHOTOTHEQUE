@@ -1,16 +1,45 @@
 <div class="list-group">
-    <%= link_to "ARTICLES", articles_path, :class=>"list-group-item"  %>
-    <%= link_to "CADRES", cadres_path, :class=>"list-group-item"  %>
-    <%= link_to "FORMAT PHOTO", formatphotos_path, :class=>"list-group-item"  %>
-    <%= link_to "FOURNISSEURS", fournisseurs_path, :class=>"list-group-item"  %>
-    <%= link_to "BOUTIQUES", boutiques_path, :class=>"list-group-item"  %>
-    <%= link_to "CLIENTS", clients_path, :class=>"list-group-item"  %>
-    <%= link_to "EMPLOYEE", employes_path, :class=>"list-group-item"  %>
-    <%= link_to "BANQUE", banques_path, :class=>"list-group-item"  %>
-    <%= link_to "T-BANQUE", tbanques_path, :class=>"list-group-item"  %>
-    <%= link_to "CAISSE", banques_path(:caisse => true), :class=>"list-group-item"  %>
-    <%= link_to "BALANCE", balances_path, :class=>"list-group-item"  %>
+  <% if user_signed_in? %>
+      <% if current_user.role == 'Root' %>
+
+
+
+      <% end %>
+
+      <% if current_user.role == 'Root' or current_user.role == 'Admin' %>
+          <%= link_to "BOUTIQUES", boutiques_path, :class => "list-group-item" %>
+          <%= link_to "MONETAIRES", monetaires_path, :class => "list-group-item" %>
+          <%= link_to "JOURNALIER", journaliers_path, :class => "list-group-item" %>
+          <%= link_to "FOURNISSEURS", fournisseurs_path, :class => "list-group-item" %>
+          <%= link_to "EMPLOYEE", employes_path, :class => "list-group-item" %>
+          <%= link_to "BALANCE", balances_path, :class => "list-group-item" %>
+
+
+      <% end %>
+
+      <% if current_user.role == 'Root' or current_user.role == 'Admin' or current_user.role == 'Manager' or current_user.role == 'inviter' %>
+          <%= link_to "ARTICLES", articles_path, :class=>"list-group-item"  %>
+          <%= link_to "CADRES", cadres_path, :class=>"list-group-item"  %>
+          <%= link_to "FORMAT PHOTO", formatphotos_path, :class=>"list-group-item"  %>
+          <%= link_to "CLIENTS", clients_path, :class => "list-group-item data" %>
+          <%= link_to "ACHATS", achats_path, :class => "list-group-item" %>
+          <%= link_to "VENTES", ventes_path, :class => "list-group-item" %>
+
+      <% end %>
+
+      <% if current_user.role == 'Root' or current_user.role == 'Admin' or current_user.role == 'Comptable' or current_user.role == 'inviter' %>
+
+          <%= link_to "BANQUE", banques_path, :class => "list-group-item" %>
+          <!--<%= link_to "T-BANQUE", tbanques_path, :class => "list-group-item" %>-->
+          <%= link_to "CAISSE", banques_path(:caisse => true), :class => "list-group-item" %>
+          <%= link_to "DEPENSE", depenses_path, :class => "list-group-item" %>
+
+      <% end %>
+  <% end %>
 </div>
+
+
+
 
         
      
