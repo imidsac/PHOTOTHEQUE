@@ -1,10 +1,15 @@
 class BanquesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_banque, only: [:show, :edit, :update, :destroy]
 
   # GET /banques
   # GET /banques.json
   def index
-    @banques = Banque.all
+    @banques = Banque.where("id != ?", -1)
+    @banques = Banque.caisse if params[:caisse]
+    @tbanques = Tbanque.all
+
+    @paiement = Paiement.new
   end
 
   # GET /banques/1
@@ -62,13 +67,13 @@ class BanquesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_banque
-      @banque = Banque.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_banque
+    @banque = Banque.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def banque_params
-      params.require(:banque).permit(:nom, :compte)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def banque_params
+    params.require(:banque).permit(:nom, :compte, :solde)
+  end
 end

@@ -1,15 +1,18 @@
 class FournisseursController < ApplicationController
+  load_and_authorize_resource
   before_action :set_fournisseur, only: [:show, :edit, :update, :destroy]
 
   # GET /fournisseurs
   # GET /fournisseurs.json
   def index
-    @fournisseurs = Fournisseur.where("id != ?", -1)
+    @fournisseurs = Fournisseur.where("fournisseurs.id != ? ", -1)
   end
 
   # GET /fournisseurs/1
   # GET /fournisseurs/1.json
   def show
+    @achats = Achat.commande_fournisseur(@fournisseur.id)
+    @paiements = Paiement.select(:nom,:compte, :datepaiement, :motif, :montant, :id ).jointure_banque.tout_paiement_fournisseur(@fournisseur.id)
   end
 
   # GET /fournisseurs/new
@@ -62,13 +65,13 @@ class FournisseursController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_fournisseur
-      @fournisseur = Fournisseur.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_fournisseur
+    @fournisseur = Fournisseur.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def fournisseur_params
-      params.require(:fournisseur).permit(:name_company, :nom, :prenom, :phone, :address, :email)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def fournisseur_params
+    params.require(:fournisseur).permit(:name_company, :nom, :prenom, :phone, :address, :email)
+  end
 end

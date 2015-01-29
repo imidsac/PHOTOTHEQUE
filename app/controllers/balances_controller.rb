@@ -1,4 +1,5 @@
 class BalancesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_balance, only: [:show, :edit, :update, :destroy]
 
   # GET /balances
@@ -62,13 +63,13 @@ class BalancesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_balance
-      @balance = Balance.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_balance
+    @balance = Balance.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def balance_params
-      params.require(:balance).permit(:exercice, :mois, :achats, :depenses, :ventes, :tva)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def balance_params
+    params.require(:balance).permit(:exercice, :mois, :achats, :depenses, :ventes, :tva)
+  end
 end

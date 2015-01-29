@@ -1,16 +1,15 @@
+require "PdfA5p.rb"
+require "ventes_pdf.rb"
+
 class VentesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_vente, only: [:show, :edit, :update, :destroy]
 
   # GET /ventes
   # GET /ventes.json
   def index
     @ventes = Vente.all
-    @ventes = @ventes.order(date_vente: :desc).article if params[:article]
-    @ventes = @ventes.order(date_vente: :desc).cadre if params[:cadre]
-    @ventes = @ventes.order(date_vente: :desc).payee if params[:payee]
-    @ventes = @ventes.order(date_vente: :desc).nopayee if params[:nopayee]
-
-    @ventes = @ventes.select("ventes.id,boutique_id,name, client_id,nom, prenom,type_ve,client_libre, date_vente,somme, payee, etat_vente").joins(:client, :boutique).order(date_vente: :desc)
+    @ventes = @ventes.select("ventes.id,boutique_id,name, client_id,nom, prenom,type_ve,client_libre, date_vente,somme, payee, etat_vente").recent
 
   end
 
@@ -27,15 +26,28 @@ class VentesController < ApplicationController
     
 
     if @vente.type_ve == 'C'
-      @ventelignes = @vente.ventelignes.select("cadre_id,numerobaguete,qte,qtelivre,prix_u,montant,ventelignes.id, ventelignes.etat").joins(:cadre)
+      @ventelignes = @vente.ventelignes.select("cadre_id,numerobaguete,qte,qtelivre,prix_u,montant,ventelignes.id, ventelignes.etat").cadre
     else
-      @ventelignes = @vente.ventelignes.select("article_id,name,reference,qte,qtelivre,prix_u,montant, ventelignes.id, ventelignes.etat").joins(:article)
+      @ventelignes = @vente.ventelignes.select("article_id,name,reference,qte,qtelivre,prix_u,montant, ventelignes.id, ventelignes.etat").article
     end
+    @paiements = @vente.paiements.jointure_banque.jointure_vente.select(:nom,:compte, :datepaiement, :motif, :montant, :id ).order(datepaiement: :desc)
+
     #@ventelignes = @vente.ventelignes
     @venteligne = Venteligne.new(:vente => @vente)
 
     @paiement = Paiement.new(:vente => @vente, :client => @cli, :boutique => @bou)
 
+    ##pdf
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = VentePdf.new(@vente, @ventelignes, @cli, @bou, view_context)
+        send_data pdf.render,
+                  filename: "vente_#{@vente.id}.pdf",
+                  type: 'application/pdf'
+        #,disposition: "inline"
+      end
+    end
 
   end
 
@@ -81,12 +93,37 @@ class VentesController < ApplicationController
   # DELETE /ventes/1
   # DELETE /ventes/1.json
   def destroy
-    @vente.destroy
-    respond_to do |format|
-      format.html { redirect_to ventes_url, notice: 'Vente was successfully destroyed.' }
-      format.json { head :no_content }
+    if params[:boutique_id]
+      @vente.destroy
+      respond_to do |format|
+        format.html { redirect_to boutique_url(@vente.boutique_id, :factures_boutique => true), notice: 'Vente was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    elsif params[:client_id]
+      @vente.destroy
+      respond_to do |format|
+        format.html { redirect_to client_url(@vente.client_id, :factures_client => true), notice: 'Vente was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      @vente.destroy
+      respond_to do |format|
+        format.html { redirect_to ventes_url, notice: 'Vente was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
+
+  def valider
+    @vente.update(valide: 'o')
+    redirect_to @vente, notice: 'Commande est valider.'
+  end
+
+  def invalider
+    @vente.update(valide: 'n')
+    redirect_to @vente, notice: 'Commande est invalider.'
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

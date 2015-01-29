@@ -1,12 +1,11 @@
 class EmployesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_employe, only: [:show, :edit, :update, :destroy]
 
   # GET /employes
   # GET /employes.json
   def index
-    #@employes = Employe.where("id != ?", -1)
-    @search = Employe.where("id != ?", -1).paginate(:page => params[:page], :per_page => 5).search(params[:q])
-    @employes = @search.result #if params[:search].present?
+    @employes = Employe.where("id != ?", -1)
   end
 
   # GET /employes/1
@@ -64,13 +63,13 @@ class EmployesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_employe
-      @employe = Employe.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_employe
+    @employe = Employe.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def employe_params
-      params.require(:employe).permit(:nom, :prenom, :sexe, :phone, :address, :email, :compte_banc, :salaireb, :type, :date_recru)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def employe_params
+    params.require(:employe).permit(:nom, :prenom, :sexe, :phone, :address, :email, :compte_banc, :salaireb, :type)
+  end
 end

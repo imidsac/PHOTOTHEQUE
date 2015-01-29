@@ -1,4 +1,5 @@
 class CategoriedepsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_categoriedep, only: [:show, :edit, :update, :destroy]
 
   # GET /categoriedeps
@@ -62,13 +63,13 @@ class CategoriedepsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_categoriedep
-      @categoriedep = Categoriedep.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_categoriedep
+    @categoriedep = Categoriedep.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def categoriedep_params
-      params.require(:categoriedep).permit(:name, :description)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def categoriedep_params
+    params.require(:categoriedep).permit(:name, :description)
+  end
 end
