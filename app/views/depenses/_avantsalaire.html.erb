@@ -1,36 +1,27 @@
-<% title "DEPENSES " %>
-
 <%- model_class = Depense -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h1>Avances sur salaires</h1>
 </div>
-<table id="depenses" class="table table-striped">
+<table class="table table-striped">
   <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:date) %></th>
-      <th><%= model_class.human_attribute_name(:categorie) %></th>
-      <th><%= model_class.human_attribute_name(:beneficiere) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:montant) %></th>
-      <!--
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:date) %></th>
+    <th><%= model_class.human_attribute_name(:employes) %></th>
+    <th><%= model_class.human_attribute_name(:description) %></th>
+    <th><%= model_class.human_attribute_name(:montant) %></th>
+    <!--
       <th><%= model_class.human_attribute_name(:etat_dep) %></th>
       -->
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
   </thead>
   <tbody>
-    <% @i=1
-       @depenses.each do |depense| %>
+  <% @depenses.each do |depense| %>
       <tr>
-        <td><%= @i %></td>
+        <td><%= link_to depense.id, depense_path(depense) %></td>
         <td><%= depense.date_dep.strftime("%d %b %Y à %H:%M") %></td>
-        <td><%= depense.name %></td>
-        <% if depense.employe_id != -1 %>
-        <td><%= link_to depense.nom+' '+depense.prenom, employe_path(depense.employe_id), :target => '_blank'  %></td>
-        <% else %>
-            <td><%= depense.beneficiere  %></td>
-        <% end %>
+        <td><%= depense.nom+' '+depense.prenom %></td>
         <td><%= depense.description %></td>
         <td><%= depense.montant %></td>
         <!--
@@ -46,8 +37,7 @@
                       :class => 'btn btn-danger btn-xs' %>
         </td>
       </tr>
-    <% @i+=1
-       end %>
+  <% end %>
   </tbody>
 </table>
 

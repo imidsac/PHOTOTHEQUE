@@ -6,12 +6,22 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @depense.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:categoriedep_id) %>:</strong></dt>
-  <dd><%= @depense.categoriedep_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:categorie) %>:</strong></dt>
+  <dd><%= @cat.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:beneficiere) %>:</strong></dt>
+  <% if @depense.employe_id != -1 %>
+  <dd><%= @em.nom+'  '+@em.prenom %></dd>
+  <% else %>
+  <dd><%= @depense.beneficiere %></dd>
+  <% end %>
   <dt><strong><%= model_class.human_attribute_name(:montant) %>:</strong></dt>
   <dd><%= @depense.montant %></dd>
   <dt><strong><%= model_class.human_attribute_name(:etat_dep) %>:</strong></dt>
-  <dd><%= @depense.etat_dep %></dd>
+  <% if @depense.etat_dep == 'n' %>
+      <dd><%= 'Nom valide' %></dd>
+  <% else %>
+      <dd><%= 'Valide' %></dd>
+  <% end %>
 </dl>
 
 <div class="form-actions">

@@ -1,11 +1,28 @@
-<%= simple_form_for @depense, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :description %>
-  <%= f.input :categoriedep_id %>
-  <%= f.input :montant %>
-  <%= f.input :etat_dep %>
-  <div class="form-actions">
-    <%= f.button :submit, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                depenses_path, :class => 'btn' %>
-  </div>
+<%= simple_form_for @depense, :html => {:class => 'form-horizontal'} do |f| %>
+    <div class="row row-1">
+      <div class="col-sm-4">
+        <%= f.input :date_dep, :label => 'Date' %>
+        <%= f.input :description %>
+        <%= f.input :beneficiere %>
+        <hr/>
+      </div>
+      <div class="col-sm-4">
+        <%= f.association :categoriedep, :label => 'Categorie' %>
+        <%= f.association :employe, :label_method => lambda { |employe| "#{employe.nom} | #{employe.prenom}"}, :include_blank => true %>
+        <%= f.input :montant %>
+        <hr/>
+        <div class="form-actions">
+          <%= f.button :submit, :class => 'btn btn-primary' %>
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                      depenses_path, :class => 'btn' %>
+        </div>
+      </div>
+
+    </div><!-- row-1-->
+    <div class="row row-2">
+
+    </div>
+
+
+
 <% end %>
