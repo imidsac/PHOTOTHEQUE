@@ -1,0 +1,53 @@
+<!-- DEPENSE -->
+
+<%- model_class = Depense -%>
+<div class="page-header">
+  <h3><%= "Depenses - #{number_to_currency(@depenses_total, precision: 0,  unit: "F CFA", format: "%n %u")}" %></h3>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:categorie) %></th>
+    <th><%= model_class.human_attribute_name(:beneficiere) %></th>
+    <th><%= model_class.human_attribute_name(:description) %></th>
+    <th><%= model_class.human_attribute_name(:montant) %></th>
+    <!--
+      <th><%= model_class.human_attribute_name(:etat_dep) %></th>
+      -->
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @i=1
+     @depenses.each do |depense| %>
+      <tr>
+        <td><%= @i %></td>
+        <td><%= depense.name %></td>
+        <% if depense.employe_id != -1 %>
+            <td><%= link_to depense.nom+' '+depense.prenom, employe_path(depense.employe_id), :target => '_blank'  %></td>
+        <% else %>
+            <td><%= depense.beneficiere  %></td>
+        <% end %>
+        <td><%= depense.description %></td>
+        <td><%= number_to_currency(depense.montant, precision: 0,  unit: "", format: "%n %u") %></td>
+        <!--
+        <td><%= depense.etat_dep %></td>
+        -->
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_depense_path(depense), :class => 'btn btn-primary btn-xs', :target => '_blank' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      depense_path(depense),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-danger btn-xs', :target => '_blank' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_depense_path,
+            :class => 'btn btn-primary', :target => '_blank' %>
