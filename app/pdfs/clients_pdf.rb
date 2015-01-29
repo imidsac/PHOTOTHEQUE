@@ -1,40 +1,87 @@
-class ClientsPdf < Prawn::Document
+class ClientsPdf < PdfA4p
   def initialize(clients)
-  	super(top_margin: 70)
-  	@clients = clients
-  	#@view = view
+    super()
+    @clients = clients
+    #@view = view
     #text "Order goes here"
     header
-    line_items
-  end
- 
-  def header
-    #This inserts an image in the pdf file and sets the size of the image
-=begin
-    logo = "#{Rails.root}/app/assets/images/images.jpg"
-    image logo, width: 130, height: 150
-    text "Order \##{@prestation.id}", size: 30, style: :bold
-    text "Order \##{@prestation.somme}", size: 30, style: :bold
-    text "Client :  \##{@cli.nom}", size: 30, style: :bold
-=end
+    table_entier
+    footer
+
   end
 
-  def line_items
+
+  def table_entier
     move_down 20
-    table lignetable do
-      row(0).font_style = :bold
-      columns(1..3).align = :right
-      self.row_colors = ["DDDDDD", "FFFFFF"]
+    table ligne_table do
+      style(
+          rows(1..-1).column(0),
+          :align => :center
+      )
+      style(
+          rows(1..-1).columns(3..-1),
+          :align => :right,
+          :style => [:italic]
+      )
+      style(
+          row(0),
+          font: "Times-Roman",
+          :size => 15,
+          :background_color => 'AFB8BE',
+          :style => [:bold, :italic],
+          :align => :center
+      )
+
+      style(
+          row(0),
+          :font_style => :bold,
+          :padding => [5, 10, 5, 10],
+          :border_lines => [:solid],
+          #:border_color => ('ff00ff'),
+          :align => :center
+      )
+      #style(row(4), padding: [12, 10], :font_style => :bold)
+      #style(columns(1..4), :align => :center)
+      self.cell_style = {:border_lines => [:dotted]}
+
+      self.row_colors = ['ECECEC', 'FFFFFF']
+      self.position = :center
       self.header = true
+
+
+    end
+
+
+  end
+
+  def item_header
+    ['N°', {content: "Client", colspan: 2}, 'Adresse', 'Phone', 'E-mail', 'Type']
+  end
+
+  def item_rows
+    @id = 0
+
+    @clients.map do |item|
+      [
+          @id+=1,
+          item.nom,
+          item.prenom,
+          item.address,
+          item.phone,
+          item.email,
+          if item.type_cl=='o'
+            'Ordinnaire'
+          else
+            item.type_cl=='g'
+            'Grossiste'
+          end
+      ]
     end
   end
 
-  def lignetable
-    [['Id','Nom', 'Prenom', 'Adresse', 'E-mail']] +
-    @clients.map do |item|
-      [item.id,item.nom, item.prenom, item.address, item.email]
-    end
+  def ligne_table
+    [item_header, *item_rows]
   end
- 
-  
+
+
 end
