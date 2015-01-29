@@ -1,0 +1,17 @@
+<%= simple_form_for(@livraisonlog) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :date_liv %>
+    <%= f.association :achat %>
+    <%= f.association :produit %>
+    <%= f.input :qte %>
+    <%= f.association :vente %>
+    <%= f.input :etat %>
+    <%= f.association :user %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

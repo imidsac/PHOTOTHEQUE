@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date re:</strong>
+  <%= @retourelog.date_re %>
+</p>
+
+<p>
+  <strong>Produit:</strong>
+  <%= @retourelog.produit %>
+</p>
+
+<p>
+  <strong>Qte:</strong>
+  <%= @retourelog.qte %>
+</p>
+
+<p>
+  <strong>Optionretoure:</strong>
+  <%= @retourelog.optionretoure %>
+</p>
+
+<p>
+  <strong>Achat:</strong>
+  <%= @retourelog.achat %>
+</p>
+
+<p>
+  <strong>Vente:</strong>
+  <%= @retourelog.vente %>
+</p>
+
+<p>
+  <strong>Motif:</strong>
+  <%= @retourelog.motif %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @retourelog.user %>
+</p>
+
+<%= link_to 'Edit', edit_retourelog_path(@retourelog) %> |
+<%= link_to 'Back', retourelogs_path %>

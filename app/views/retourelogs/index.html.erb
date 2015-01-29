@@ -1,0 +1,39 @@
+<h1>Listing retourelogs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date re</th>
+      <th>Produit</th>
+      <th>Qte</th>
+      <th>Optionretoure</th>
+      <th>Achat</th>
+      <th>Vente</th>
+      <th>Motif</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @retourelogs.each do |retourelog| %>
+      <tr>
+        <td><%= retourelog.date_re %></td>
+        <td><%= retourelog.produit %></td>
+        <td><%= retourelog.qte %></td>
+        <td><%= retourelog.optionretoure %></td>
+        <td><%= retourelog.achat %></td>
+        <td><%= retourelog.vente %></td>
+        <td><%= retourelog.motif %></td>
+        <td><%= retourelog.user %></td>
+        <td><%= link_to 'Show', retourelog %></td>
+        <td><%= link_to 'Edit', edit_retourelog_path(retourelog) %></td>
+        <td><%= link_to 'Destroy', retourelog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Retourelog', new_retourelog_path %>

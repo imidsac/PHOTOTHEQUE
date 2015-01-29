@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @optionretoure.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @optionretoure.description %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @optionretoure.user %>
+</p>
+
+<%= link_to 'Edit', edit_optionretoure_path(@optionretoure) %> |
+<%= link_to 'Back', optionretoures_path %>

@@ -1,0 +1,29 @@
+<h1>Listing optionretoures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @optionretoures.each do |optionretoure| %>
+      <tr>
+        <td><%= optionretoure.name %></td>
+        <td><%= optionretoure.description %></td>
+        <td><%= optionretoure.user %></td>
+        <td><%= link_to 'Show', optionretoure %></td>
+        <td><%= link_to 'Edit', edit_optionretoure_path(optionretoure) %></td>
+        <td><%= link_to 'Destroy', optionretoure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Optionretoure', new_optionretoure_path %>

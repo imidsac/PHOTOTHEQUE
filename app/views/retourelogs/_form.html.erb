@@ -1,0 +1,18 @@
+<%= simple_form_for(@retourelog) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :date_re %>
+    <%= f.association :produit %>
+    <%= f.input :qte %>
+    <%= f.association :optionretoure %>
+    <%= f.association :achat %>
+    <%= f.association :vente %>
+    <%= f.input :motif %>
+    <%= f.association :user %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
