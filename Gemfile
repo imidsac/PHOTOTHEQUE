@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 gem 'will_paginate', '~> 3.0.7'
 gem 'kaminari', '~> 0.16.1'
 
-#gem 'activeadmin', '~> 0.6.3'
-
 #ruby '2.1.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
@@ -50,8 +48,10 @@ gem 'less-rails', '~> 2.5.0'
 gem 'twitter-bootstrap-rails'
 gem 'therubyracer', '~> 0.12.1', :require => 'v8'
 
-gem 'jquery-datatables-rails', '~> 3.0.0'
+#gem 'jquery-datatables-rails', '~> 3.0.0'
 #gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+gem 'jquery-datatables-rails', '~> 3.1.1'
+gem 'ajax-datatables-rails'
 
 gem 'twitter-bootswatch-rails', '~> 3.2'
 #gem 'twitter-bootswatch-rails-helpers', '~> 3.1'
@@ -64,16 +64,16 @@ group :test, :development do
 
   # Factory girl
   gem 'factory_girl_rails'
-  
+
   # Capybara
   gem 'capybara'
-  
+
   # Email spec
   #gem "email_spec", ">= 1.4.0"
 
-# uncomment to gen with erb
-#gem 'haml-rails'
-gem 'unicorn-rails', '~> 2.2.0'
+  # uncomment to gen with erb
+  #gem 'haml-rails'
+  gem 'unicorn-rails', '~> 2.2.0'
 end
 
 gem 'quiet_assets', '~> 1.0.3', :group => :development
@@ -89,26 +89,28 @@ gem 'rmagick', '~> 2.13.3'
 gem 'prawn', '~> 1.3.0'
 gem 'prawn-table', '~> 0.2.1'
 #gem 'prawn-layout', '~> 0.8.4'
-gem 'prawnto_2', '~> 0.2.6', :require => "prawnto" 
+gem 'prawnto_2', '~> 0.2.6', :require => "prawnto"
 #gem "prawnto_2", :require => "prawnto"
 gem 'pdf-core', '~> 0.4.0'
 gem 'ttfunk', '~> 1.4.0'
-gem 'cancan'
+gem 'cancancan', '1.9.2'
 
 gem 'sunspot_rails', '~> 2.1.1'
 #gem 'sunspot_solr', '~> 2.1.1'
 group :development do
-    gem 'sunspot_solr', '~> 2.1.1'
-    gem 'better_errors', '~> 2.0.0'
-  end
+  gem 'sunspot_solr', '~> 2.1.1'
+  gem 'better_errors', '~> 2.0.0'
+end
 
 
 gem 'progress_bar'
 gem 'ransack', '~> 1.5.1'
 gem 'jquery-turbolinks'
-
 gem "binding_of_caller"
 
-#gem 'client_side_validations', '~> 3.2.6'
-#gem 'client_side_validations-simple_form', '~> 2.1.0'
-gem 'barby', '~> 0.6.2'
+gem 'figaro', '~> 1.0.0'
+
+gem 'by_star', '~> 2.2.1'
+
+gem 'angularjs-rails', '~> 1.3.36'
+
