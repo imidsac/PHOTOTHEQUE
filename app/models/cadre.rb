@@ -1,6 +1,7 @@
 class Cadre < ActiveRecord::Base
 	#default_scope { where("cadres.id != ? ", -1)}
-	default_scope {order(:numerobaguete)}
+	default_scope {where("cadres.id != ? ", -1).order(:numerobaguete)}
+	belongs_to :fournisseur
 	has_many :alignes
 	has_many :prestationlignes
 	has_many :ventelignes

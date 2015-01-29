@@ -6,15 +6,16 @@ class Venteligne < ActiveRecord::Base
 
   validates_uniqueness_of :vente_id, scope: [:article_id, :cadre_id]
 
-  alidates_numericality_of :qtelivre, :qte
+  validates_numericality_of :qtelivre, :qte
   validates_presence_of :qtelivre, :qte, :prix_u
 
-  #jointure avec produit
-  scope :prod, -> { joins(:produit).where("produit_id != -1").order(:created_at) }
+  #jointure avec article
+  scope :article, -> { joins(:article).where("article_id != -1").order(:created_at) }
+  scope :cadre, -> { joins(:cadre).where("cadre_id != -1").order(:created_at) }
 
   validates :vente_id, presence: true#, scope: [:article_id, :cadre_id]
 
-  validates_uniqueness_of :vente_id, scope: [:produit_id]
+  validates_uniqueness_of :vente_id, scope: [:article_id, :cadre_id]
 
   before_save :verifier_vligne
   after_save  :total
