@@ -1,3 +1,5 @@
+<% title "#{@employe.nom + '   ' + @employe.prenom}" %>
+
 <%- model_class = Employe -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
@@ -9,8 +11,12 @@
   <dt><strong><%= model_class.human_attribute_name(:prenom) %>:</strong></dt>
   <dd><%= @employe.prenom %></dd>
   <dt><strong><%= model_class.human_attribute_name(:sexe) %>:</strong></dt>
-  <dd><%= @employe.sexe %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
+  <% if @employe.sexe == 'm' %>
+  <dd><%= 'Masculin' %></dd>
+      <% else %>
+      <dd><%= 'Feminin' %></dd>
+      <% end %>
+      <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
   <dd><%= @employe.phone %></dd>
   <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
   <dd><%= @employe.address %></dd>
