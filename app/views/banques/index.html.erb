@@ -1,7 +1,24 @@
-<div class="col-sm-2">
-  <%= render 'layouts/sidebar' %>
-</div><!-- /.col-sm-2 -->
 
-<div class="col-sm-6">
-  <%= render 'list' %>
-</div><!-- /.col-sm-10 -->
+<div class="row row-1">
+	<div class="col-sm-2">
+	  <%= render 'layouts/sidebar' %>
+	</div><!-- /.col-sm-2 -->
+
+	<div class="col-sm-6">
+		<% if params[:caisse] %>
+	  		<%= render 'caisse' %>
+	  	<% else %>
+	  		<%= render 'list' %>
+	  	<% end %>
+	</div><!-- /.col-sm-6 -->
+
+  <div class="col-sm-4">
+    <% if params[:caisse] %>
+    <%= render 'vcb' %>
+    <% end %>
+  </div><!-- /.col-sm-3-->
+
+</div><!-- row-1 -->
+
+
+

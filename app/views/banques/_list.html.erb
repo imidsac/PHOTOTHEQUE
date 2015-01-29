@@ -10,16 +10,23 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:nom) %></th>
       <th><%= model_class.human_attribute_name(:compte) %></th>
+      <th><%= model_class.human_attribute_name(:solde) %></th>
+      <% if current_user.role == 'Root' %>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% end %>
+
     </tr>
   </thead>
   <tbody>
-    <% @banques.each do |banque| %>
+    <% @i=1
+       @banques.each do |banque| %>
       <tr>
-        <td><%= link_to banque.id, banque_path(banque) %></td>
+        <td><%= @i %></td>
         <td><%= banque.nom %></td>
         <td><%= banque.compte %></td>
+        <td><%= banque.solde %></td>
         <td>
+          <% if current_user.role == 'Root' %>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       banque_path(banque), :class => 'btn btn-info btn-xs' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -29,12 +36,16 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-danger btn-xs' %>
+        <% end %>
         </td>
       </tr>
-    <% end %>
+    <% @i+=1
+       end %>
   </tbody>
 </table>
 
+<!--
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_banque_path,
             :class => 'btn btn-primary' %>
+-->
