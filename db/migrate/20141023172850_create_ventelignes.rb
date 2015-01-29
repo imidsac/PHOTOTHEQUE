@@ -8,7 +8,9 @@ class CreateVentelignes < ActiveRecord::Migration
       t.decimal :qtelivre, default: 0
       t.decimal :prix_u, default: 0
       t.decimal :montant, default: 0
+      t.decimal :remise, default: 0
       t.string :etat, limit: 1, default: 'n'
+      t.references :user, index: true
 
       t.timestamps
     end

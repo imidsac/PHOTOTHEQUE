@@ -7,6 +7,7 @@ class CreateFournisseurs < ActiveRecord::Migration
       t.string :phone
       t.text :address
       t.string :email
+      t.references :user, index: true
 
       t.timestamps
     end

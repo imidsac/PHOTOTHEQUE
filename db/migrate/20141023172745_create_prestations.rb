@@ -12,6 +12,8 @@ class CreatePrestations < ActiveRecord::Migration
       t.string :type_pr, limit:1, default: 's'
       t.string :num_pr, limit: 30
       t.string :valide, limit: 1, default: 'n'
+      t.integer :retoure, default: 0
+      t.references :user, index: true
 
       t.timestamps
     end

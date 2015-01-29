@@ -11,6 +11,7 @@ class CreateEmployes < ActiveRecord::Migration
       t.decimal :salaireb, default: 0
       t.string :type_em
       t.date :date_recru
+      t.references :user, index: true
 
       t.timestamps
     end

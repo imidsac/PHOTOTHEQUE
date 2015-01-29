@@ -4,6 +4,7 @@ class CreateMonetaires < ActiveRecord::Migration
       t.string :money
       t.string :code_money
       t.decimal :valeur
+      t.references :user, index: true
 
       t.timestamps
     end

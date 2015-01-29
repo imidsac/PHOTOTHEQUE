@@ -14,6 +14,8 @@ class CreatePaiements < ActiveRecord::Migration
       t.string :motif
       t.decimal :montant, default: 0
       t.string :etat
+      t.references :user, index: true
+
       t.timestamps
     end
   end

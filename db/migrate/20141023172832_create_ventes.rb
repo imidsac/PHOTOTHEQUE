@@ -13,6 +13,8 @@ class CreateVentes < ActiveRecord::Migration
       t.string :etat_vente, limit: 1, default: 'n'
       t.string :num_ve, limit: 30
       t.string :valide, limit: 1, default: 'n'
+      t.integer :retoure, default: 0
+      t.references :user, index: true
 
       t.timestamps
     end

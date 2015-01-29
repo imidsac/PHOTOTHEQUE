@@ -11,7 +11,9 @@ class CreatePrestationlignes < ActiveRecord::Migration
       t.integer :numero_prise, default: 0
       t.string :type_pl, limit: 2
       t.string :color, limit: 2
+      t.decimal :remise, default: 0
       t.string :etat, limit: 1, default: 'n'
+      t.references :user, index: true
 
       t.timestamps
     end
