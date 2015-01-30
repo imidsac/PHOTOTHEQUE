@@ -2,7 +2,7 @@ class CreatePaiements < ActiveRecord::Migration
   def change
     create_table :paiements do |t|
       t.references :banque, index: true, default: -1        #
-      t.string :type_paiement, limit: 10, default: 'pv'
+      t.string :type_paiement, limit: 10, null: false
       t.references :boutique, index: true
       t.references :client, index: true
       t.references :vente, index: true

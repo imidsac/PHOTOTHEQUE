@@ -7,7 +7,7 @@ class CreateArticles < ActiveRecord::Migration
       t.decimal :stock, default: 0
       t.decimal :vstock, default: 0
       t.decimal :dstock, default: 0
-      t.deciaml :EnCommande, default: 0
+      t.decimal :EnCommande, default: 0
       t.decimal :pachat, default: 0
       t.decimal :pdetail, default: 0
       t.decimal :pgros, default: 0
