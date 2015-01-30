@@ -1,16 +1,17 @@
 <%= simple_form_for @achat, :html => { :class => 'form-horizontal' } do |f| %>
 <fieldset>
   <p>
-  <%= f.association :fournisseur, label_method: :name_company %>
+    <%= f.association :monetaire, :label_method => lambda { |monetaire| "#{monetaire.money} | #{monetaire.valeur} "}, :include_blank => false %>
+  </p>
+  <p>
+    <%= f.association :fournisseur, :label_method => lambda { |fournisseur| "#{fournisseur.name_company} | #{fournisseur.nom} #{fournisseur.prenom}"}, :include_blank => false %>
   </p>
   <p><%= f.input :fournisseur_libre %></p>
   <p>
   <%= f.input :date_achat %>
   </p>
   <%= f.collection_radio_buttons :type_ac, [['C', 'Cadre'], ['A', 'Article']], :first, :last %>
-  <!--<%= f.input :somme %>
-  <%= f.input :payee %>
-  <%= f.input :etat_achat %>-->
+
 </fieldset>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-primary' %>

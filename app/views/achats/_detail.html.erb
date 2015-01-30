@@ -4,6 +4,9 @@
   <%- model_class = Achat -%>
 <div class="page-header">
   <h3><%=t '.title', :default => model_class.model_name.human %> contenu</h3>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_achat_path,
+              :class => 'btn btn-primary' %>
 </div>
 </div>
 <div class="row">
@@ -17,6 +20,9 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn-xs btn-danger' %>
+
+  <%= link_to t('.pdf', :default => t("helpers.links.pdf")),
+              achat_path(@achat, format: "pdf"), :class => 'btn-xs btn-info' %>
 </div>
 </div>
 

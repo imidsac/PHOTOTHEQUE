@@ -8,19 +8,24 @@ class Aligne < ActiveRecord::Base
 
   #produit plus demander
   #scope :plus_pop, -> { group('produit_id', 'qte').having( 'SUM(qte) >= 1').order(:qte).limit(10) }
-  scope :plus_pop, -> { having( 'SUM(qte) >= 1').group(:produit_id, :qte).order(:qte) }
+  scope :plus_pop, -> { having( 'SUM(qte) >= 1').group(:article_id, :qte).order(:qte) }
 
   #jointure avec produit
-  scope :prod, -> { joins(:produit).where("produit_id != -1").order(:created_at) }
+  scope :article, -> { joins(:article).where("article_id != -1").order(:created_at) }
+  scope :cadre, -> { joins(:cadre).where("cadre_id != -1").order(:created_at) }
 
   #somme
-  scope :montant_detail, -> { prod.sum('qte*pdetail') }
-  scope :montant_gros, -> { prod.sum('qte*pgros') }
+  scope :montant_detail_article, -> { article.sum('qte*pdetail') }
+  scope :montant_gros_article, -> { article.sum('qte*pgros') }
+
+  scope :montant_detail_cadre, -> { cadre.sum('qte*pdetail') }
+  scope :montant_gros_cadre, -> { cadre.sum('qte*pgros') }
 
   validates :achat_id, presence: true
-  validates :produit_id, presence: true
+  validates :article_id, presence: true
+  validates :cadre_id, presence: true
 
-  validates_uniqueness_of :achat_id, scope: [:produit_id]
+  validates_uniqueness_of :achat_id, scope: [:article_id, :cadre_id]
 
   before_save :verifier_aligne
   after_save  :total

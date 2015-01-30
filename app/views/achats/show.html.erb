@@ -1,19 +1,27 @@
-
 <div class="col-sm-2">
-	<%= render 'layouts/sidebar'  %>
+  <%= render 'layouts/sidebar' %>
 </div>
 
 
 <div class="col-sm-8">
-	<%= render 'detail'  %>
-	<hr />
-	<%= render 'alignes/alignes'  %>
+  <%= render 'detail' %>
+  <hr/>
+  <%= render 'alignes/alignes' %>
+  <hr/>
+  <% if @paiements.size!=0 %>
+      <%= render :partial => 'plignes' %>
+  <% else %>
+      <%= 'No paiement found' %>
+  <% end %>
 </div>
 
 <div class="col-sm-2">
-	<%= render 'alignes/form_aligne'  %>
-	<hr />
-	<% if @achat.somme-@achat.payee!=0 %>
-	<%= render 'paiements/form_apaie'  %>
-	<% end %>
+  <% if @achat.valide != 'o' %>
+      <%= render 'alignes/form_aligne' %>
+      <hr/>
+  <% end %>
+
+  <% if @achat.somme-@achat.payee!=0 %>
+      <%= render 'paiements/form_apaie' %>
+  <% end %>
 </div>
