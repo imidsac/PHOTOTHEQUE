@@ -1,0 +1,46 @@
+<h1>Modifier les produits coché</h1>
+<%= form_tag update_multiple_vente_ventelignes_path, method: :put do %>
+
+    <table>
+      <thead>
+      <!--<tr>
+          <th><%= 'Produit' %></th>
+          <th><%= 'Qte' %></th>
+          <th><%= 'Qte-livret' %></th>
+          <th><%= 'Prix-unitaire' %></th>
+        </tr>-->
+      </thead>
+      <tbody>
+      <% @ventelignes2.each do |venteligne| %>
+          <%= simple_fields_for "ventelignes[]", venteligne do |f| %>
+              <tr>
+                <% if @vente.type_ve == 'A' %>
+                    <td>
+                      <%= f.association :article, :label_method => lambda { |article| "#{article.name} | #{article.reference}"}, :include_blank => false %>
+                    </td>
+                <% elsif @vente.type_ve == 'C'%>
+                    <td>
+                      <%= f.association :cadre, :label_method => lambda { |cadre| "#{cadre.numerobaguete}"}, :include_blank => false %>
+                    </td>
+                <% end %>
+                <td>
+                  <%= f.input :qte %>
+                </td>
+                <td>
+                  <%= f.input :qtelivre %>
+                </td>
+                <td>
+                  <%= f.input :prix_u %>
+                </td>
+              </tr>
+          <% end %>
+      <% end  %>
+      </tbody>
+    </table>
+
+    <div class="form-actions">
+      <%= submit_tag "UPDATE", :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  [@vente], :class => 'btn' %>
+    </div>
+<% end  %>

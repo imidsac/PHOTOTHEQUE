@@ -2,13 +2,9 @@
   <%= f.error_notification %>
   <%= f.input :date_vente, label: "Date" %>
   <%= f.association :boutique %>
-  <%= f.association :client, label_method: :nom   %>
+    <%= f.association :client, :label_method => lambda { |client| "#{client.nom} | #{client.prenom}"}, :include_blank => true  %>
   <%= f.input :client_libre %>
   <%= f.collection_radio_buttons :type_ve, [['C', 'Cadre'], ['A', 'Article']], :first, :last %>
-  <!--<%= f.input :etat_vente %>
-  <%= f.input :somme %>
-  <%= f.input :payee %>-->
-  <%= f.error :base %>
 
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-primary' %>

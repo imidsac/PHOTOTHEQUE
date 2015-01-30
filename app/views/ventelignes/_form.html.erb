@@ -2,10 +2,11 @@
   <%= f.error_notification %>
 
   <% if @vente.type_ve == 'A' %>
-  <%= f.association :article , required: true %>
+  <%= f.association :article , collection: Article.list, :label_method => lambda { |article| "#{article.name} | #{article.reference}"}, :include_blank => false %>
 <% elsif @vente.type_ve == 'C'%>
-  <%= f.association :cadre, label_method: :numerobaguete, required: true %>
-<% end %>
+        <%= f.association :cadre, collection: Cadre.list, :label_method => lambda { |cadre| "#{cadre.numerobaguete}"}, :include_blank => false %>
+
+    <% end %>
   <%= f.input :qte %>
   <%= f.input :qtelivre %>
   <%= f.input :prix_u, input_html: { :placeholder=> 'Prix unitaire'} %>

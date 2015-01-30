@@ -1,19 +1,28 @@
 <div class="row">
-	<div class="col-sm-2">
-		<%= render 'layouts/sidebar' %>
-	</div><!-- /.col-sm-2 -->
+  <div class="col-sm-2">
+    <%= render 'layouts/sidebar' %>
+  </div><!-- /.col-sm-2 -->
 
-	<div class="col-sm-8">
-		<%= render 'detaile'  %>
-		<hr />
-		<%= render 'ventelignes/vlignes'  %>
-	</div>
+  <div class="col-sm-8">
+    <%= render 'detaile'  %>
+    <hr />
+    <%= render 'ventelignes/vlignes'  %>
+    <hr/>
+    <% if @paiements.size!=0 %>
+        <%= render :partial => 'plignes' %>
+    <% else %>
+        <%= 'No paiement found' %>
+    <% end %>
+  </div>
 
-	<div class="col-sm-2">
-		<%= render 'ventelignes/form_vligne'  %>
-		<hr />
-		<% if @vente.somme-@vente.payee!=0 %>
-		<%= render 'paiements/form_vpaie'  %>
-		<% end %>
-	</div>
+  <div class="col-sm-2">
+    <% if @vente.valide != 'o' %>
+        <%= render 'ventelignes/form_vligne'  %>
+        <hr />
+    <% end %>
+
+    <% if @vente.somme-@vente.payee!=0 %>
+        <%= render 'paiements/form_vpaie'  %>
+    <% end %>
+  </div>
 </div>
