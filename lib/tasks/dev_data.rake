@@ -47,6 +47,33 @@ namespace :dev_data do
 
     puts "===> Sample date have been set in DB  Users!"
 
+    Categoriedep.create!(
+        id: -1,
+        name: "AUTRE"
+    )
+    Categoriedep.create!(
+        name: "AVANT SALAIRE"
+    )
+    Categoriedep.create!(
+        name: "E.D.M"
+    )
+    Categoriedep.create!(
+        name: "LOYER"
+    )
+    Categoriedep.create!(
+        name: "TRANSPORT"
+    )
+    Categoriedep.create!(
+        name: "CARBURANT"
+    )
+    Categoriedep.create!(
+        name: "CARTE DE RECHARGE"
+    )
+    Categoriedep.create!(
+        name: "REPARATION DE AUTO/MOTO"
+    )
+
+    puts "===> Sample date have been set in DB  Categories depenses!"
 
     Formatphoto.create!(
         dimention: "10*15"
@@ -385,6 +412,23 @@ namespace :dev_data do
         valeur: 153.6658
     )
     puts "===> Sample date have been set in DB  Money!"
+
+    Optionretoure.create!(
+        id: -100,
+        name: "Défectueux",
+        description: "Qui ne fonction plus..."
+    )
+    Optionretoure.create!(
+        id: 100,
+        name: "Echange",
+        description: "Qui ne fonction plus..."
+    )
+    Optionretoure.create!(
+        id: 50,
+        name: "Réparation",
+        description: "Qui ne fonction plus..."
+    )
+    puts "===> Sample date have been set in DB  Options de retoures!"
 
   end
   
