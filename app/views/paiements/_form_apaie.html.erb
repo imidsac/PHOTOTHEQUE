@@ -6,10 +6,11 @@
 <%= f.input :fournisseur_id, :as => :hidden %>
 <%= f.input :type_paiement, :as => :hidden, input_html: {value: 'pa'} %>
 <%= f.input :datepaiement, :as => :hidden, input_html: {value: Time.now} %>
+<%= f.association :banque, collection: Banque.all, :label_method => lambda { |banque| "#{banque.nom} | #{banque.compte}"}, :include_blank => false %>
 <%= f.input :motif, input_html: {:value => 'ESPECE'} %>
 <%= f.input :montant, input_html: {:value => @achat.somme-@achat.payee} %>
 <div class="form-actions">
-  <%= f.button :submit, :class => 'btn btn-success' %>
+  <%= f.button :submit, 'Payer', :class => 'btn btn-success' %>
 
 </div>
 <% end %>

@@ -1,34 +1,36 @@
+<% title "PAIEMENTS" %>
+
 <%- model_class = Paiement -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
 <table class="table table-striped">
   <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:vente_id) %></th>
-      <th><%= model_class.human_attribute_name(:client_id) %></th>
-      <th><%= model_class.human_attribute_name(:achat_id) %></th>
-      <th><%= model_class.human_attribute_name(:fournisseur_id) %></th>
-      <th><%= model_class.human_attribute_name(:datepaiement) %></th>
-      <th><%= model_class.human_attribute_name(:motif) %></th>
-      <th><%= model_class.human_attribute_name(:montant) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:vente_id) %></th>
+    <th><%= model_class.human_attribute_name(:client_id) %></th>
+    <th><%= model_class.human_attribute_name(:boutique_id) %></th>
+    <th><%= model_class.human_attribute_name(:achat_id) %></th>
+    <th><%= model_class.human_attribute_name(:fournisseur_id) %></th>
+    <th><%= model_class.human_attribute_name(:datepaiement) %></th>
+    <th><%= model_class.human_attribute_name(:motif) %></th>
+    <th><%= model_class.human_attribute_name(:montant) %></th>
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
   </thead>
   <tbody>
-    <% @paiements.each do |paiement| %>
+  <% @paiements.each do |paiement| %>
       <tr>
         <td><%= link_to paiement.id, paiement_path(paiement) %></td>
         <td><%= paiement.vente_id %></td>
         <td><%= paiement.client_id %></td>
+        <td><%= paiement.boutique_id %></td>
         <td><%= paiement.achat_id %></td>
         <td><%= paiement.fournisseur_id %></td>
-        <td><%= paiement.datepaiement %></td>
+        <td><%= paiement.datepaiement.strftime("%d %b %Y à %H:%M") %></td>
         <td><%= paiement.motif %></td>
         <td><%= paiement.montant %></td>
-        <td><%=l paiement.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_paiement_path(paiement), :class => 'btn btn-primary btn-xs' %>
@@ -39,7 +41,7 @@
                       :class => 'btn btn-danger btn-xs' %>
         </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
