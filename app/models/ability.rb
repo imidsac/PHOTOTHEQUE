@@ -12,7 +12,7 @@ class Ability
     elsif user.role == 'Admin'
       can :manage, :all
     elsif user.role == 'Manager'
-      can [:read, :index, :create, :update, :destroy], [Achat, Aligne, Vente, Venteligne, Produit, Categoriepro, Depense, Categoriedep, Fournisseur, Client, Balance, Tbanque, Banque, Paiement, Monetaire]
+      can [:read, :index, :create, :update, :destroy], [Achat, Aligne, Vente, Venteligne, Article, Cadre, Depense, Categoriedep, Fournisseur, Client, Balance, Tbanque, Banque, Paiement, Monetaire]
     elsif user.role == 'Comptable'
       can [:read, :index, :create, :update, :delete], [Achat, Aligne, Vente, Venteligne,  Depense, Categoriedep, Fournisseur, Client, Balance, Tbanque, Banque, Paiement, Monetaire]
     elsif user.role == 'Inviter'
