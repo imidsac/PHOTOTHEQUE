@@ -1,5 +1,29 @@
 Rails.application.routes.draw do
 
+  resources :journaliers
+  #get 'journaliers/index'
+
+  #get 'journaliers/show'
+
+  resources :retourelogs
+
+  resources :optionretoures
+
+  resources :livraisonlogs
+
+  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', sign_up: 'register' }
+=begin
+  devise_scope :user do
+    get :register, :to => 'devise/registrations#new'
+    post :register, :to => 'devise/registrations#create'
+    put :update_password, :to => 'devise/my_registrations#update'
+    get :login, :to => 'devise/sessions#new'
+    get :login, :to => 'devise/sessions#new', :as => :new_copasser_session
+    post :login, :to => 'devise/sessions#create'
+    delete :logout, :to => 'devise/sessions#destroy'
+  end
+=end
+
   resources :monetaires
 
   resources :balances
@@ -7,25 +31,65 @@ Rails.application.routes.draw do
   concern :sociable do
     resources :paiements
   end
+  resources :paiements
 
-  resources :fournisseurs
+  concern :gestion do
+    member do
+      post :valider
+      post :invalider
+    end
+  end
+
+  concern :gestion1 do
+    collection do
+      get :edit_multiple
+      put :update_multiple
+      post :livrets
+      post :nlivrets
+    end
+  end
+
+  concern :gestion_livraison do
+    member do
+      post :livret
+      post :nlivret
+    end
+  end
+
+  resources :fournisseurs do
+    concerns :sociable
+  end
 
   resources :achats do
-    resources :alignes
+    concerns :gestion
+    resources :alignes do
+      concerns :gestion1
+      concerns :gestion_livraison
+    end
     concerns :sociable
   end
 
   resources :boutiques
-  resources :clients
+  resources :clients do
+    concerns :sociable
+  end
 
   resources :ventes do
-    resources :ventelignes
+    concerns :gestion
+    resources :ventelignes do
+      concerns :gestion1
+      concerns :gestion_livraison
+    end
     concerns :sociable
   end
 
   resources :prestations do
+    concerns :gestion
     resources :prestation_attachments
-    resources :prestationlignes
+    resources :prestationlignes do
+      concerns :gestion1
+      concerns :gestion_livraison
+    end
     concerns :sociable
     collection do
          get 'image'
@@ -36,7 +100,6 @@ Rails.application.routes.draw do
 
   resources :coffres
 
-  devise_for :users
 
   resources :banques 
   resources :tbanques
