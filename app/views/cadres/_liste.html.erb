@@ -20,8 +20,10 @@
       <th><%= sort_link @q, :id, model_class.human_attribute_name(:id) %></th>
       <th><%= sort_link @q, :numerobaguete, model_class.human_attribute_name(:numerobaguete) %></th>
       <th><%= model_class.human_attribute_name(:info) %></th>
-      <th><%= sort_link @q, :stock, model_class.human_attribute_name(:stock) %></th>
-      <th><%= sort_link @q, :vstock, model_class.human_attribute_name(:vstock) %></th>
+      <th><%= model_class.human_attribute_name(:stock) %></th>
+      <th><%= model_class.human_attribute_name(:vstock) %></th>
+      <th><%= model_class.human_attribute_name(:Prix_detail) %></th>
+      <th><%= model_class.human_attribute_name(:Prix_gros) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -33,6 +35,8 @@
         <td><%= cadre.info %></td>
         <td><%= cadre.stock %></td>
         <td><%= cadre.vstock %></td>
+        <td><%= cadre.pdetail %></td>
+        <td><%= cadre.pgros %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       cadre_path(cadre), :class => 'btn btn-info btn-xs' %>

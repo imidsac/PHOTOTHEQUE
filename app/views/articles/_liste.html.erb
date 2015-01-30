@@ -14,8 +14,10 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= sort_link @q, :name,  model_class.human_attribute_name(:name) %></th>
       <th><%= sort_link @q, :reference, model_class.human_attribute_name(:reference) %></th>
-      <th><%= sort_link @q, :stock, model_class.human_attribute_name(:stock) %></th>
-      <th><%= sort_link @q, :vstock, model_class.human_attribute_name(:vstock) %></th>
+      <th><%= model_class.human_attribute_name(:stock) %></th>
+      <th><%= model_class.human_attribute_name(:vstock) %></th>
+      <th><%= model_class.human_attribute_name(:Prix_detail) %></th>
+      <th><%= model_class.human_attribute_name(:Prix_gros) %></th>
       <th><%= model_class.human_attribute_name(:etat) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -28,6 +30,8 @@
         <td><%= article.reference %></td>
         <td><%= article.stock %></td>
         <td><%= article.vstock %></td>
+        <td><%= article.pdetail %></td>
+        <td><%= article.pgros %></td>
         <% if article.etat == 'a' %>
         <td><%= 'Actif' %></td>
         <% elsif article.etat == 'i' %>

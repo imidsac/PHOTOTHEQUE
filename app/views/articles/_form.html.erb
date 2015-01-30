@@ -1,7 +1,12 @@
 <%= simple_form_for @article, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :name %>
   <%= f.input :reference %>
-  <%= f.input :etat %>
+    <%= f.input :pachat, :label => 'Prix achat' %>
+    <%= f.input :pdetail, :label => 'Prix detail' %>
+    <%= f.input :pgros, :label => 'Prix gros' %>
+    <% if current_user.role == 'Root' %>
+        <%= f.input :stock %>
+    <% end %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
