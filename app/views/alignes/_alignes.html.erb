@@ -1,33 +1,40 @@
 <%- model_class = Aligne -%>
 <% if @alignes.size != 0 %>
-    <% if @achat.etat_achat != 't' %>
-        <%= link_to t('.new', :default => t("helpers.links.Livret tout")),
-                    livrets_achat_alignes_path(@achat),
-                    :method => :livrets,
-                    :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                    :class => 'btn btn-success' %>
-    <% else %>
+    <div class="row ligne1">
+      <div class="col-sm-7 blog2">
+      </div>
 
-        <%= link_to t('.Annuler la livraison total', :default => t("helpers.links.Annuler la livraison total")),
-                    nlivrets_achat_alignes_path(@achat),
-                    :method => :nlivrets,
-                    :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                    :class => 'btn btn-danger' %>
-    <% end %>
+      <div class="col-sm-5 blog1">
+        <% if @achat.etat_achat != 't' %>
+            <%= link_to t('.new', :default => t("helpers.links.Livret tout")),
+                        livrets_achat_alignes_path(@achat),
+                        :method => :livrets,
+                        :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                        :class => 'btn btn-success' %>
+        <% else %>
 
-    <% if @achat.valide == 'n' %>
-        <%= link_to t('.Valider Achat', :default => t("helpers.links.Valider")),
-                    valider_achat_path(@achat),
-                    :method => :valider,
-                    :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                    :class => 'btn btn-success' %>
-    <% else %>
-        <%= link_to t('.Valider Achat', :default => t("helpers.links.Invalider")),
-                    invalider_achat_path(@achat),
-                    :method => :invalider,
-                    :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                    :class => 'btn btn-danger' %>
-    <% end %>
+            <%= link_to t('.Annuler la livraison total', :default => t("helpers.links.Annuler la livraison total")),
+                        nlivrets_achat_alignes_path(@achat),
+                        :method => :nlivrets,
+                        :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                        :class => 'btn btn-danger' %>
+        <% end %>
+        <% if @achat.valide == 'n' %>
+            <%= link_to t('.Valider Achat', :default => t("helpers.links.Valider")),
+                        valider_achat_path(@achat),
+                        :method => :valider,
+                        :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                        :class => 'btn btn-success' %>
+        <% else %>
+            <%= link_to t('.Valider Achat', :default => t("helpers.links.Invalider")),
+                        invalider_achat_path(@achat),
+                        :method => :invalider,
+                        :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                        :class => 'btn btn-danger' %>
+        <% end %>
+      </div>
+    </div>
+
     <%= form_tag edit_multiple_achat_alignes_path(@achat), method: :get do %>
 
         <table class="table table-striped table-hover table-condensed">

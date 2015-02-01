@@ -1,8 +1,8 @@
 <%= simple_form_for [@achat, @aligne], :html => { :class => 'form-horizontal' } do |f| %>
   <% if @achat.type_ac == 'A' %>
-  <%= f.association :article %>
+  <%= f.association :article, collection: Article.list, :label_method => lambda { |article| "#{article.name} | #{article.reference}"}, :include_blank => false %>
 <% elsif @achat.type_ac == 'C'%>
-  <%= f.association :cadre, label_method: :numerobaguete %>
+  <%= f.association :cadre, collection: Cadre.list, :label_method => lambda { |cadre| "#{cadre.numerobaguete}"}, :include_blank => false %>
 <% end %>
   <%= f.input :qte %>
   <%= f.input :prix_u %>
