@@ -11,16 +11,23 @@ class Paiement < ActiveRecord::Base
 	scope :jointure_boutique, -> { joins(:boutique)}
 	scope :jointure_client, -> { joins(:client)}
 	scope :jointure_vente, -> { joins(:vente)}
+	scope :jointure_prestation, -> { joins(:prestation)}
 	scope :jointure_fournisseur, -> { joins(:fournisseur)}
 	scope :jointure_achat, -> { joins(:achat)}
 	#jointure avec boutique et client
 	scope :jointure_boutique_client_vente_achat_fournisseur, -> { joins(:boutique, :client, :vente, :achat, :fournisseur) }
 
 	####JOURNALIER####
+	scope :journaliers_vente_boutique, -> { today.jointure_boutique.jointure_vente.jointure_banque }
 	scope :journaliers_vente_client, -> { today.jointure_client.jointure_vente.jointure_banque }
-	scope :journaliers_vente_boutique, -> { today.jointure_client.jointure_vente.jointure_banque }
+	scope :journaliers_prestation_client, -> { today.jointure_client.jointure_prestation.jointure_banque }
+
 	scope :journaliers_vente_total, -> { today.jointure_vente.sum('montant') }
-	scope :journaliers_achat, -> { today.jointure_fournisseur.jointure_achat.jointure_banque }
+	scope :journaliers_prestation_total, -> { today.jointure_prestation.sum('montant') }
+	scope :journaliers_boutique_total, -> { today.jointure_boutique.sum('montant') }
+
+	scope :journaliers_achat_total, -> { today.jointure_achat.sum('montant') }
+	scope :journaliers_achat_fournisseur, -> { today.jointure_fournisseur.jointure_achat.jointure_banque }
 
 
 	#####FOURNISSEUR####
@@ -55,6 +62,13 @@ class Paiement < ActiveRecord::Base
 	scope :total_paiement_vente, ->(vente_id) { where("vente_id = ?", vente_id).sum('montant')}
 	scope :vtotal_paiement_vente, ->(vente_id, mont) { (mont).to_i + total_paiement_vente(vente_id).to_i}
 
+###PRESTATION####
+	# TOUT LES PAIEMENTS EFFECTUER POUR PRESTATION
+	scope :tout_paiement_prestation, ->(prestation_id) { where("prestation_id = ?", prestation_id)}
+	# TOTAL LES PAIEMENTS EFFECTUER POUR PRESTATION
+	scope :total_paiement_prestation, ->(prestation_id) { where("prestation_id = ?", prestation_id).sum('montant')}
+	scope :ptotal_paiement_prestation, ->(prestation_id, mont) { (mont).to_i + total_paiement_prestation(prestation_id).to_i}
+
 
 
 	before_save :verifier_paiement
@@ -63,6 +77,8 @@ class Paiement < ActiveRecord::Base
 		if achat_id.present? and Paiement.vtotal_paiement_achat("#{achat_id}","#{montant}") > achat.somme
 			return false
 		elsif vente_id.present? and Paiement.vtotal_paiement_vente("#{vente_id}","#{montant}") > vente.somme
+			return false
+		elsif prestation_id.present? and Paiement.ptotal_paiement_prestation("#{prestation_id}","#{montant}") > prestation.somme
 			return false
 		end
 	end

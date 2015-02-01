@@ -53,6 +53,22 @@ class PaiementsController < ApplicationController
         end
       end
 
+      elsif params[:prestation_id]
+
+        @prestation = Prestation.find(params[:prestation_id])
+        @cli = @prestation.client_id
+        @paiement = @prestation.paiements.new(paiement_params)
+
+        respond_to do |format|
+          if @paiement.save
+            format.html { redirect_to @paiement.prestation, notice: 'Paiement was successfully created.' }
+            format.json { render :show, status: :created, location: @paiement }
+          else
+            format.html { redirect_to @paiement.prestation, notice: 'Paiement no v created.' }
+            format.json { render json: @paiement.errors, status: :unprocessable_entity }
+          end
+        end
+
     elsif params[:achat_id]
       @achat = Achat.find(params[:achat_id])
       #@montants = Paiement.total_paiement_achat(@achat.id)+params[:montant].to_i
@@ -105,6 +121,22 @@ class PaiementsController < ApplicationController
           format.json { render json: @paiement.errors, status: :unprocessable_entity }
         end
       end
+
+      elsif params[:prestation_id]
+        @prestation = Prestation.find(params[:prestation_id])
+        @cli = @prestation.client_id
+        @paiement = @prestation.paiements.update(paiement_params)
+
+        respond_to do |format|
+          #if @paiement.update(paiement_params)
+          if @paiement.save
+            format.html { redirect_to @paiement.prestation, notice: 'Paiement was successfully updated.' }
+            format.json { render :show, status: :ok, location: @paiement }
+          else
+            format.html { render :edit }
+            format.json { render json: @paiement.errors, status: :unprocessable_entity }
+          end
+        end
 
     elsif params[:achat_id]
       respond_to do |format|
@@ -167,7 +199,15 @@ class PaiementsController < ApplicationController
         format.json { head :no_content }
       end
 
-    elsif params[:achat_id]
+    elsif params[:prestation_id]
+      @paiement.destroy
+      respond_to do |format|
+        format.html { redirect_to @paiement.prestation, notice: 'Paiement was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+
+
+      elsif params[:achat_id]
       @paiement.destroy
       respond_to do |format|
         format.html { redirect_to @paiement.achat, notice: 'Paiement was successfully destroyed.' }
@@ -209,6 +249,6 @@ class PaiementsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def paiement_params
-    params.require(:paiement).permit(:vente_id, :boutique_id, :client_id, :achat_id, :banque_id, :fournisseur_id, :datepaiement, :motif, :montant, :type_paiement)
+    params.require(:paiement).permit(:vente_id, :prestation_id, :boutique_id, :client_id, :achat_id, :banque_id, :fournisseur_id, :datepaiement, :motif, :montant, :type_paiement)
   end
 end
