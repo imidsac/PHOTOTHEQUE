@@ -1,16 +1,16 @@
 
 <%- model_class = Paiement -%>
 <div class="page-header">
-  <h3><%= "Paiement Vente - #{number_to_currency(@ventes_paiement_total, precision: 0,  unit: "F CFA", format: "%n %u")}" %></h3>
+  <h3><%= "Paiement Prestation - #{number_to_currency(@prestations_paiement_total, precision: 0,  unit: "F CFA", format: "%n %u")}" %></h3>
 </div>
-<table id="ventes" class="table table-striped table-hover table-condensed display">
+<table id="prestations" class="table table-striped table-hover table-condensed display">
+
   <thead>
   <tr>
     <th><%= model_class.human_attribute_name(:id) %></th>
-    <th><%= model_class.human_attribute_name(:boutique) %></th>
     <th><%= model_class.human_attribute_name(:client) %></th>
     <th><%= model_class.human_attribute_name(:client_libre) %></th>
-    <th><%= model_class.human_attribute_name(:N_vente) %></th>
+    <th><%= model_class.human_attribute_name(:N_prestation) %></th>
     <th><%= model_class.human_attribute_name(:compte) %></th>
     <th><%= model_class.human_attribute_name(:motif) %></th>
     <th><%= model_class.human_attribute_name(:montant) %></th>
@@ -18,13 +18,12 @@
   </thead>
   <tbody>
   <% @i=1
-     @ventes_paiement.each do |paiement| %>
+     @prestations_paiement.each do |paiement| %>
       <tr>
         <td><%= @i %></td>
-        <td><%= paiement.name %></td>
-        <td><%= paiement.nom_cl+' / '+paiement.prenom %></td>
+        <td><%= paiement.nom_cl+' / '+paiement.prenom_cl %></td>
         <td><%= paiement.client_libre %></td>
-        <td><%= paiement.vente_num %></td>
+        <td><%= paiement.prestations_num %></td>
         <td><%= paiement.nom+' / '+paiement.compte %></td>
         <td><%= paiement.motif %></td>
         <td><%= number_to_currency(paiement.montant, precision: 0,  unit: "", format: "%n %u") %></td>

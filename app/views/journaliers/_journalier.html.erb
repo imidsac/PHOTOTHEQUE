@@ -1,5 +1,42 @@
 <% title "JOURNALIER #{Time.now.strftime("%d/%m/%Y")} " %>
-<%= render 'vente' %>
-<%= render 'achat' %>
-<%= render 'depense' %>
-<%= render 'paiement_vente' %>
+<% if @achats.size != 0 %>
+    <%= render 'achat' %>
+<% else %>
+    <%= 'No achats found' %>
+<% end %>
+<hr>
+<% if @ventes.size != 0 %>
+    <%= render 'vente' %>
+<% else %>
+    <%= 'No ventes found' %>
+<% end %>
+<hr>
+<% if @prestations.size != 0 %>
+    <%= render 'prestation' %>
+<% else %>
+    <%= 'No prestations found' %>
+<% end %>
+<hr>
+<% if @ventes_paiement.size != 0 %>
+
+    <%= render 'paiement_vente' %>
+<% else %>
+    <%= 'No paiement vente found' %>
+<% end %>
+<hr>
+<% if @prestations_paiement.size != 0 %>
+    <%= render 'paiement_prestation' %>
+<% else %>
+    <%= 'No paiement prestaions found' %>
+<% end %>
+<hr>
+<%= render 'paiement_boutique' %>
+<%= render 'paiement_achat' %>
+
+<% if @depenses.size != 0 %>
+
+    <%= render 'depense' %>
+<% else %>
+    <%= 'No depenses found' %>
+<% end %>
+<hr>

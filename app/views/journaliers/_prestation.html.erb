@@ -1,0 +1,65 @@
+<%- model_class = Prestation -%>
+<div class="page-header">
+  <h3><%=t '.title', :default => model_class.model_name.human.pluralize %></h3>
+</div>
+<table id="prestations" class="table table-striped table-hover table-condensed display">
+
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:client_id) %></th>
+    <th><%= model_class.human_attribute_name(:client_libre) %></th>
+    <th><%= model_class.human_attribute_name(:employe_id) %></th>
+    <th><%= model_class.human_attribute_name(:type) %></th>
+    <th><%= model_class.human_attribute_name(:etat) %></th>
+    <th><%= model_class.human_attribute_name(:total) %></th>
+    <th><%= model_class.human_attribute_name(:payee) %></th>
+
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @prestations.each do |prestation| %>
+      <tr>
+        <td><%= link_to prestation.id, prestation_path(prestation) %></td>
+        <td><%= prestation.nom %></td>
+        <td><%= prestation.client_libre %></td>
+        <td><%= prestation.em_nom %></td>
+        <% if prestation.type_pr == 'A' %>
+            <td><%= 'Agrandissement' %></td>
+        <% elsif prestation.type_pr == 'C' %>
+            <td><%= 'Cadrage' %></td>
+        <% elsif prestation.type_pr == 'S' %>
+            <td><%= 'Studio' %></td>
+        <% elsif prestation.type_pr == 'R' %>
+            <td><%= 'Retirage' %></td>
+        <% end %>
+        <% if prestation.etat_prestation == 'n' %>
+            <td><%= 'N-Livret' %></td>
+        <% elsif prestation.etat_prestation == 'p' %>
+            <td><%= 'P-Livret' %></td>
+        <% elsif prestation.etat_prestation == 't' %>
+            <td><%= 'T-Livret' %></td>
+        <% end %>
+        <td><%= number_to_currency(prestation.somme, precision: 0,  unit: "", format: "%n %u") %></td>
+        <td><%= number_to_currency(prestation.payee, precision: 0,  unit: "", format: "%n %u") %></td>
+
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      prestation_path(prestation), :class => 'btn btn-info btn-xs', :target => '_blank' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_prestation_path(prestation), :class => 'btn btn-primary btn-xs', :target => '_blank' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      prestation_path(prestation),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-danger btn-xs', :target => '_blank' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_prestation_path,
+            :class => 'btn btn-primary', :target => '_blank' %>
