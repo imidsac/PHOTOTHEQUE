@@ -89,15 +89,15 @@
                     <td><%= prestationligne.numero_prise %></td>
 
 
-                    <% if prestationligne.type_pl == 'sp' %>
+                    <% if prestationligne.type_pl == 'SP' %>
                         <td><%= 'Sur place' %></td>
-                    <% elsif prestationligne.type_pl == 'rv' %>
+                    <% elsif prestationligne.type_pl == 'RV' %>
                         <td><%= 'Rendez-vous' %></td>
                     <% end %>
 
-                    <% if prestationligne.color == 'c' %>
+                    <% if prestationligne.color == 'EC' %>
                         <td><%= 'En couleur' %></td>
-                    <% elsif prestationligne.color == 'n' %>
+                    <% elsif prestationligne.color == 'NB' %>
                         <td><%= 'Noir & Blanc' %></td>
 
                     <% end %>

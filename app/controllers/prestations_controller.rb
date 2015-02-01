@@ -9,7 +9,7 @@ class PrestationsController < ApplicationController
   # GET /prestations.json
   def index
     @prestations = Prestation.all
-    @prestations = @prestations.select("prestations.id,employe_id,employes.nom as em_nom,employes.prenom,client_id,client_libre, clients.nom as cl_nom, clients.prenom,type_pr, date_prestation,somme, payee, etat_prestation").joins(:client, :employe).order(date_prestation: :desc).limit(10)
+    @prestations = @prestations.select("prestations.id,employe_id,employes.nom as em_nom,employes.prenom,client_id,client_libre, clients.nom as cl_nom, clients.prenom,type_pr, date_prestation,somme, payee, etat_prestation").recent
 
     ##pdf
     respond_to do |format|

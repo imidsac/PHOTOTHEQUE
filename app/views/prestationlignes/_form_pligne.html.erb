@@ -15,8 +15,8 @@
 <% if @prestation.type_pr == 'S'%>
 
 <%= f.input :numero_prise %>
-<%= f.collection_radio_buttons :type_pl, [['sp', 'SP'], ['rv', 'RV']], :first, :last %><br />
-<%= f.collection_radio_buttons :color, [['c', 'E-C'], ['n', 'N-B']], :first, :last %>
+        <%= f.input :type_pl, collection: [['Sur place', 'SP'], ['Rendez-vous', 'RV']], :include_blank => false %>
+        <%= f.input :color, collection: [['En couleur', 'EC'], ['Noir & Blanc', 'NB']], :include_blank => false %>
 <% end %>
 <div class="form-actions">
   <%= f.button :submit, :class => 'btn btn-success' %>
