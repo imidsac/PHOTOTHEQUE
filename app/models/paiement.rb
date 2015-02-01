@@ -16,8 +16,10 @@ class Paiement < ActiveRecord::Base
 	scope :jointure_achat, -> { joins(:achat)}
 	#jointure avec boutique et client
 	scope :jointure_boutique_client_vente_achat_fournisseur, -> { joins(:boutique, :client, :vente, :achat, :fournisseur) }
+	scope :jointure_boutique_client_vente, -> { joins(:boutique, :client, :vente, :banque) }
 
 	####JOURNALIER####
+	scope :journaliers_vente, -> { today.jointure_boutique_client_vente }
 	scope :journaliers_vente_boutique, -> { today.jointure_boutique.jointure_vente.jointure_banque }
 	scope :journaliers_vente_client, -> { today.jointure_client.jointure_vente.jointure_banque }
 	scope :journaliers_prestation_client, -> { today.jointure_client.jointure_prestation.jointure_banque }
@@ -74,11 +76,11 @@ class Paiement < ActiveRecord::Base
 	before_save :verifier_paiement
 
 	def verifier_paiement
-		if achat_id.present? and Paiement.vtotal_paiement_achat("#{achat_id}","#{montant}") > achat.somme
+		if achat_id.present? and achat_id != -1 and Paiement.vtotal_paiement_achat("#{achat_id}","#{montant}") > achat.somme
 			return false
-		elsif vente_id.present? and Paiement.vtotal_paiement_vente("#{vente_id}","#{montant}") > vente.somme
+		elsif vente_id.present? and vente_id != -1 and Paiement.vtotal_paiement_vente("#{vente_id}","#{montant}") > vente.somme
 			return false
-		elsif prestation_id.present? and Paiement.ptotal_paiement_prestation("#{prestation_id}","#{montant}") > prestation.somme
+		elsif prestation_id.present? and prestation_id != -1 and Paiement.ptotal_paiement_prestation("#{prestation_id}","#{montant}") > prestation.somme
 			return false
 		end
 	end

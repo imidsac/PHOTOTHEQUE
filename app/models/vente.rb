@@ -1,4 +1,5 @@
 class Vente < ActiveRecord::Base
+  default_scope { where("ventes.id != ? ", -1)}
   belongs_to :boutique
   belongs_to :client
   has_many :ventelignes, dependent: :destroy

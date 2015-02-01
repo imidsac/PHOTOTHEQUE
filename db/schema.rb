@@ -271,12 +271,12 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   create_table "paiements", force: true do |t|
     t.integer  "banque_id",                 default: -1
     t.string   "type_paiement",  limit: 10,               null: false
-    t.integer  "boutique_id"
-    t.integer  "client_id"
-    t.integer  "vente_id"
-    t.integer  "prestation_id"
-    t.integer  "achat_id"
-    t.integer  "fournisseur_id"
+    t.integer  "boutique_id",               default: -1
+    t.integer  "client_id",                 default: -1
+    t.integer  "vente_id",                  default: -1
+    t.integer  "prestation_id",             default: -1
+    t.integer  "achat_id",                  default: -1
+    t.integer  "fournisseur_id",            default: -1
     t.integer  "employe_id"
     t.datetime "datepaiement"
     t.string   "motif"

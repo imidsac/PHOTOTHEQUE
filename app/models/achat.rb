@@ -1,4 +1,5 @@
 class Achat < ActiveRecord::Base
+  default_scope { where("achats.id != ? ", -1)}
   by_star_field :date_achat
 
   belongs_to :fournisseur
