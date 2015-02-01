@@ -2,8 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  $('#employe').dataTable()
-  	sPaginationType: "full_numbers"
+  $('#employes').dataTable
+    sPaginationType: "full_numbers"
     bJQueryUI: true
-    bProcessing: true
-    bServerSide: true
