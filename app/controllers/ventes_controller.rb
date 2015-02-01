@@ -133,6 +133,6 @@ class VentesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vente_params
-      params.require(:vente).permit(:boutique_id, :client_id, :client_libre, :date_vente, :etat_vente, :somme, :payee, :type_ve, :etat_vente)
+      params.require(:vente).permit(:boutique_id, :client_id, :client_libre, :date_vente, :type_ve)
     end
   end
