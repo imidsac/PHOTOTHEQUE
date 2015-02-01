@@ -1,5 +1,8 @@
-        require 'prestation_pdf.rb'
+require "PdfA5p.rb"
+#require "prestations_pdf.rb"
+require 'prestation_pdf.rb'
 class PrestationsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_prestation, only: [:show, :edit, :update, :destroy]
         
   # GET /prestations
@@ -26,9 +29,10 @@ class PrestationsController < ApplicationController
     @emp = Employe.select("id,nom, prenom").find(@prestation.employe_id)
 
     @prestationlignes = @prestation.prestationlignes.select("color,cadre_id,numerobaguete,formatphoto_id,dimention, qte,qtelivre,prix_u,montant,prestationlignes.numero_prise,prestationlignes.type_pl, prestationlignes.id, prestationlignes.etat").joins(:cadre, :formatphoto)
+    @paiements = @prestation.paiements.jointure_banque.jointure_prestation.select(:nom,:compte, :datepaiement, :motif, :montant, :id ).order(datepaiement: :desc)
+
+
     @prestationligne = Prestationligne.new(:prestation => @prestation)
-
-
     @paiement = Paiement.new(:prestation => @prestation, :client => @cli)
 
     #@prestation_attachments = @prestation.prestation_attachments.all
@@ -98,11 +102,29 @@ class PrestationsController < ApplicationController
   # DELETE /prestations/1
   # DELETE /prestations/1.json
   def destroy
+  if params[:client_id]
+    @prestation.destroy
+    respond_to do |format|
+      format.html { redirect_to client_url(@prestation.client_id, :factures_client => true), notice: 'Vente was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  else
     @prestation.destroy
     respond_to do |format|
       format.html { redirect_to prestations_url, notice: 'Prestation was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  end
+
+  def valider
+    @prestation.update(valide: 'o')
+    redirect_to @prestation, notice: 'Commande est valider.'
+  end
+
+  def invalider
+    @prestation.update(valide: 'n')
+    redirect_to @prestation, notice: 'Commande est invalider.'
   end
 
   private
@@ -113,6 +135,6 @@ class PrestationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prestation_params
-      params.require(:prestation).permit(:type_pr,:client_id, :client_libre, :employe_id, :date_prestation, :etat_prestation, :somme, :payee)
+      params.require(:prestation).permit(:type_pr,:client_id, :client_libre, :employe_id, :date_prestation)
     end
   end

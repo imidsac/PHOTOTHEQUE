@@ -1,7 +1,11 @@
+<% title "PRESTATION CONTENUE" %>
 <div class="row ligne1">
   <%- model_class = Prestation -%>
 <div class="page-header">
   <h3><%=t '.title', :default => model_class.model_name.human %> contenue</h3>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_prestation_path,
+              :class => 'btn btn-primary' %>
 </div>
 </div><!-- ligne1 -->
 <div class="row ligne2">

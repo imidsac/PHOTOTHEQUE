@@ -1,17 +1,29 @@
-<div class="col-sm-2">
-	<%= render 'layouts/sidebar' %>
-</div><!-- /.col-sm-2 -->
+<div class="row">
+  <div class="col-sm-2">
+    <%= render 'layouts/sidebar' %>
+  </div><!-- /.col-sm-2 -->
 
-<div class="col-sm-8">
-	<%= render 'detaile'  %>
-	<hr />
-	<%= render 'prestationlignes/plignes'  %>
+  <div class="col-sm-8">
+    <%= render 'detaile'  %>
+    <hr />
+    <%= render 'prestationlignes/plignes'  %>
+    <hr/>
+    <% if @paiements.size!=0 %>
+        <%= render :partial => 'plignes' %>
+    <% else %>
+        <%= 'No paiement found' %>
+    <% end %>
+  </div>
+
+  <div class="col-sm-2">
+    <% if @prestation.valide != 'o' %>
+        <%= render 'prestationlignes/form_pligne'  %>
+        <hr />
+    <% end %>
+
+    <% if @prestation.somme-@prestation.payee!=0 %>
+        <%= render 'paiements/form_ppaie'  %>
+    <% end %>
+  </div>
 </div>
 
-<div class="col-sm-2">
-	<%= render 'prestationlignes/form_pligne'  %>
-	<hr />
-	<% if @prestation.somme-@prestation.payee!=0 %>
-	<%= render 'paiements/form_ppaie'  %>
-	<% end %>
-</div>
