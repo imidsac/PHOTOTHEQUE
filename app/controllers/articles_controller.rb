@@ -4,10 +4,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    #@articles = Article.where("id != ?", -1)
-    @q = Article.list.search(params[:q])
-    @articles = @q.result(distinct: true)
-  
+    @articles = Article.list
   end
 
   def search
