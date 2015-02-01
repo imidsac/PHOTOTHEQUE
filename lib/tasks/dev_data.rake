@@ -317,7 +317,7 @@ namespace :dev_data do
         email: "No"
       )
 
-    (0..1110).map do |i|
+    (0..100).map do |i|
       Client.create!(
         nom: "Client-#{i}", 
         prenom: "Client-#{i}", 
@@ -429,6 +429,28 @@ namespace :dev_data do
         description: "Qui ne fonction plus..."
     )
     puts "===> Sample date have been set in DB  Options de retoures!"
+
+    Achat.create!(
+        id: -1,
+        fournisseur_id: -1,
+        fournisseur_libre: 'Initial achat',
+    )
+    puts "===> Sample date have been set in DB  Options de achats!"
+
+    Vente.create!(
+        id: -1,
+        client_id: -1,
+        boutique_id: -1,
+        client_libre: 'Initial vente',
+    )
+    puts "===> Sample date have been set in DB  Options de ventes!"
+
+    Prestation.create!(
+        id: -1,
+        client_id: -1,
+        client_libre: 'Initial vente',
+    )
+    puts "===> Sample date have been set in DB  Options de ventes!"
 
   end
   
