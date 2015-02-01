@@ -23,6 +23,7 @@ class ClientsController < ApplicationController
   # GET /clients/1.json
   def show
     @ventes = Vente.factures_client(@client.id)
+    @prestations = Prestation.select("prestations.id,employe_id,employes.nom as em_nom,employes.prenom,client_id,client_libre, clients.nom as cl_nom, clients.prenom,type_pr, date_prestation,somme, payee, etat_prestation").jointure_employe_client.prestations_client(@client.id)
     @paiements = Paiement.select(:nom,:compte, :datepaiement, :motif, :montant, :id ).jointure_banque.tout_paiement_client(@client.id)
   end
 

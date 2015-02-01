@@ -1,43 +1,52 @@
 <% title "#{@client.nom + '   ' + @client.prenom}" %>
 
 <%- model_class = Client -%>
-   <div class="form-actions">
-     <%= link_to t('.back', :default => t("helpers.links.back")),
-                 clients_path, :class => 'btn'  %>
-     <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                 edit_client_path(@client), :class => 'btn btn-primary' %>
-     <% if current_user.role == 'Admin' or current_user.role == 'Root' %>
-     <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                 client_path(@client),
-                 :method => 'delete',
-                 :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                 :class => 'btn btn-danger' %>
-    <% end %>
-   </div>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              clients_path, :class => 'btn' %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_client_path(@client), :class => 'btn btn-primary' %>
+  <% if current_user.role == 'Admin' or current_user.role == 'Root' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  client_path(@client),
+                  :method => 'delete',
+                  :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                  :class => 'btn btn-danger' %>
+  <% end %>
+</div>
 <div class="page-header">
 
- <!--<h1><%=t '.title', :default => model_class.model_name.human %></h1>-->
- <h1><%= @client.nom + '   ' + @client.prenom %></h1>  <h1><%=  %></h1>
+  <!--<h1><%= t '.title', :default => model_class.model_name.human %></h1>-->
+  <h1><%= @client.nom + '   ' + @client.prenom %></h1>
+
+  <h1><%= %></h1>
 </div>
 
 <ul class="nav nav-pills">
 
   <li class="active"><%= link_to 'Profile', client_path() %></li>
   <!--<li ><%= link_to 'Facture', '', :class => "badge" %></li>-->
-  <li><%= link_to  "Facture #{@ventes.size}", client_path(:factures_client => true)  %></li>
-  <li><%= link_to  "Paiement #{@paiements.size}", client_path(:tout_paiement_client => true) %></li>
+  <li><%= link_to "Facture #{@ventes.size}", client_path(:factures_client => true) %></li>
+  <li><%= link_to "Prestation #{@prestations.size}", client_path(:prestations_client => true) %></li>
+  <li><%= link_to "Paiement #{@paiements.size}", client_path(:tout_paiement_client => true) %></li>
 </ul>
 
 
 <% if params[:factures_client] %>
     <% if @ventes.size!=0 %>
-    <%= render 'factures_client' %>
-     <% else %>
+        <%= render 'factures_client' %>
+    <% else %>
         <h1><%= 'No found!!!' %></h1>
-     <% end %>
+    <% end %>
+<% elsif params[:prestations_client] %>
+    <% if @prestations.size!=0 %>
+        <%= render 'prestations_client' %>
+    <% else %>
+        <h1><%= 'No found!!!' %></h1>
+    <% end %>
 <% elsif params[:tout_paiement_client] %>
     <% if @paiements.size!=0 %>
-    <%= render :partial => 'paiements_client' %>
+        <%= render :partial => 'paiements_client' %>
     <% else %>
         <h1><%= 'No found!!!' %></h1>
     <% end %>
