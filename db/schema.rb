@@ -108,10 +108,11 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   add_index "banques", ["user_id"], name: "index_banques_on_user_id", using: :btree
 
   create_table "boutiques", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name",                                null: false
     t.string   "phone"
     t.text     "address"
     t.integer  "user_id"
+    t.string   "etat",       limit: 10, default: "a"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -149,12 +150,13 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   add_index "categoriedeps", ["user_id"], name: "index_categoriedeps_on_user_id", using: :btree
 
   create_table "clients", force: true do |t|
-    t.string   "nom",                                null: false
+    t.string   "nom",                                 null: false
     t.string   "prenom"
     t.string   "phone"
     t.text     "address"
     t.string   "email"
-    t.string   "type_cl",    limit: 1, default: "o"
+    t.string   "type_cl",    limit: 1,  default: "o"
+    t.string   "etat",       limit: 10, default: "a"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -195,9 +197,10 @@ ActiveRecord::Schema.define(version: 20150129223557) do
     t.text     "address"
     t.string   "email"
     t.string   "compte_banc"
-    t.decimal  "salaireb",    default: 0.0
+    t.decimal  "salaireb",               default: 0.0
     t.string   "type_em"
     t.date     "date_recru"
+    t.string   "etat",        limit: 10, default: "a"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -220,6 +223,7 @@ ActiveRecord::Schema.define(version: 20150129223557) do
     t.string   "phone"
     t.text     "address"
     t.string   "email"
+    t.string   "etat",         limit: 10, default: "a"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -261,6 +265,7 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   create_table "optionretoures", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.string   "etat",        limit: 10, default: "a"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -406,19 +411,20 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "nom",                                        null: false
-    t.string   "prenom",                                     null: false
-    t.string   "email",                  default: "",        null: false
-    t.string   "encrypted_password",     default: "",        null: false
+    t.string   "nom",                                                   null: false
+    t.string   "prenom",                                                null: false
+    t.string   "email",                             default: "",        null: false
+    t.string   "encrypted_password",                default: "",        null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,         null: false
+    t.integer  "sign_in_count",                     default: 0,         null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "role",                   default: "Inviter"
+    t.string   "role",                              default: "Inviter"
+    t.string   "etat",                   limit: 10, default: "a"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
