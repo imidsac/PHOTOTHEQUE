@@ -5,6 +5,7 @@ class CreateBoutiques < ActiveRecord::Migration
       t.string :phone
       t.text :address
       t.references :user, index: true
+      t.string :etat, limit: 10, default: 'a' #actif
 
       t.timestamps
     end

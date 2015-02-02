@@ -7,6 +7,7 @@ class CreateClients < ActiveRecord::Migration
       t.text :address
       t.string :email
       t.string :type_cl, limit:1, default: 'o'
+      t.string :etat, limit: 10, default: 'a' #actif
       t.references :user, index: true
 
       t.timestamps
