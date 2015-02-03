@@ -9,7 +9,7 @@
       <div class="col-sm-4">
         <%= f.association :categoriedep, :label => 'Categorie' %>
         <%= f.association :employe, :label_method => lambda { |employe| "#{employe.nom} | #{employe.prenom}"}, :include_blank => true %>
-        <%= f.input :montant %>
+        <%= f.input :montant, input_html: { value: '0'} %>
         <hr/>
         <div class="form-actions">
           <%= f.button :submit, :class => 'btn btn-primary' %>
