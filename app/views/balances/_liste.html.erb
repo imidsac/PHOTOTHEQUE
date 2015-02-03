@@ -13,6 +13,7 @@
       <th><%= model_class.human_attribute_name(:depenses) %></th>
       <th><%= model_class.human_attribute_name(:ventes) %></th>
       <th><%= model_class.human_attribute_name(:prestations) %></th>
+      <th><%= model_class.human_attribute_name(:balances) %></th>
       <th><%= model_class.human_attribute_name(:tva_net) %></th>
       <!--
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -29,6 +30,7 @@
         <td><%= balance.depenses %></td>
         <td><%= balance.ventes %></td>
         <td><%= balance.prestations %></td>
+        <td><%= number_to_currency((balance.ventes+balance.prestations)-(balance.achats+balance.depenses), precision: 0, unit: "", format: "%n %u") %></td>
         <td><%= balance.tva_net %></td>
         <!--
         <td>
