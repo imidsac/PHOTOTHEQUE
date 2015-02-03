@@ -3,13 +3,13 @@
 <% if @prestation.type_pr == 'C' %>
 
 
-<%= f.association :cadre, collection: Cadre.where.not(id: Prestationligne.select('cadre_id').where("prestationlignes.prestation_id = ?", @prestation.id)), :label_method => lambda { |cadre| "#{cadre.numerobaguete}"}, :include_blank => false %>
+<%= f.association :cadre, collection: Cadre.list.where.not(id: Prestationligne.select('cadre_id').where("prestationlignes.prestation_id = ?", @prestation.id)), :label_method => lambda { |cadre| "#{cadre.numerobaguete}"}, :include_blank => false %>
 <% end %>
 
 
-<%= f.association :formatphoto, label_method: :dimention, :include_blank => false %>
+<%= f.association :formatphoto, collection: Formatphoto.list.where.not(id: Prestationligne.select('formatphoto_id').where("prestationlignes.prestation_id = ?", @prestation.id)), :label_method => lambda { |formatphoto| "#{formatphoto.dimention}"}, :include_blank => false %>
 
-<%= f.input :qte %>
+<%= f.input :qte, input_html: { value: '1'} %>
 <%= f.input :prix_u %>
 
 <% if @prestation.type_pr == 'S'%>
