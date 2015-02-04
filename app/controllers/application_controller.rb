@@ -13,15 +13,15 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(user)
     if user.role =='Root'
-      ventes_path
+      journaliers_path
     elsif user.role == 'Admin'
-      ventes_path
+      journaliers_path
     elsif user.role == 'Manager'
-      new_vente_path
+      journaliers_path
     elsif user.role == 'Comptable'
-      paiements_path
+      journaliers_path
     elsif user.role == 'Inviter'
-      welcome_home_path
+      home_index_path
     end
   end
 
