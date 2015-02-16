@@ -19,4 +19,5 @@
 //= require bootswatch/bootswatch
 //= require twitter/bootstrap
 //= require turbolinks
+//= require_tree .
 

@@ -17,4 +17,5 @@
  *= require bootstrap_and_overrides
  *= require bootswatch/loader
  *= require bootswatch/bootswatch
+ *= require_tree .
  */
