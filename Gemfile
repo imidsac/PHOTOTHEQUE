@@ -112,5 +112,5 @@ gem 'figaro', '~> 1.0.0'
 
 gem 'by_star', '~> 2.2.1'
 
-gem 'angularjs-rails', '~> 1.3.36'
+#gem 'angularjs-rails', '~> 1.3.36'
 
