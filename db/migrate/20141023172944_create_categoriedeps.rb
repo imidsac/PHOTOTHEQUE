@@ -3,6 +3,7 @@ class CreateCategoriedeps < ActiveRecord::Migration
     create_table :categoriedeps do |t|
       t.string :name, null: false
       t.string :description
+      t.string :etat, limit: 10, default: 'a' #actif
       t.references :user, index: true
 
       t.timestamps

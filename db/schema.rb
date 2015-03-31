@@ -19,17 +19,26 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   create_table "achats", force: true do |t|
     t.integer  "fournisseur_id",               default: -1
     t.string   "fournisseur_libre",            default: "No"
-    t.datetime "date_achat"
     t.string   "type_ac",           limit: 1,  default: "A"
     t.decimal  "somme",                        default: 0.0
+    t.decimal  "somme1",                       default: 0.0
     t.decimal  "payee",                        default: 0.0
+    t.decimal  "payee1",                       default: 0.0
+    t.decimal  "depense",                      default: 0.0
+    t.decimal  "depense1",                     default: 0.0
+    t.decimal  "remise",                       default: 0.0
     t.decimal  "tva",                          default: 0.0
+    t.decimal  "avoir",                        default: 0.0
+    t.decimal  "asomme",                       default: 0.0
+    t.decimal  "apayee",                       default: 0.0
     t.string   "etat_achat",        limit: 1,  default: "n"
     t.string   "num_ac",            limit: 30
+    t.string   "num",               limit: 10
     t.string   "valide",            limit: 1,  default: "n"
     t.integer  "monetaire_id",                 default: -1
-    t.integer  "retoure",                      default: 0
     t.integer  "user_id"
+    t.datetime "date_achat"
+    t.datetime "date_retoure"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -62,21 +71,28 @@ ActiveRecord::Schema.define(version: 20150129223557) do
 
   create_table "articles", force: true do |t|
     t.integer  "fournisseur_id"
-    t.string   "name",                                   null: false
+    t.string   "name",                                              null: false
     t.string   "reference"
-    t.decimal  "stock",                    default: 0.0
-    t.decimal  "vstock",                   default: 0.0
-    t.decimal  "dstock",                   default: 0.0
-    t.decimal  "EnCommande",               default: 0.0
-    t.decimal  "pachat",                   default: 0.0
-    t.decimal  "pdetail",                  default: 0.0
-    t.decimal  "pgros",                    default: 0.0
-    t.string   "etat",           limit: 1, default: "a"
+    t.string   "num",              limit: 10
+    t.string   "codearticle"
+    t.decimal  "stock",                       default: 0.0
+    t.decimal  "vstock",                      default: 0.0
+    t.decimal  "dstock",                      default: 0.0
+    t.decimal  "EnCommande",                  default: 0.0
+    t.decimal  "pachat",                      default: 0.0
+    t.decimal  "previen",                     default: 0.0
+    t.decimal  "pdetail",                     default: 0.0
+    t.decimal  "pgros",                       default: 0.0
+    t.decimal  "pourcent_pdetail",            default: 0.0
+    t.decimal  "pourcent_pgros",              default: 0.0
+    t.string   "niveau",           limit: 30, default: "Originale"
+    t.string   "etat",             limit: 10, default: "a"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "articles", ["codearticle"], name: "index_articles_on_codearticle", unique: true, using: :btree
   add_index "articles", ["fournisseur_id"], name: "index_articles_on_fournisseur_id", using: :btree
   add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
@@ -98,8 +114,9 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   create_table "banques", force: true do |t|
     t.string   "nom"
     t.string   "compte"
-    t.decimal  "solde",      default: 0.0
-    t.decimal  "font",       default: 0.0
+    t.decimal  "solde",                 default: 0.0
+    t.decimal  "font",                  default: 0.0
+    t.string   "etat",       limit: 10, default: "a"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -121,27 +138,35 @@ ActiveRecord::Schema.define(version: 20150129223557) do
 
   create_table "cadres", force: true do |t|
     t.integer  "fournisseur_id"
-    t.string   "numerobaguete",  limit: 30,               null: false
+    t.string   "numerobaguete",    limit: 30,                       null: false
     t.text     "info"
-    t.decimal  "stock",                     default: 0.0
-    t.decimal  "vstock",                    default: 0.0
-    t.decimal  "dstock",                    default: 0.0
-    t.decimal  "EnCommande",                default: 0.0
-    t.decimal  "pachat",                    default: 0.0
-    t.decimal  "pdetail",                   default: 0.0
-    t.decimal  "pgros",                     default: 0.0
-    t.string   "etat",           limit: 1,  default: "a"
+    t.string   "num",              limit: 10
+    t.string   "codecadre"
+    t.decimal  "stock",                       default: 0.0
+    t.decimal  "vstock",                      default: 0.0
+    t.decimal  "dstock",                      default: 0.0
+    t.decimal  "EnCommande",                  default: 0.0
+    t.decimal  "pachat",                      default: 0.0
+    t.decimal  "previen",                     default: 0.0
+    t.decimal  "pdetail",                     default: 0.0
+    t.decimal  "pgros",                       default: 0.0
+    t.decimal  "pourcent_pdetail",            default: 0.0
+    t.decimal  "pourcent_pgros",              default: 0.0
+    t.string   "niveau",           limit: 30, default: "Originale"
+    t.string   "etat",             limit: 10, default: "a"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "cadres", ["codecadre"], name: "index_cadres_on_codecadre", unique: true, using: :btree
   add_index "cadres", ["fournisseur_id"], name: "index_cadres_on_fournisseur_id", using: :btree
   add_index "cadres", ["user_id"], name: "index_cadres_on_user_id", using: :btree
 
   create_table "categoriedeps", force: true do |t|
-    t.string   "name",        null: false
+    t.string   "name",                                 null: false
     t.string   "description"
+    t.string   "etat",        limit: 10, default: "a"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -150,18 +175,29 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   add_index "categoriedeps", ["user_id"], name: "index_categoriedeps_on_user_id", using: :btree
 
   create_table "clients", force: true do |t|
-    t.string   "nom",                                 null: false
-    t.string   "prenom"
-    t.string   "phone"
+    t.string   "nom",                    default: "",       null: false
+    t.string   "prenom",                 default: "",       null: false
+    t.string   "sexe"
+    t.string   "nationalite"
+    t.string   "ville",                  default: "Bamako", null: false
+    t.string   "region",                 default: "Bamako", null: false
+    t.date     "date_nai"
+    t.string   "lieu_nai"
+    t.string   "phone",                  default: "",       null: false
     t.text     "address"
     t.string   "email"
-    t.string   "type_cl",    limit: 1,  default: "o"
-    t.string   "etat",       limit: 10, default: "a"
+    t.string   "codeclient"
+    t.string   "type_cl",     limit: 1,  default: "o"
+    t.string   "etat",        limit: 10, default: "a"
+    t.decimal  "points",                 default: 0.0
+    t.string   "num",         limit: 10
     t.integer  "user_id"
+    t.date     "date_ins"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "clients", ["codeclient"], name: "index_clients_on_codeclient", unique: true, using: :btree
   add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "coffres", force: true do |t|
@@ -192,13 +228,13 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   create_table "employes", force: true do |t|
     t.string   "nom"
     t.string   "prenom"
-    t.string   "sexe"
+    t.string   "sexe",        limit: 1,  default: "m"
     t.string   "phone"
     t.text     "address"
     t.string   "email"
     t.string   "compte_banc"
     t.decimal  "salaireb",               default: 0.0
-    t.string   "type_em"
+    t.string   "type_em",     limit: 1,  default: "r"
     t.date     "date_recru"
     t.string   "etat",        limit: 10, default: "a"
     t.integer  "user_id"
@@ -223,24 +259,27 @@ ActiveRecord::Schema.define(version: 20150129223557) do
     t.string   "phone"
     t.text     "address"
     t.string   "email"
-    t.string   "etat",         limit: 10, default: "a"
+    t.string   "codefournisseur"
+    t.string   "etat",            limit: 10, default: "a"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "fournisseurs", ["codefournisseur"], name: "index_fournisseurs_on_codefournisseur", unique: true, using: :btree
   add_index "fournisseurs", ["user_id"], name: "index_fournisseurs_on_user_id", using: :btree
 
   create_table "livraisonlogs", force: true do |t|
-    t.datetime "date_liv"
-    t.integer  "achat_id"
-    t.integer  "article_id"
-    t.integer  "cadre_id"
-    t.decimal  "qte"
-    t.integer  "vente_id"
-    t.string   "type_liv",   limit: 10, null: false
+    t.integer  "achat_id",                 default: -1
+    t.integer  "article_id",               default: -1
+    t.integer  "cadre_id",                 default: -1
+    t.decimal  "qte",                      default: 0.0
+    t.integer  "vente_id",                 default: -1
+    t.integer  "prestation_id",            default: -1
+    t.string   "type_liv",      limit: 10,               null: false
     t.string   "etat"
     t.integer  "user_id"
+    t.datetime "date_liv"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -248,6 +287,7 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   add_index "livraisonlogs", ["achat_id"], name: "index_livraisonlogs_on_achat_id", using: :btree
   add_index "livraisonlogs", ["article_id"], name: "index_livraisonlogs_on_article_id", using: :btree
   add_index "livraisonlogs", ["cadre_id"], name: "index_livraisonlogs_on_cadre_id", using: :btree
+  add_index "livraisonlogs", ["prestation_id"], name: "index_livraisonlogs_on_prestation_id", using: :btree
   add_index "livraisonlogs", ["user_id"], name: "index_livraisonlogs_on_user_id", using: :btree
   add_index "livraisonlogs", ["vente_id"], name: "index_livraisonlogs_on_vente_id", using: :btree
 
@@ -255,6 +295,7 @@ ActiveRecord::Schema.define(version: 20150129223557) do
     t.string   "money"
     t.string   "code_money"
     t.decimal  "valeur"
+    t.string   "etat",       limit: 10, default: "a"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -276,18 +317,20 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   create_table "paiements", force: true do |t|
     t.integer  "banque_id",                 default: -1
     t.string   "type_paiement",  limit: 10,               null: false
+    t.integer  "achat_id",                  default: -1
+    t.integer  "fournisseur_id",            default: -1
     t.integer  "boutique_id",               default: -1
     t.integer  "client_id",                 default: -1
     t.integer  "vente_id",                  default: -1
     t.integer  "prestation_id",             default: -1
-    t.integer  "achat_id",                  default: -1
-    t.integer  "fournisseur_id",            default: -1
     t.integer  "employe_id"
-    t.datetime "datepaiement"
     t.string   "motif"
     t.decimal  "montant",                   default: 0.0
-    t.string   "etat"
+    t.decimal  "debit",                     default: 0.0
+    t.decimal  "credit",                    default: 0.0
+    t.string   "etat",           limit: 1,  default: "n"
     t.integer  "user_id"
+    t.datetime "datepaiement"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -340,16 +383,21 @@ ActiveRecord::Schema.define(version: 20150129223557) do
     t.integer  "client_id",                  default: -1
     t.string   "client_libre",               default: "No"
     t.integer  "employe_id",                 default: -1
-    t.datetime "date_prestation"
+    t.string   "type_pr",         limit: 1,  default: "s"
     t.string   "etat_prestation", limit: 1,  default: "n"
     t.decimal  "somme",                      default: 0.0
     t.decimal  "payee",                      default: 0.0
+    t.decimal  "remise",                     default: 0.0
     t.decimal  "tva",                        default: 0.0
-    t.string   "type_pr",         limit: 1,  default: "s"
+    t.decimal  "avoir",                      default: 0.0
+    t.decimal  "asomme",                     default: 0.0
+    t.decimal  "apayee",                     default: 0.0
     t.string   "num_pr",          limit: 30
-    t.string   "valide",          limit: 1,  default: "n"
-    t.integer  "retoure",                    default: 0
+    t.string   "num",             limit: 10
+    t.string   "valide",                     default: "n"
     t.integer  "user_id"
+    t.datetime "date_prestation"
+    t.datetime "date_retoure"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -359,16 +407,17 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   add_index "prestations", ["user_id"], name: "index_prestations_on_user_id", using: :btree
 
   create_table "retourelogs", force: true do |t|
-    t.string   "type_re",          limit: 10, null: false
-    t.datetime "date_re"
-    t.integer  "article_id"
-    t.integer  "cadre_id"
-    t.decimal  "qte"
-    t.integer  "optionretoure_id"
-    t.integer  "achat_id"
-    t.integer  "vente_id"
+    t.string   "type_re",          limit: 10,               null: false
+    t.integer  "article_id",                  default: -1
+    t.integer  "cadre_id",                    default: -1
+    t.decimal  "qte",                         default: 0.0
+    t.integer  "optionretoure_id",                          null: false
+    t.integer  "achat_id",                    default: -1
+    t.integer  "vente_id",                    default: -1
+    t.integer  "prestation_id",               default: -1
     t.string   "motif"
     t.integer  "user_id"
+    t.datetime "date_re"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -377,6 +426,7 @@ ActiveRecord::Schema.define(version: 20150129223557) do
   add_index "retourelogs", ["article_id"], name: "index_retourelogs_on_article_id", using: :btree
   add_index "retourelogs", ["cadre_id"], name: "index_retourelogs_on_cadre_id", using: :btree
   add_index "retourelogs", ["optionretoure_id"], name: "index_retourelogs_on_optionretoure_id", using: :btree
+  add_index "retourelogs", ["prestation_id"], name: "index_retourelogs_on_prestation_id", using: :btree
   add_index "retourelogs", ["user_id"], name: "index_retourelogs_on_user_id", using: :btree
   add_index "retourelogs", ["vente_id"], name: "index_retourelogs_on_vente_id", using: :btree
 
@@ -457,16 +507,21 @@ ActiveRecord::Schema.define(version: 20150129223557) do
     t.integer  "boutique_id",             default: -1
     t.integer  "client_id",               default: -1
     t.string   "client_libre",            default: "No"
-    t.datetime "date_vente"
-    t.string   "etat_vente",   limit: 1,  default: "n"
     t.decimal  "somme",                   default: 0.0
     t.decimal  "payee",                   default: 0.0
+    t.decimal  "remise",                  default: 0.0
     t.decimal  "tva",                     default: 0.0
-    t.string   "type_ve",      limit: 1,  default: "A"
+    t.decimal  "avoir",                   default: 0.0
+    t.decimal  "asomme",                  default: 0.0
+    t.decimal  "apayee",                  default: 0.0
     t.string   "num_ve",       limit: 30
-    t.string   "valide",       limit: 1,  default: "n"
-    t.integer  "retoure",                 default: 0
+    t.string   "num",          limit: 10
+    t.string   "valide",                  default: "n"
+    t.string   "type_ve",      limit: 1,  default: "A"
+    t.string   "etat_vente",   limit: 1,  default: "n"
     t.integer  "user_id"
+    t.datetime "date_vente"
+    t.datetime "date_retoure"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

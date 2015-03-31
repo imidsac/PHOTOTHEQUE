@@ -2,15 +2,16 @@ class CreateRetourelogs < ActiveRecord::Migration
   def change
     create_table :retourelogs do |t|
       t.string :type_re, limit: 10, null: false
-      t.datetime :date_re
-      t.references :article, index: true
-      t.references :cadre, index: true
-      t.decimal :qte
-      t.references :optionretoure, index: true
-      t.references :achat, index: true
-      t.references :vente, index: true
+      t.references :article, index: true, default: -1
+      t.references :cadre, index: true, default: -1
+      t.decimal :qte, default: 0
+      t.references :optionretoure, index: true, null: false
+      t.references :achat, index: true, default: -1
+      t.references :vente, index: true, default: -1
+      t.references :prestation, index: true, default: -1
       t.string :motif
       t.references :user, index: true
+      t.datetime :date_re
 
       t.timestamps
     end
