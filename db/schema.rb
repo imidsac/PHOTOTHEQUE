@@ -411,6 +411,8 @@ ActiveRecord::Schema.define(version: 20150129223557) do
     t.integer  "article_id",                  default: -1
     t.integer  "cadre_id",                    default: -1
     t.decimal  "qte",                         default: 0.0
+    t.decimal  "prix_u",                      default: 0.0
+    t.decimal  "montant",                     default: 0.0
     t.integer  "optionretoure_id",                          null: false
     t.integer  "achat_id",                    default: -1
     t.integer  "vente_id",                    default: -1

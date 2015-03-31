@@ -5,6 +5,8 @@ class CreateRetourelogs < ActiveRecord::Migration
       t.references :article, index: true, default: -1
       t.references :cadre, index: true, default: -1
       t.decimal :qte, default: 0
+      t.decimal :prix_u, default: 0
+      t.decimal :montant, default: 0
       t.references :optionretoure, index: true, null: false
       t.references :achat, index: true, default: -1
       t.references :vente, index: true, default: -1
