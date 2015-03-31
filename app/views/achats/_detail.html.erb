@@ -15,6 +15,8 @@
     <div class="form-actions">
       <%= link_to t('.back', :default => t("helpers.links.back")),
                   achats_path, :class => 'btn-xs btn-info' %>
+      <% if current_user.role != 'Root'  %>
+          <% if @achat.date_achat > Time.now - 1.days  %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
                   edit_achat_path(@achat), :class => 'btn-xs btn-primary' %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -22,14 +24,23 @@
                   :method => 'delete',
                   :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
                   :class => 'btn-xs btn-danger' %>
-
+          <% end  %>
+      <% elsif current_user.role == 'Root'  %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_achat_path(@achat), :class => 'btn-xs btn-primary' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      achat_path(@achat),
+                      :method => 'delete',
+                      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                      :class => 'btn-xs btn-danger' %>
+      <% end  %>
     </div>
   </div>
   <!-- blog1 -->
 
   <div class="col-sm-6 blog2">
     <%= link_to t('.pdf', :default => t("helpers.links.pdf")),
-                '#', :class => 'btn-xs btn-info' %>
+                achat_path(@achat, format: "pdf"), :class => 'btn-xs btn-info' %>
 
   </div>
 </div>
@@ -39,18 +50,12 @@
     <dl class="dl-horizontal">
       <dt><strong><%= model_class.human_attribute_name(:fournisseur_id) %>:</strong></dt>
       <% if @achat.fournisseur_id != -1 %>
-          <dd><%= @fourni.name_company %></dd>
+          <dd><%= link_to @fourni.name_company, fournisseur_path(@fourni.id), :target => '_blank' %></dd>
       <% else %>
           <dd><%= @achat.fournisseur_libre %></dd>
       <% end %>
       <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
       <dd><%= @achat.date_achat.strftime("%d %b %Y à %H:%M") %></dd>
-      <dt><strong><%= model_class.human_attribute_name(:type) %>:</strong></dt>
-      <% if @achat.type_ac == 'C' %>
-          <dd><%= 'Cadre' %></dd>
-      <% elsif @achat.type_ac == 'A' %>
-          <dd><%= 'Article' %></dd>
-      <% end %>
     </dl>
   </div>
   <div class="col-sm-6">
@@ -61,15 +66,15 @@
 
       <% elsif @achat.etat_achat == 'p' %>
           <dd><%= 'P-Livret' %></dd>
-      <% elsif @achat.etat_achat == 'p' %>
+      <% elsif @achat.etat_achat == 't' %>
           <dd><%= 'T-Livret' %></dd>
       <% end %>
       <dt><strong><%= model_class.human_attribute_name(:total) %>:</strong></dt>
-      <dd><%= number_to_currency(@achat.somme, precision: 0, unit: " F CFA", format: "%n %u") %></dd>
+      <dd><%= number_to_currency(@achat.somme, precision: 0, unit: "#{@monait.code_money}", format: "%n %u") %></dd>
       <dt><strong><%= model_class.human_attribute_name(:payee) %>:</strong></dt>
-      <dd><%= number_to_currency(@achat.payee, precision: 0, unit: " F CFA", format: "%n %u") %></dd>
+      <dd><%= number_to_currency(@achat.payee, precision: 0, unit: "#{@monait.code_money}", format: "%n %u") %></dd>
       <dt><strong>Reste:</strong></dt>
-      <dd><%= number_to_currency(@achat.somme-@achat.payee, precision: 0, unit: " F CFA", format: "%n %u") %></dd>
+      <dd><%= number_to_currency(@achat.somme-@achat.payee, precision: 0, unit: "#{@monait.code_money}", format: "%n %u") %></dd>
     </dl>
   </div>
 </div>

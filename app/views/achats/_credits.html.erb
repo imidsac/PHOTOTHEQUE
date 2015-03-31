@@ -1,0 +1,6 @@
+<% title "DEBITEURS " %>
+<%= render 'credits_fournisseurs_fideles' %>
+<%= render 'credits_fournisseurs_libres' %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_achat_path,
+            :class => 'btn btn-primary' %>

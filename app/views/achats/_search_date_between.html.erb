@@ -1,0 +1,6 @@
+<%= form_tag achats_path, :method => 'get'  do  %>
+    <%= text_field_tag :date1, (Time.now-1.weeks).strftime("%d-%m-%Y")  %>
+    <%= text_field_tag :date2, Time.now.strftime("%d-%m-%Y") %>
+    <%= submit_tag "Search", :name => nil,  :class => 'btn btn-success' %>
+    <%= link_to 'Anuller', achats_path, :class => 'btn btn-danger' if params[:date1] %>
+<% end %>

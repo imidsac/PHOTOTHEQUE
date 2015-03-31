@@ -1,6 +1,5 @@
 require "PdfA4l.rb"
 require "achats_pdf.rb"
-
 class AchatsController < ApplicationController
   load_and_authorize_resource
   before_action :set_achat, only: [:show, :edit, :update, :destroy]
@@ -8,9 +7,13 @@ class AchatsController < ApplicationController
   # GET /achats
   # GET /achats.json
   def index
-    @achats = Achat.all
-    @achats = @achats.select("achats.id,fournisseur_id,fournisseur_libre, name_company, nom, prenom,type_ac, date_achat,somme, payee, etat_achat").recent.order(date_achat: :desc)
-
+    if params[:utf8]
+      @achats = Achat.date_between("#{params[:date1]}", "#{params[:date2]}")
+    else
+      @achats = Achat.recent
+    end
+    @crediteurs_fournisseurs = Achat.credit_fournisseurs_fideles if params[:credits]
+    @crediteurs_fournisseurs_libres = Achat.credit_fournisseurs_libres if params[:credits]
   end
 
   # GET /achats/1
