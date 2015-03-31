@@ -1,66 +1,37 @@
-<% title "VENTES " %>
 <%- model_class = Vente -%>
 <div class="page-header">
-  <div class="row ligne1">
-    <div class="col-sm-4 blog1">
-      <h3><%= t '.title', :default => model_class.model_name.human.pluralize %></h3>
-    </div>
-    <div class="col-sm-8 blog2">
-      <%= render 'serach_date_between' %>
-    </div>
-  </div>
-
-
+  <h3><%='CLIENTS LIBRES' %></h3>
 </div>
-<table id="ventes" class="table table-striped table-hover table-condensed display">
+<table id="ventes" class="table table-striped table-hover table-condensed">
   <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      
-      <th><%= model_class.human_attribute_name(:date) %></th>
-      <th><%= model_class.human_attribute_name(:boutique_id) %></th>
-      <th><%= model_class.human_attribute_name(:client_id) %></th>
-      <th><%= model_class.human_attribute_name(:client_libre) %></th>
-      <th><%= model_class.human_attribute_name(:type) %></th>
-      <th><%= model_class.human_attribute_name(:total) %></th>
-      <th><%= model_class.human_attribute_name(:payee) %></th>
-      <th><%= model_class.human_attribute_name(:acount) %></th>
-      <th><%= model_class.human_attribute_name(:etat) %></th>
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:date) %></th>
+    <th><%= model_class.human_attribute_name(:client_libre) %></th>
+    <th><%= model_class.human_attribute_name(:total) %></th>
+    <th><%= model_class.human_attribute_name(:payee) %></th>
+    <th><%= model_class.human_attribute_name(:acount) %></th>
+    <th><%= model_class.human_attribute_name(:etat) %></th>
 
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
   </thead>
   <tbody>
   <%
      @somme=0
      @payee=0
      @i=1
-     @ventes.each do |vente|
+     @crediteurs_clients_libre.each do |vente|
        @somme+=vente.somme
        @payee+=vente.payee
   %>
       <tr>
-        <td><%= link_to vente.id, vente_path(vente) %></td>
-        <td><%= vente.date_vente.strftime("%d %b %Y à %H:%M") %></td>
-        
-        <td><%= vente.name %></td>
-        <% if vente.client_id != -1 %>
-          <td><%= link_to vente.nom+' '+vente.prenom, client_path(vente.client_id), :target => '_blank'  %></td>
-        <% else %>
-          <td><%= vente.nom  %></td>
-        <% end %>
-        
-        <td><%= vente.client_libre %></td>
-        <% if vente.type_ve == 'C' %>
-        <td><%= 'Cadre' %></td>
-        <% elsif vente.type_ve == 'A' %>
-        <td><%= 'Article' %></td>
-      <% end %>
-
+        <td><%= vente.id %></td>
+        <td><%= vente.date_vente.strftime("%d %b %Y à %H:%M")  %></td>
+        <td><%= vente.client_libre  %></td>
         <td><%= number_to_currency(vente.somme, precision: 0,  unit: "", format: "%n %u") %></td>
         <td><%= number_to_currency(vente.payee, precision: 0,  unit: "", format: "%n %u") %></td>
         <td><%= number_to_currency(vente.somme-vente.payee, precision: 0,  unit: "", format: "%n %u") %></td>
-
         <% if vente.etat_vente == 'n' %>
             <td><%= 'N-Livret' %></td>
         <% elsif vente.etat_vente == 'p' %>
@@ -68,7 +39,6 @@
         <% elsif vente.etat_vente == 't' %>
             <td><%= 'T-Livret' %></td>
         <% end %>
-
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       vente_path(vente), :class => 'btn btn-info btn-xs' %>
@@ -99,7 +69,7 @@
   <% if current_user.role == 'Root' %>
       <tfoot>
       <tr>
-        <th colspan="6"><%= 'TOTAL' %></th>
+        <th colspan="5"><%= 'TOTAL' %></th>
         <th ><%= number_to_currency(@somme, precision: 0, unit: "", format: "%n %u") %></th>
         <th ><%= number_to_currency(@payee, precision: 0, unit: "", format: "%n %u") %></th>
         <th ><%= number_to_currency(@somme-@payee, precision: 0, unit: "", format: "%n %u") %></th>
@@ -109,6 +79,3 @@
   <% end  %>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_vente_path,
-            :class => 'btn btn-primary' %>

@@ -1,0 +1,7 @@
+<% title "CREDITEURS " %>
+<%= render 'credits_boutiques' %>
+<%= render 'credits_clients_fideles' %>
+<%= render 'credits_clients_libres' %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_vente_path,
+            :class => 'btn btn-primary' %>

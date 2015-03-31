@@ -8,8 +8,14 @@ class VentesController < ApplicationController
   # GET /ventes
   # GET /ventes.json
   def index
-    @ventes = Vente.all
-    @ventes = @ventes.select("ventes.id,boutique_id,name, client_id,nom, prenom,type_ve,client_libre, date_vente,somme, payee, etat_vente").recent
+    if params[:utf8]
+      @ventes = Vente.date_between("#{params[:date1]}", "#{params[:date2]}")
+    else
+      @ventes = Vente.recent
+    end
+    @crediteurs_boutiques = Vente.credit_boutiques_fideles if params[:credits]
+    @crediteurs_clients = Vente.credit_clients_fideles if params[:credits]
+    @crediteurs_clients_libre = Vente.credit_clients_libres if params[:credits]
 
   end
 

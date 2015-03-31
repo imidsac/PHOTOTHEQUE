@@ -16,6 +16,8 @@
     <div class="form-actions">
       <%= link_to t('.back', :default => t("helpers.links.back")),
                   ventes_path, :class => 'btn-xs btn-info' %>
+      <% if current_user.role != 'Root'  %>
+          <% if @vente.date_vente > Time.now - 1.days  %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
                   edit_vente_path(@vente), :class => 'btn-xs btn-primary' %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -23,7 +25,16 @@
                   :method => 'delete',
                   :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
                   :class => 'btn-xs btn-danger' %>
-
+      <% end  %>
+      <% elsif current_user.role == 'Root'  %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_vente_path(@vente), :class => 'btn-xs btn-primary' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      vente_path(@vente),
+                      :method => 'delete',
+                      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                      :class => 'btn-xs btn-danger' %>
+      <% end  %>
 
     </div>
   </div>
@@ -31,7 +42,7 @@
 
   <div class="col-sm-6 blog2">
     <%= link_to t('.pdf', :default => t("helpers.links.pdf")),
-                '#', :class => 'btn-xs btn-info' %>
+                vente_path(@vente, format: "pdf"), :class => 'btn-xs btn-info' %>
 
   </div>
 </div>
@@ -51,12 +62,7 @@
       <% end %>
       <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
       <dd><%= @vente.date_vente.strftime("%d %b %Y à %H:%M") %></dd>
-      <dt><strong><%= model_class.human_attribute_name(:type) %>:</strong></dt>
-      <% if @vente.type_ve == 'C' %>
-          <dd><%= 'Cadre' %></dd>
-      <% elsif @vente.type_ve == 'A' %>
-          <dd><%= 'Article' %></dd>
-      <% end %>
+
     </dl>
   </div>
   <div class="col-sm-6">
@@ -66,7 +72,7 @@
           <dd><%= 'N-Livret' %></dd>
       <% elsif @vente.etat_vente == 'p' %>
           <dd><%= 'P-Livret' %></dd>
-      <% elsif @vente.etat_vente == 'p' %>
+      <% elsif @vente.etat_vente == 't' %>
           <dd><%= 'T-Livret' %></dd>
       <% end %>
       <dt><strong><%= model_class.human_attribute_name(:total) %>:</strong></dt>
