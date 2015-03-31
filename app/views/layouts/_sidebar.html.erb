@@ -33,6 +33,8 @@
           <!--<%= link_to "T-BANQUE", tbanques_path, :class => "list-group-item" %>-->
           <%= link_to "CAISSE", banques_path(:caisse => true), :class => "list-group-item" %>
           <%= link_to "DEPENSE", depenses_path, :class => "list-group-item" %>
+          <%= link_to "CREDITEURS", ventes_path(:credits => true), :class => "list-group-item" %>
+          <%= link_to "DEBITEURS", achats_path(:credits => true), :class => "list-group-item" %>
 
       <% end %>
   <% end %>
