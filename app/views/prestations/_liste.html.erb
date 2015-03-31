@@ -1,10 +1,20 @@
 <% title "PRESTATIONS" %>
 <%- model_class = Prestation -%>
 <div class="page-header">
-  <h3><%=t '.title', :default => model_class.model_name.human.pluralize %></h3>
-  <%= link_to t('.pdf', :default => t("helpers.links.pdf")),
-              prestations_path(@prestations, format: "pdf"), :class => 'btn-xs btn-info'  %>
+  <div class="row ligne1">
+    <div class="col-sm-4 blog1">
+      <h3><%= t '.title', :default => model_class.model_name.human.pluralize %></h3>
+      <%= link_to t('.pdf', :default => t("helpers.links.pdf")),
+                  prestations_path(@prestations, format: "pdf"), :class => 'btn-xs btn-info'  %>
+    </div>
+    <div class="col-sm-8 blog2">
+      <%= render 'serach_date_between' %>
+    </div>
+  </div>
+
+
 </div>
+
 <table id="prestations" class="table table-striped table-hover table-condensed display">
   <thead>
     <tr>

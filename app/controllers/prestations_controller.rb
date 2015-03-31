@@ -8,8 +8,13 @@ class PrestationsController < ApplicationController
   # GET /prestations
   # GET /prestations.json
   def index
-    @prestations = Prestation.all
-    @prestations = @prestations.select("prestations.id,employe_id,employes.nom as em_nom,employes.prenom,client_id,client_libre, clients.nom as cl_nom, clients.prenom,type_pr, date_prestation,somme, payee, etat_prestation").recent
+    if params[:utf8]
+      @prestations = Prestation.date_between("#{params[:date1]}", "#{params[:date2]}")
+    else
+      @prestations = Prestation.recent
+    end
+    @crediteurs_clients = Prestation.credit_clients_fideles if params[:credits]
+    @crediteurs_clients_libre = Prestation.credit_clients_libres if params[:credits]
 
     ##pdf
     respond_to do |format|
@@ -105,7 +110,7 @@ class PrestationsController < ApplicationController
   if params[:client_id]
     @prestation.destroy
     respond_to do |format|
-      format.html { redirect_to client_url(@prestation.client_id, :factures_client => true), notice: 'Vente was successfully destroyed.' }
+      format.html { redirect_to client_url(@prestation.client_id, :factures_client => true), notice: 'Prestation was successfully destroyed.' }
       format.json { head :no_content }
     end
   else

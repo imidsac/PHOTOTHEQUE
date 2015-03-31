@@ -21,6 +21,7 @@ class Prestation < ActiveRecord::Base
 
   #jointure avec employee et client
   scope :jointure_employe_client, -> { joins(:employe, :client) }
+  scope :jointure_client, -> { joins(:client) }
 
   # Achats recents
   scope :recent, -> { past_month.jointure_employe_client }
@@ -66,6 +67,15 @@ class Prestation < ActiveRecord::Base
 
   # TOTAL DE CREDIT D'UN EMPLOYEE
   scope :total_doit_payee_employe, ->(employe_id) { where("somme-payee > ? and employe_id = ?", 0, employe_id).sum('somme-payee')}
+
+
+  # TOTAL DE CREDIT D'UN CLIENT
+  scope :credit_client, ->(client_id) { where("somme-payee > ? and client_id = ?", 0, client_id).sum('somme-payee') }
+  # TOTAL DE CREDIT DE TOUT LES CLIENTS FIDELES
+  scope :credit_clients_fideles, -> { select("client_id,nom, prenom,sum(somme) as somme, sum(payee) as payee").jointure_client.where("somme-payee > ? AND client_id != ?", 0, -1).group(:client_id, :nom, :prenom) }
+  # TOTAL DE CREDIT DE TOUT LES CLIENTS LIBRES
+  scope :credit_clients_libres, -> { select("prestations.id,client_libre,date_prestation, somme,payee, etat_prestation").where("somme-payee > ? AND client_id = ?", 0, -1) }
+
 
   before_save :verifier_prestation
   before_create :get_code_fac

@@ -3,5 +3,9 @@
 </div><!-- /.col-sm-2 -->
 
 <div class="col-sm-10">
-  <%= render 'liste' %>
+  <% if params[:credits] %>
+      <%= render 'credits' %>
+  <% else %>
+      <%= render 'liste' %>
+  <% end %>
 </div><!-- /.col-sm-10 -->
