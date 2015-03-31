@@ -11,6 +11,13 @@ class Prestation < ActiveRecord::Base
 
   by_star_field :date_prestation
 
+  scope :list, -> { select("prestations.id,employe_id,employes.nom as em_nom, employes.prenom as em_prenom, client_id,clients.nom, clients.prenom,client_libre,type_pr, date_prestation,somme, payee, etat_prestation").order(date_prestation: :desc) }
+
+  scope :date_between, lambda { |start_date, end_date| list.jointure_employe_client.where("date_prestation::date >= ? AND date_prestation::date <= ?", start_date, end_date) }
+  scope :date_between_total, lambda { |start_date, end_date| list.jointure_employe_client.where("date_prestation::date >= ? AND date_prestation::date <= ?", start_date, end_date).sum('somme') }
+  scope :date_between_payee, lambda { |start_date, end_date| list.jointure_employe_client.where("date_prestation::date >= ? AND date_prestation::date <= ?", start_date, end_date).sum('payee') }
+  scope :date_between_credit, lambda { |start_date, end_date| where("date_prestation::date >= ? AND date_prestation::date <= ? AND somme > payee ", start_date, end_date) }
+
 
   #jointure avec employee et client
   scope :jointure_employe_client, -> { joins(:employe, :client) }

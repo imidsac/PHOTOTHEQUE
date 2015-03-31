@@ -1,0 +1,36 @@
+
+<%- model_class = Paiement -%>
+<div class="page-header">
+  <h3><%= "Paiement - #{number_to_currency(@achats_paiement_total, precision: 0,  unit: "F CFA", format: "%n %u")}" %></h3>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:fournisseur) %></th>
+    <th><%= model_class.human_attribute_name(:fournisseur_libre) %></th>
+    <th><%= model_class.human_attribute_name(:N_achat) %></th>
+    <th><%= model_class.human_attribute_name(:compte) %></th>
+    <th><%= model_class.human_attribute_name(:motif) %></th>
+    <th><%= model_class.human_attribute_name(:montant) %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @i=1
+     @achats_paiement.each do |paiement| %>
+      <tr>
+        <td><%= @i %></td>
+        <td><%= paiement.name_company %></td>
+        <td><%= paiement.fournisseur_libre %></td>
+        <td><%= paiement.vente_num %></td>
+        <td><%= paiement.nom+' / '+paiement.compte %></td>
+        <td><%= paiement.motif %></td>
+        <td><%= number_to_currency(paiement.montant, precision: 0,  unit: "", format: "%n %u") %></td>
+        <td>
+
+        </td>
+      </tr>
+  <% @i+=1
+     end %>
+  </tbody>
+</table>

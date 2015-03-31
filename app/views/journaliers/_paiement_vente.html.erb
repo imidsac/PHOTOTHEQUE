@@ -1,16 +1,15 @@
-
 <%- model_class = Paiement -%>
 <div class="page-header">
-  <h3><%= "Paiement Vente - #{number_to_currency(@ventes_paiement_total, precision: 0,  unit: "F CFA", format: "%n %u")}" %></h3>
+  <h3><%= "Paiement : #{number_to_currency(@ventes_paiement_total-@vrptotal, precision: 0, unit: "F CFA", format: "%n %u")}" %></h3>
 </div>
-<table id="ventes" class="table table-striped table-hover table-condensed display">
+<table id="boutiques" class="table table-striped table-hover table-condensed display">
   <thead>
   <tr>
     <th><%= model_class.human_attribute_name(:id) %></th>
-    <th><%= model_class.human_attribute_name(:boutique) %></th>
-    <th><%= model_class.human_attribute_name(:client) %></th>
-    <th><%= model_class.human_attribute_name(:client_libre) %></th>
+    <th><%= model_class.human_attribute_name(:type) %></th>
+    <th><%= model_class.human_attribute_name(:N_achat) %></th>
     <th><%= model_class.human_attribute_name(:N_vente) %></th>
+    <th><%= model_class.human_attribute_name(:N_prestation) %></th>
     <th><%= model_class.human_attribute_name(:compte) %></th>
     <th><%= model_class.human_attribute_name(:motif) %></th>
     <th><%= model_class.human_attribute_name(:montant) %></th>
@@ -21,13 +20,28 @@
      @ventes_paiement.each do |paiement| %>
       <tr>
         <td><%= @i %></td>
-        <td><%= paiement.name %></td>
-        <td><%= paiement.nom_cl+' / '+paiement.prenom %></td>
-        <td><%= paiement.client_libre %></td>
-        <td><%= paiement.vente_num %></td>
-        <td><%= paiement.nom+' / '+paiement.compte %></td>
+        <% if paiement.type_paiement== 'pv' %>
+            <td><%= 'VENTE' %></td>
+        <% elsif paiement.type_paiement== 'pvr' %>
+            <td><%= 'RETOURE VENTE' %></td>
+        <% elsif paiement.type_paiement== 'pa' %>
+            <td><%= 'ACHAT' %></td>
+        <% elsif paiement.type_paiement== 'par' %>
+            <td><%= 'RETOURE ACHAT' %></td>
+        <% end %>
+        <% if paiement.achat_id!= -1 %>
+            <td><%= link_to paiement.num_ac, achat_path(paiement.achat_id), :target => '_blank'  %></td>
+        <% else %>
+            <td><%= 'No' %></td>
+        <% end %>
+        <% if paiement.vente_id!= -1 %>
+            <td><%= link_to paiement.num_ve, vente_path(paiement.vente_id), :target => '_blank' %></td>
+        <% else %>
+            <td><%= 'No' %></td>
+        <% end %>
+        <td><%= paiement.bank+' / '+paiement.compte %></td>
         <td><%= paiement.motif %></td>
-        <td><%= number_to_currency(paiement.montant, precision: 0,  unit: "", format: "%n %u") %></td>
+        <td><%= number_to_currency(paiement.montant, precision: 0, unit: "", format: "%n %u") %></td>
         <td>
 
         </td>

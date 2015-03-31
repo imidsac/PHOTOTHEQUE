@@ -1,7 +1,7 @@
 <!-- VENTE -->
 <%- model_class = Vente -%>
 <div class="page-header">
-  <h3><%=t '.title', :default => model_class.model_name.human.pluralize %></h3>
+  <h3><%= t '.title', :default => model_class.model_name.human.pluralize %></h3>
 </div>
 <table id="ventes" class="table table-striped table-hover table-condensed display">
   <thead>
@@ -11,27 +11,37 @@
     <th><%= model_class.human_attribute_name(:boutique_id) %></th>
     <th><%= model_class.human_attribute_name(:client_id) %></th>
     <th><%= model_class.human_attribute_name(:client_libre) %></th>
-    <th><%= model_class.human_attribute_name(:etat) %></th>
     <th><%= model_class.human_attribute_name(:total) %></th>
     <th><%= model_class.human_attribute_name(:payee) %></th>
+    <th><%= model_class.human_attribute_name(:acount) %></th>
+    <th><%= model_class.human_attribute_name(:etat) %></th>
 
-    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
   <tbody>
-  <% @i=1
-     @ventes.each do |vente| %>
+  <%
+     @somme=0
+     @payee=0
+     @i=1
+     @ventes.each do |vente|
+       @somme+=vente.somme
+       @payee+=vente.payee
+  %>
       <tr>
-        <td><%= @i %></td>
-
+        <td><%= vente.id %></td>
         <td><%= vente.name %></td>
         <% if vente.client_id != -1 %>
-            <td><%= link_to vente.nom+' '+vente.prenom, client_path(vente.client_id), :target => '_blank'  %></td>
+            <td><%= link_to vente.nom+' '+vente.prenom, client_path(vente.client_id), :target => '_blank' %></td>
         <% else %>
-            <td><%= vente.nom  %></td>
+            <td><%= vente.nom %></td>
         <% end %>
 
-        <td><%= vente.client_libre  %></td>
+        <td><%= vente.client_libre %></td>
+
+        <td><%= number_to_currency(vente.somme, precision: 0, unit: "", format: "%n %u") %></td>
+        <td><%= number_to_currency(vente.payee, precision: 0, unit: "", format: "%n %u") %></td>
+        <td><%= number_to_currency(vente.somme-vente.payee, precision: 0, unit: "", format: "%n %u") %></td>
         <% if vente.etat_vente == 'n' %>
             <td><%= 'N-Livret' %></td>
         <% elsif vente.etat_vente == 'p' %>
@@ -39,9 +49,6 @@
         <% elsif vente.etat_vente == 't' %>
             <td><%= 'T-Livret' %></td>
         <% end %>
-        <td><%= number_to_currency(vente.somme, precision: 0,  unit: "", format: "%n %u") %></td>
-        <td><%= number_to_currency(vente.payee, precision: 0,  unit: "", format: "%n %u") %></td>
-
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       vente_path(vente), :class => 'btn btn-info btn-xs', :target => '_blank' %>
@@ -50,7 +57,7 @@
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       vente_path(vente),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
                       :class => 'btn btn-danger btn-xs', :target => '_blank' %>
         </td>
       </tr>
@@ -62,7 +69,6 @@
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_vente_path,
             :class => 'btn btn-primary', :target => '_blank' %>
-
 
 
 

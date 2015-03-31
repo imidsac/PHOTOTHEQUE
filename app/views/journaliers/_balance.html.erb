@@ -3,26 +3,41 @@
 
   <tr>
 
-    <th colspan="3" ><%= 'ACHAT' %></th>
-    <th colspan="3" ><%= 'VENTE' %></th>
-    <th colspan="3" ><%= 'PRESTATION' %></th>
-    <th rowspan="2" ><%= 'DEPENSE' %></th>
+    <th colspan="6" ><%= 'VENTE' %></th>
+    <th colspan="6" ><%= 'ACHAT' %></th>
+    <th rowspan="3" ><%= 'DEPENSE' %></th>
 
   </tr>
 
   <tr>
 
-    <th><%= 'TOTAL' %></th>
-    <th><%= 'PAYEE' %></th>
-    <th><%= 'RESTE' %></th>
+    <th colspan="2" ><%= 'TOTAL' %></th>
+    <th colspan="2" ><%= 'PAYEE' %></th>
+    <th colspan="2" ><%= 'RESTE' %></th>
 
-    <th><%= 'TOTAL' %></th>
-    <th><%= 'PAYEE' %></th>
-    <th><%= 'RESTE' %></th>
+    <th colspan="2" ><%= 'TOTAL' %></th>
+    <th colspan="2" ><%= 'PAYEE' %></th>
+    <th colspan="2" ><%= 'RESTE' %></th>
 
-    <th><%= 'TOTAL' %></th>
-    <th><%= 'PAYEE' %></th>
-    <th><%= 'RESTE' %></th>
+  </tr>
+
+  <tr>
+
+    <th><%= 'REEL' %></th>
+    <th><%= 'RETOURE' %></th>
+    <th><%= 'REEL' %></th>
+    <th><%= 'RETOURE' %></th>
+    <th><%= 'REEL' %></th>
+    <th><%= 'RETOURE' %></th>
+
+
+    <th><%= 'REEL' %></th>
+    <th><%= 'RETOURE' %></th>
+    <th><%= 'REEL' %></th>
+    <th><%= 'RETOURE' %></th>
+    <th><%= 'REEL' %></th>
+    <th><%= 'RETOURE' %></th>
+
 
   </tr>
 
@@ -31,17 +46,20 @@
   <tbody>
 
       <tr>
-        <td><%= number_to_currency(@attotal, precision: 0,  unit: " ", format: "%n %u") %></td>
-        <td><%= number_to_currency(@aptotal, precision: 0,  unit: " ", format: "%n %u") %></td>
-        <td><%= number_to_currency(@attotal-@aptotal, precision: 0,  unit: " ", format: "%n %u") %></td>
-
         <td><%= number_to_currency(@vttotal, precision: 0,  unit: " ", format: "%n %u") %></td>
-        <td><%= number_to_currency(@vptotal, precision: 0,  unit: " ", format: "%n %u") %></td>
+        <td><%= number_to_currency(@vrttotal, precision: 0,  unit: " ", format: "%n %u") %></td>
+        <td><%= number_to_currency(@ventes_paiement_total, precision: 0,  unit: " ", format: "%n %u") %></td>
+        <td><%= number_to_currency(@vrptotal, precision: 0,  unit: " ", format: "%n %u") %></td>
         <td><%= number_to_currency(@vttotal-@vptotal, precision: 0,  unit: " ", format: "%n %u") %></td>
+        <td><%= number_to_currency(@vrttotal-@vrptotal, precision: 0,  unit: " ", format: "%n %u") %></td>
 
-        <td><%= number_to_currency(@pttotal, precision: 0,  unit: " ", format: "%n %u") %></td>
-        <td><%= number_to_currency(@pptotal, precision: 0,  unit: " ", format: "%n %u") %></td>
-        <td><%= number_to_currency(@pttotal-@pptotal, precision: 0,  unit: " ", format: "%n %u") %></td>
+
+        <td><%= number_to_currency(@attotal, precision: 0,  unit: " ", format: "%n %u") %></td>
+        <td><%= number_to_currency(@arttotal, precision: 0,  unit: " ", format: "%n %u") %></td>
+        <td><%= number_to_currency(@achats_paiement_total, precision: 0,  unit: " ", format: "%n %u") %></td>
+        <td><%= number_to_currency(@arptotal, precision: 0,  unit: " ", format: "%n %u") %></td>
+        <td><%= number_to_currency(@attotal-@aptotal, precision: 0,  unit: " ", format: "%n %u") %></td>
+        <td><%= number_to_currency(@arttotal-@arptotal, precision: 0,  unit: " ", format: "%n %u") %></td>
 
         <td><%= number_to_currency(@dttotal, precision: 0,  unit: " ", format: "%n %u") %></td>
       </tr>

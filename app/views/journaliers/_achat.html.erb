@@ -12,6 +12,8 @@
     <th><%= model_class.human_attribute_name(:fournisseur_libre) %></th>
     <th><%= model_class.human_attribute_name(:somme) %></th>
     <th><%= model_class.human_attribute_name(:payee) %></th>
+    <th><%= model_class.human_attribute_name(:acount) %></th>
+    <th><%= model_class.human_attribute_name(:devise) %></th>
     <th><%= model_class.human_attribute_name(:etat) %></th>
     <!--<th><%= model_class.human_attribute_name(:created_at) %></th>-->
     <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -22,10 +24,16 @@
      @achats.each do |achat| %>
       <tr>
         <td><%= @i %></td>
-        <td><%= achat.name_company %></td>
+        <% if achat.fournisseur_id != -1 %>
+            <td><%= link_to achat.name_company, fournisseur_path(achat.fournisseur_id), :target => '_blank' %></td>
+        <% else %>
+            <td><%= achat.name_company  %></td>
+        <% end %>
         <td><%= achat.fournisseur_libre %></td>
         <td><%= number_to_currency(achat.somme, precision: 0,  unit: "", format: "%n %u") %></td>
         <td><%= number_to_currency(achat.payee, precision: 0,  unit: "", format: "%n %u")%></td>
+        <td><%= number_to_currency(achat.somme-achat.payee, precision: 0, unit: "", format: "%n %u") %></td>
+        <td><%= achat.code_money  %></td>
         <% if achat.etat_achat == 'n' %>
             <td><%= 'N-Livret' %></td>
         <% elsif achat.etat_achat == 'p' %>

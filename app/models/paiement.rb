@@ -42,6 +42,7 @@ class Paiement < ActiveRecord::Base
 	scope :date_between_achat, lambda { |start_date, end_date| jointure_achat.where("datepaiement::date >= ? AND datepaiement::date <= ?", start_date, end_date) }
 
 	####JOURNALIER####
+	scope :journaliers, -> { today.list.jointure_banque.jointure_boutique.jointure_client.jointure_vente.jointure_prestation.jointure_fournisseur.jointure_achat }
 	scope :journaliers_vente, -> { today.jointure_boutique_client_vente }
 	scope :journaliers_vente_boutique, -> { today.jointure_boutique.jointure_vente.jointure_banque }
 	scope :journaliers_vente_client, -> { today.jointure_client.jointure_vente.jointure_banque }
